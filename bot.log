@@ -1,0 +1,10 @@
+2025-10-04 19:09:28,356 - ERROR - Ошибка загрузки: ConcertEvent.__init__() got an unexpected keyword argument 'image_url'
+2025-10-04 19:09:28,418 - INFO - 🎵 Запуск надежного бота...
+2025-10-04 19:09:28,419 - ERROR - Критическая ошибка: Cannot close a running event loop
+/workspace/reliable_bot.py:314: RuntimeWarning: coroutine 'Application.shutdown' was never awaited
+  self.is_running = False
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/reliable_bot.py:314: RuntimeWarning: coroutine 'Application._bootstrap_initialize' was never awaited
+  self.is_running = False
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+2025-10-04 19:09:28,420 - INFO - 🚀 Запуск мониторинга
