@@ -2,7 +2,7 @@
   "https://vk-stadium.ru/": {
     "url": "https://vk-stadium.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T12:51:06.630783",
+    "last_check": "2025-10-04T12:56:56.625860",
     "last_hash": "df66dd2b034d4ec2ce1003a4807e86df",
     "events": [
       {
@@ -26,7 +26,7 @@
   "https://livearena.ru/performances": {
     "url": "https://livearena.ru/performances",
     "user_id": 268477119,
-    "last_check": "2025-10-04T12:51:08.085412",
+    "last_check": "2025-10-04T12:56:57.819705",
     "last_hash": "d784d5fbb9f597e85854fafbfb58601c",
     "events": [
       {
@@ -162,7 +162,237 @@
   "https://sohorooms.com/anons": {
     "url": "https://sohorooms.com/anons",
     "user_id": 268477119,
-    "last_check": "2025-10-04T12:51:07.572495",
+    "last_check": "2025-10-04T12:56:57.818179",
+    "last_hash": "d2c112c61ab40e2eff25c61a858e6018",
+    "events": [
+      {
+        "title": "Soho Rooms Exclusive: БАСТА!",
+        "date": "Soho Rooms Exclusive: БАСТА!11 October 2025 | 22:00ПодробнееКупить билет",
+        "url": "https://sohorooms.com/anons/basta",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "SEVAK в Soho Rooms!",
+        "date": "SEVAK в Soho Rooms!24 October 2025 | 22:00ПодробнееКупить билет",
+        "url": "https://sohorooms.com/anons/sevak",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "КАСПИЙСКИЙ ГРУЗ эксклюзивно в Soho Rooms!",
+        "date": "КАСПИЙСКИЙ ГРУЗ эксклюзивно в Soho Rooms!25 October 2025 | 22:00ПодробнееКупить билет",
+        "url": "https://sohorooms.com/anons/kaspiiskii",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Ирина Дубцова в Soho Rooms!",
+        "date": "Ирина Дубцова в Soho Rooms!14 November 2025 | 22:00ПодробнееКупить билет",
+        "url": "https://sohorooms.com/anons/dubcova",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Впервые в Soho Rooms - Татьяна Буланова!",
+        "date": "Впервые в Soho Rooms - Татьяна Буланова!29 November 2025 | 22:00ПодробнееКупить билет",
+        "url": "https://sohorooms.com/anons/bylanova",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      }
+    ]
+  },
+  "https://kremlinpalace.org/": {
+    "url": "https://kremlinpalace.org/",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T12:56:58.069201",
+    "last_hash": "d102c617a8a29abfba3e9f50b50508ea",
+    "events": [
+      {
+        "title": "«Аленький цветочек». В. Купцов. Спектакль театра «Кремлёвский балет»",
+        "date": "4октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Денис Мацуев «И классика, и джаз»",
+        "date": "5октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "«Гадкий утёнок». Из цикла музыкальных сказок в исполнении Юлии Рутберг и камерного оркестра «Гнесинские виртуозы»",
+        "date": "5октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Елена Ваенга. Концерт к юбилею Великой Победы",
+        "date": "6октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "«Жизель». А. Адан. Спектакль театра «Кремлёвский балет»",
+        "date": "7октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Академический ансамбль песни и пляски Российской армии им. А.В. Александрова",
+        "date": "9октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Торжественное собрание, посвящённое Дню работника сельского хозяйства и перерабатывающей промышленности 2025 года.",
+        "date": "10октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "«Лебединое озеро». П. Чайковский. Спектакль театра «Кремлёвский балет»",
+        "date": "11октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Концерт из цикла «Валерий Семин представляет»: «Русская гармонь»",
+        "date": "11октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "«Щелкунчик». П. Чайковский. Спектакль театра «Кремлёвский балет»",
+        "date": "12октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "«Щелкунчик». П. Чайковский. Спектакль театра «Кремлёвский балет»",
+        "date": "12октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Вечер одноактных балетов «Ballet Triptych»",
+        "date": "13октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Шоу Первого канала «Голос»",
+        "date": "14октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "«Эсмеральда». Ц. Пуни, Р. Дриго. Спектакль театра «Кремлёвский балет»",
+        "date": "16октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "«Коко любит джаз: все о французской моде и о музыке»",
+        "date": "16октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Съезд специалистов по охране труда",
+        "date": "17октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Концерт  Государственного академического Омского русского народного хора",
+        "date": "18октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Концерт заслуженного артиста России Виктора Третьякова «На краю осени»",
+        "date": "18октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "День рождения «МУЗ-ТВ»",
+        "date": "19октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "«Симфония Аниме». Дирижер – Кеничи Симура",
+        "date": "20октября",
+        "url": "https://kremlinpalace.org",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      }
+    ]
+  },
+  "https://assuntamadre.ru/blog/": {
+    "url": "https://assuntamadre.ru/blog/",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T12:56:56.626915",
+    "last_hash": "",
+    "events": []
+  },
+  "https://letolifefest.ru/": {
+    "url": "https://letolifefest.ru/",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T12:57:05.150519",
+    "last_hash": "",
+    "events": []
+  },
+  "https://crave.ru/afisha/": {
+    "url": "https://crave.ru/afisha/",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T12:57:20.443964",
     "last_hash": "",
     "events": []
   }

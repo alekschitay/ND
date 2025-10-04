@@ -71,12 +71,11 @@ LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 
 # Настройки для конкретных сайтов (можно расширить)
 SITE_SPECIFIC_CONFIGS = {
-    # Пример конфигурации для конкретного сайта
-    # "example.com": {
-    #     "event_selector": ".custom-event",
-    #     "title_selector": ".custom-title",
-    #     "date_selector": ".custom-date"
-    # }
+    "sohorooms.com": {
+        "event_selector": ".t776__col.t-col.t-col_4.t-align_left.t-item.t776__col_mobile-grid.js-product",
+        "title_selector": None,  # Будем извлекать из текста
+        "date_selector": None    # Будем извлекать из текста
+    }
 }
 
 # Черный список доменов (сайты, которые не стоит мониторить)

@@ -842,8 +842,15 @@ NOTIFICATION_SETTINGS = {{
                         break
             
             if not title:
-                # Пробуем найти текст в самом элементе
-                title = element.get_text(strip=True)[:100]  # Ограничиваем длину
+                # Специальная логика для sohorooms.com
+                if domain == "sohorooms.com":
+                    text = element.get_text(strip=True)
+                    lines = text.split('\n')
+                    # Первая строка обычно содержит название события
+                    title = lines[0] if lines else text[:100]
+                else:
+                    # Пробуем найти текст в самом элементе
+                    title = element.get_text(strip=True)[:100]  # Ограничиваем длину
             
             # Поиск ссылки
             link_elem = element.find('a')
@@ -860,12 +867,22 @@ NOTIFICATION_SETTINGS = {{
                 if date_elem:
                     date_text = date_elem.get_text(strip=True)
             else:
-                # Используем универсальные селекторы
-                for selector in DATE_SELECTORS:
-                    date_elem = element.select_one(selector)
-                    if date_elem:
-                        date_text = date_elem.get_text(strip=True)
-                        break
+                # Специальная логика для sohorooms.com
+                if domain == "sohorooms.com":
+                    text = element.get_text(strip=True)
+                    lines = text.split('\n')
+                    # Ищем строку с датой
+                    for line in lines:
+                        if any(word in line.lower() for word in ['october', 'november', 'december', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', '2025', '2024']):
+                            date_text = line.strip()
+                            break
+                else:
+                    # Используем универсальные селекторы
+                    for selector in DATE_SELECTORS:
+                        date_elem = element.select_one(selector)
+                        if date_elem:
+                            date_text = date_elem.get_text(strip=True)
+                            break
             
             # Поиск изображения
             img_elem = element.find('img')
