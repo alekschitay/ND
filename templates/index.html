@@ -1,0 +1,430 @@
+{% extends "base.html" %}
+
+{% block title %}Concert Monitor - Главная{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="fas fa-music"></i> Мониторинг концертных площадок</h1>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSiteModal">
+                <i class="fas fa-plus"></i> Добавить сайт
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Statistics -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 id="totalSites">0</h4>
+                        <p class="mb-0">Мониторится сайтов</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-globe fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 id="totalEvents">0</h4>
+                        <p class="mb-0">Всего событий</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-calendar fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 id="newEvents">0</h4>
+                        <p class="mb-0">Новых событий</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-star fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 id="activeSites">0</h4>
+                        <p class="mb-0">Активных сайтов</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sites Section -->
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 id="sites"><i class="fas fa-globe"></i> Мониторимые сайты</h2>
+        <div class="card">
+            <div class="card-body">
+                <div id="sitesList">
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Загрузка...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Events -->
+<div class="row">
+    <div class="col-12">
+        <h2 id="events"><i class="fas fa-calendar"></i> Последние события</h2>
+        <div class="card">
+            <div class="card-body">
+                <div id="eventsList">
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Загрузка...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Site Modal -->
+<div class="modal fade" id="addSiteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить новый сайт</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSiteForm">
+                    <div class="mb-3">
+                        <label for="siteName" class="form-label">Название сайта</label>
+                        <input type="text" class="form-control" id="siteName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="siteUrl" class="form-label">URL страницы</label>
+                        <input type="url" class="form-control" id="siteUrl" required>
+                        <div class="form-text">Полный URL страницы с событиями</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="siteSelector" class="form-label">CSS селектор</label>
+                        <input type="text" class="form-control" id="siteSelector" required>
+                        <div class="form-text">CSS селектор для элементов событий (например: .event-item, .concert-card)</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="addSite()">Добавить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Site Modal -->
+<div class="modal fade" id="editSiteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Редактировать сайт</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editSiteForm">
+                    <input type="hidden" id="editSiteId">
+                    <div class="mb-3">
+                        <label for="editSiteName" class="form-label">Название сайта</label>
+                        <input type="text" class="form-control" id="editSiteName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSiteUrl" class="form-label">URL страницы</label>
+                        <input type="url" class="form-control" id="editSiteUrl" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSiteSelector" class="form-label">CSS селектор</label>
+                        <input type="text" class="form-control" id="editSiteSelector" required>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="editSiteActive">
+                            <label class="form-check-label" for="editSiteActive">
+                                Активен
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="updateSite()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let sites = [];
+let events = [];
+
+// Load data on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadSites();
+    loadEvents();
+    updateStatistics();
+});
+
+// Load sites
+async function loadSites() {
+    try {
+        const response = await axios.get('/api/sites');
+        sites = response.data;
+        renderSites();
+        updateStatistics();
+    } catch (error) {
+        console.error('Error loading sites:', error);
+        document.getElementById('sitesList').innerHTML = '<div class="alert alert-danger">Ошибка загрузки сайтов</div>';
+    }
+}
+
+// Load events
+async function loadEvents() {
+    try {
+        const response = await axios.get('/api/events?limit=20');
+        events = response.data;
+        renderEvents();
+        updateStatistics();
+    } catch (error) {
+        console.error('Error loading events:', error);
+        document.getElementById('eventsList').innerHTML = '<div class="alert alert-danger">Ошибка загрузки событий</div>';
+    }
+}
+
+// Render sites
+function renderSites() {
+    const container = document.getElementById('sitesList');
+    
+    if (sites.length === 0) {
+        container.innerHTML = '<div class="text-center text-muted">Нет добавленных сайтов</div>';
+        return;
+    }
+    
+    const html = sites.map(site => `
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="card-title">
+                            <span class="site-status ${site.is_active ? 'status-active' : 'status-inactive'}"></span>
+                            ${site.name}
+                        </h5>
+                        <p class="card-text">
+                            <strong>URL:</strong> <a href="${site.url}" target="_blank">${site.url}</a><br>
+                            <strong>Селектор:</strong> <code>${site.selector}</code><br>
+                            <small class="text-muted">Добавлен: ${new Date(site.created_at).toLocaleString('ru-RU')}</small>
+                        </p>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-primary" onclick="checkSite(${site.id})">
+                            <i class="fas fa-sync"></i> Проверить
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="editSite(${site.id})">
+                            <i class="fas fa-edit"></i> Редактировать
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteSite(${site.id})">
+                            <i class="fas fa-trash"></i> Удалить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    container.innerHTML = html;
+}
+
+// Render events
+function renderEvents() {
+    const container = document.getElementById('eventsList');
+    
+    if (events.length === 0) {
+        container.innerHTML = '<div class="text-center text-muted">Нет событий</div>';
+        return;
+    }
+    
+    const html = events.map(event => `
+        <div class="card mb-3 event-card ${event.is_new ? 'new-event' : ''}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5 class="card-title">${event.title}</h5>
+                        <p class="card-text">
+                            <strong>Сайт:</strong> ${event.site.name}<br>
+                            ${event.date ? `<strong>Дата:</strong> ${new Date(event.date).toLocaleString('ru-RU')}<br>` : ''}
+                            ${event.description ? `<strong>Описание:</strong> ${event.description.substring(0, 200)}${event.description.length > 200 ? '...' : ''}<br>` : ''}
+                            <small class="text-muted">Найдено: ${new Date(event.created_at).toLocaleString('ru-RU')}</small>
+                        </p>
+                        ${event.url ? `<a href="${event.url}" target="_blank" class="btn btn-primary btn-sm">Подробнее</a>` : ''}
+                    </div>
+                    <div class="col-md-4 text-end">
+                        ${event.image_url ? `<img src="${event.image_url}" class="img-fluid rounded" style="max-height: 150px;" alt="${event.title}">` : ''}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    container.innerHTML = html;
+}
+
+// Update statistics
+function updateStatistics() {
+    document.getElementById('totalSites').textContent = sites.length;
+    document.getElementById('totalEvents').textContent = events.length;
+    document.getElementById('newEvents').textContent = events.filter(e => e.is_new).length;
+    document.getElementById('activeSites').textContent = sites.filter(s => s.is_active).length;
+}
+
+// Add site
+async function addSite() {
+    const name = document.getElementById('siteName').value;
+    const url = document.getElementById('siteUrl').value;
+    const selector = document.getElementById('siteSelector').value;
+    
+    try {
+        await axios.post('/api/sites', {
+            name: name,
+            url: url,
+            selector: selector
+        });
+        
+        bootstrap.Modal.getInstance(document.getElementById('addSiteModal')).hide();
+        document.getElementById('addSiteForm').reset();
+        loadSites();
+        
+        // Show success message
+        showAlert('Сайт успешно добавлен!', 'success');
+    } catch (error) {
+        console.error('Error adding site:', error);
+        showAlert('Ошибка при добавлении сайта', 'danger');
+    }
+}
+
+// Edit site
+function editSite(siteId) {
+    const site = sites.find(s => s.id === siteId);
+    if (!site) return;
+    
+    document.getElementById('editSiteId').value = site.id;
+    document.getElementById('editSiteName').value = site.name;
+    document.getElementById('editSiteUrl').value = site.url;
+    document.getElementById('editSiteSelector').value = site.selector;
+    document.getElementById('editSiteActive').checked = site.is_active;
+    
+    new bootstrap.Modal(document.getElementById('editSiteModal')).show();
+}
+
+// Update site
+async function updateSite() {
+    const id = document.getElementById('editSiteId').value;
+    const name = document.getElementById('editSiteName').value;
+    const url = document.getElementById('editSiteUrl').value;
+    const selector = document.getElementById('editSiteSelector').value;
+    const isActive = document.getElementById('editSiteActive').checked;
+    
+    try {
+        await axios.put(`/api/sites/${id}`, {
+            name: name,
+            url: url,
+            selector: selector,
+            is_active: isActive
+        });
+        
+        bootstrap.Modal.getInstance(document.getElementById('editSiteModal')).hide();
+        loadSites();
+        
+        showAlert('Сайт успешно обновлен!', 'success');
+    } catch (error) {
+        console.error('Error updating site:', error);
+        showAlert('Ошибка при обновлении сайта', 'danger');
+    }
+}
+
+// Delete site
+async function deleteSite(siteId) {
+    if (!confirm('Вы уверены, что хотите удалить этот сайт? Все связанные события также будут удалены.')) {
+        return;
+    }
+    
+    try {
+        await axios.delete(`/api/sites/${siteId}`);
+        loadSites();
+        loadEvents();
+        
+        showAlert('Сайт успешно удален!', 'success');
+    } catch (error) {
+        console.error('Error deleting site:', error);
+        showAlert('Ошибка при удалении сайта', 'danger');
+    }
+}
+
+// Check site manually
+async function checkSite(siteId) {
+    try {
+        await axios.post(`/api/check/${siteId}`);
+        showAlert('Сайт проверен!', 'success');
+        loadEvents();
+    } catch (error) {
+        console.error('Error checking site:', error);
+        showAlert('Ошибка при проверке сайта', 'danger');
+    }
+}
+
+// Show alert
+function showAlert(message, type) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.querySelector('.container').insertBefore(alertDiv, document.querySelector('.row'));
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (alertDiv.parentNode) {
+            alertDiv.remove();
+        }
+    }, 5000);
+}
+</script>
+{% endblock %}

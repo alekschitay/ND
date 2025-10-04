@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Monitor - Демо</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .event-card { 
+            transition: transform 0.2s; 
+            margin-bottom: 1rem;
+        }
+        .event-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .new-event { 
+            border-left: 4px solid #28a745; 
+        }
+        .site-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .status-active {
+            background-color: #28a745;
+        }
+        .status-inactive {
+            background-color: #dc3545;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-music"></i> Concert Monitor
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="#features">Возможности</a>
+                <a class="nav-link" href="#demo">Демо</a>
+                <a class="nav-link" href="#setup">Установка</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 mb-4">
+                <i class="fas fa-music"></i> Concert Monitor
+            </h1>
+            <p class="lead mb-4">
+                Автоматический мониторинг сайтов концертных площадок с уведомлениями о новых событиях
+            </p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="alert alert-light" role="alert">
+                        <strong>🎯 Основная задача:</strong> Отслеживать изменения на сайтах концертных площадок и присылать уведомления только при появлении новых событий
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Возможности системы</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>Автоматический мониторинг</h4>
+                        <p>Проверка сайтов каждые 10 минут на наличие новых событий</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h4>Умные уведомления</h4>
+                        <p>Telegram и email уведомления только при появлении новых событий</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h4>Поддержка афиш</h4>
+                        <p>Автоматическое извлечение и отправка графических афиш событий</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Гибкие селекторы</h4>
+                        <p>Настройка CSS селекторов для любых сайтов концертных площадок</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h4>Статистика и история</h4>
+                        <p>Отслеживание всех найденных событий и статистика мониторинга</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card h-100">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Простое управление</h4>
+                        <p>Веб-интерфейс для добавления сайтов и управления мониторингом</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Демонстрация работы</h2>
+            
+            <!-- Статистика -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4>3</h4>
+                                    <p class="mb-0">Мониторится сайтов</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-globe fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4>12</h4>
+                                    <p class="mb-0">Всего событий</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-calendar fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4>2</h4>
+                                    <p class="mb-0">Новых событий</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-star fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4>3</h4>
+                                    <p class="mb-0">Активных сайтов</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fas fa-check-circle fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Мониторимые сайты -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3><i class="fas fa-globe"></i> Мониторимые сайты</h3>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h5 class="card-title">
+                                                <span class="site-status status-active"></span>
+                                                Крокус Сити Холл
+                                            </h5>
+                                            <p class="card-text">
+                                                <strong>URL:</strong> <a href="#" target="_blank">https://kroсus-city-hall.ru/events</a><br>
+                                                <strong>Селектор:</strong> <code>.event-card</code><br>
+                                                <strong>Статус:</strong> <span class="badge bg-success">Активен</span><br>
+                                                <small class="text-muted">Последняя проверка: 04.10.2024 12:45</small>
+                                            </p>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-sync"></i> Проверить
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-edit"></i> Редактировать
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h5 class="card-title">
+                                                <span class="site-status status-active"></span>
+                                                Олимпийский
+                                            </h5>
+                                            <p class="card-text">
+                                                <strong>URL:</strong> <a href="#" target="_blank">https://olympic-stadium.ru/concerts</a><br>
+                                                <strong>Селектор:</strong> <code>.concert-item</code><br>
+                                                <strong>Статус:</strong> <span class="badge bg-success">Активен</span><br>
+                                                <small class="text-muted">Последняя проверка: 04.10.2024 12:45</small>
+                                            </p>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-sync"></i> Проверить
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-edit"></i> Редактировать
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h5 class="card-title">
+                                                <span class="site-status status-active"></span>
+                                                СК "Олимпийский"
+                                            </h5>
+                                            <p class="card-text">
+                                                <strong>URL:</strong> <a href="#" target="_blank">https://olympic.ru/events</a><br>
+                                                <strong>Селектор:</strong> <code>.event-block</code><br>
+                                                <strong>Статус:</strong> <span class="badge bg-success">Активен</span><br>
+                                                <small class="text-muted">Последняя проверка: 04.10.2024 12:45</small>
+                                            </p>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-sync"></i> Проверить
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-edit"></i> Редактировать
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Последние события -->
+            <div class="row">
+                <div class="col-12">
+                    <h3><i class="fas fa-calendar"></i> Последние события</h3>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card mb-3 event-card new-event">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h5 class="card-title">
+                                                <span class="badge bg-success me-2">НОВОЕ</span>
+                                                Концерт группы 'Ария'
+                                            </h5>
+                                            <p class="card-text">
+                                                <strong>Сайт:</strong> Крокус Сити Холл<br>
+                                                <strong>Дата:</strong> 15.12.2024 20:00<br>
+                                                <strong>Описание:</strong> Легендарная группа Ария выступит с новой программой "Крещение огнем"<br>
+                                                <small class="text-muted">Найдено: 04.10.2024 12:45</small>
+                                            </p>
+                                            <a href="#" target="_blank" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-external-link-alt"></i> Подробнее
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <div class="bg-light p-3 rounded">
+                                                <i class="fas fa-image fa-3x text-muted"></i>
+                                                <p class="small text-muted mt-2">Афиша события</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-3 event-card new-event">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h5 class="card-title">
+                                                <span class="badge bg-success me-2">НОВОЕ</span>
+                                                Рок-фестиваль 'Нашествие'
+                                            </h5>
+                                            <p class="card-text">
+                                                <strong>Сайт:</strong> Олимпийский<br>
+                                                <strong>Дата:</strong> 20.12.2024 19:00<br>
+                                                <strong>Описание:</strong> Крупнейший рок-фестиваль России с участием ведущих групп<br>
+                                                <small class="text-muted">Найдено: 04.10.2024 12:45</small>
+                                            </p>
+                                            <a href="#" target="_blank" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-external-link-alt"></i> Подробнее
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <div class="bg-light p-3 rounded">
+                                                <i class="fas fa-image fa-3x text-muted"></i>
+                                                <p class="small text-muted mt-2">Афиша события</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-3 event-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h5 class="card-title">Концерт 'Сплин'</h5>
+                                            <p class="card-text">
+                                                <strong>Сайт:</strong> СК "Олимпийский"<br>
+                                                <strong>Дата:</strong> 25.12.2024 21:00<br>
+                                                <strong>Описание:</strong> Акустический концерт группы Сплин<br>
+                                                <small class="text-muted">Найдено: 03.10.2024 15:30</small>
+                                            </p>
+                                            <a href="#" target="_blank" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-external-link-alt"></i> Подробнее
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <div class="bg-light p-3 rounded">
+                                                <i class="fas fa-image fa-3x text-muted"></i>
+                                                <p class="small text-muted mt-2">Афиша события</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Section -->
+    <section id="setup" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Установка и настройка</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="fas fa-docker"></i> С Docker (рекомендуется)</h4>
+                    <div class="bg-dark text-light p-3 rounded">
+                        <pre><code># Клонирование репозитория
+git clone &lt;repository-url&gt;
+cd concert-monitor
+
+# Настройка переменных окружения
+cp .env.example .env
+# Отредактируйте .env файл
+
+# Запуск с Docker Compose
+docker-compose up -d</code></pre>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4><i class="fas fa-terminal"></i> Локальная установка</h4>
+                    <div class="bg-dark text-light p-3 rounded">
+                        <pre><code># Установка зависимостей
+pip install -r requirements.txt
+
+# Настройка базы данных
+python init_db.py
+
+# Запуск приложения
+python run.py</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> Настройка уведомлений</h5>
+                        <p><strong>Telegram:</strong></p>
+                        <ol>
+                            <li>Создайте бота через <a href="https://t.me/botfather" target="_blank">@BotFather</a></li>
+                            <li>Получите токен бота</li>
+                            <li>Узнайте ваш Chat ID</li>
+                            <li>Добавьте токен и Chat ID в .env файл</li>
+                        </ol>
+                        <p><strong>Email:</strong> Настройте SMTP параметры в .env файле</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-music"></i> Concert Monitor</h5>
+                    <p>Автоматический мониторинг концертных площадок</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>&copy; 2024 Concert Monitor. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
