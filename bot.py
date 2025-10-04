@@ -132,12 +132,20 @@ class ConcertMonitorBot:
         """Обработчик команды /test для тестирования парсинга"""
         if not context.args:
             await update.message.reply_text(
-                "🔍 Использование: /test <URL>\n\n"
-                "Пример: /test https://example.com/events"
+                "🔍 Использование: /test <URL или домен>\n\n"
+                "Примеры:\n"
+                "/test https://example.com/events\n"
+                "/test example.com\n"
+                "/test viagogo.com"
             )
             return
         
         url = context.args[0]
+        
+        # Если это не полный URL, добавляем протокол
+        if not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+        
         if not self._is_valid_url(url):
             await update.message.reply_text("❌ Пожалуйста, укажите корректную ссылку.")
             return
@@ -371,13 +379,21 @@ class ConcertMonitorBot:
         """Обработчик команды /images для тестирования извлечения изображений"""
         if not context.args:
             await update.message.reply_text(
-                "🖼️ Использование: /images <URL>\n\n"
-                "Пример: /images https://example.com/posters\n\n"
+                "🖼️ Использование: /images <URL или домен>\n\n"
+                "Примеры:\n"
+                "/images https://example.com/posters\n"
+                "/images example.com\n"
+                "/images memobar.ru\n\n"
                 "Эта команда специально для страниц с графическими афишами."
             )
             return
         
         url = context.args[0]
+        
+        # Если это не полный URL, добавляем протокол
+        if not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+        
         if not self._is_valid_url(url):
             await update.message.reply_text("❌ Пожалуйста, укажите корректную ссылку.")
             return
