@@ -2,7 +2,7 @@
   "https://vk-stadium.ru/": {
     "url": "https://vk-stadium.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:38:41.107352",
+    "last_check": "2025-10-04T18:44:42.466864",
     "last_hash": "df66dd2b034d4ec2ce1003a4807e86df",
     "events": [
       {
@@ -26,7 +26,7 @@
   "https://livearena.ru/performances": {
     "url": "https://livearena.ru/performances",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:12.585972",
+    "last_check": "2025-10-04T18:44:43.152651",
     "last_hash": "d784d5fbb9f597e85854fafbfb58601c",
     "events": [
       {
@@ -162,7 +162,7 @@
   "https://sohorooms.com/anons": {
     "url": "https://sohorooms.com/anons",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:12.587654",
+    "last_check": "2025-10-04T18:44:42.659906",
     "last_hash": "d2c112c61ab40e2eff25c61a858e6018",
     "events": [
       {
@@ -210,7 +210,7 @@
   "https://kremlinpalace.org/": {
     "url": "https://kremlinpalace.org/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:16.377153",
+    "last_check": "2025-10-04T18:44:43.440159",
     "last_hash": "d102c617a8a29abfba3e9f50b50508ea",
     "events": [
       {
@@ -378,14 +378,14 @@
   "https://assuntamadre.ru/blog/": {
     "url": "https://assuntamadre.ru/blog/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:11.977627",
+    "last_check": "2025-10-04T18:44:41.992751",
     "last_hash": "",
     "events": []
   },
   "https://letolifefest.ru/": {
     "url": "https://letolifefest.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:16.792343",
+    "last_check": "2025-10-04T18:44:47.311082",
     "last_hash": "688b25115047f37e69c453f18f9a4a86",
     "events": [
       {
@@ -593,21 +593,21 @@
   "https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop": {
     "url": "https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:11.325116",
+    "last_check": "2025-10-04T18:44:41.361833",
     "last_hash": "",
     "events": []
   },
   "https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates": {
     "url": "https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:11.570374",
+    "last_check": "2025-10-04T18:44:47.330385",
     "last_hash": "",
     "events": []
   },
   "https://peachrest.ru/events/": {
     "url": "https://peachrest.ru/events/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:12.453755",
+    "last_check": "2025-10-04T18:44:43.155824",
     "last_hash": "9b0bb02e2fa6f5074ede8d19252d94a7",
     "events": [
       {
@@ -775,14 +775,14 @@
   "https://bolshoi.ru/timetable/all": {
     "url": "https://bolshoi.ru/timetable/all",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:12.449194",
+    "last_check": "2025-10-04T18:44:42.470175",
     "last_hash": "",
     "events": []
   },
   "https://mxat.ru/afisha/": {
     "url": "https://mxat.ru/afisha/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:16.789373",
+    "last_check": "2025-10-04T18:44:47.316002",
     "last_hash": "2e2d27e6e7ee83332f5b7f032965e5f3",
     "events": [
       {
@@ -950,7 +950,7 @@
   "https://msk-live-hall.mts.ru/": {
     "url": "https://msk-live-hall.mts.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:16.784083",
+    "last_check": "2025-10-04T18:44:42.989124",
     "last_hash": "4b70735a6bfcaf42fa806c04112e56b0",
     "events": [
       {
@@ -1086,7 +1086,7 @@
   "https://vtb-arena.com/poster/": {
     "url": "https://vtb-arena.com/poster/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:16.797877",
+    "last_check": "2025-10-04T18:44:47.327877",
     "last_hash": "5af5273e1ced26fc81a6825eaf823e7c",
     "events": [
       {
@@ -1102,7 +1102,7 @@
   "https://icearenamsk.ru/": {
     "url": "https://icearenamsk.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:16.795115",
+    "last_check": "2025-10-04T18:44:43.726413",
     "last_hash": "bf8ed03139d4ae87ce4b86e9bcf4ba81",
     "events": [
       {
@@ -1254,21 +1254,21 @@
   "https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f": {
     "url": "https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:12.452194",
+    "last_check": "2025-10-04T18:44:42.615269",
     "last_hash": "",
     "events": []
   },
   "https://spartak.com/": {
     "url": "https://spartak.com/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:12.450692",
+    "last_check": "2025-10-04T18:44:42.612405",
     "last_hash": "",
     "events": []
   },
   "https://pfc-cska.com/matches/spisok-matchej/": {
     "url": "https://pfc-cska.com/matches/spisok-matchej/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T18:37:17.962239",
+    "last_check": "2025-10-04T18:44:47.325072",
     "last_hash": "",
     "events": []
   }

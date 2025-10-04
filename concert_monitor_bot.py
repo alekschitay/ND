@@ -312,6 +312,19 @@ class ConcertMonitorBot:
         await update.message.reply_text("🏓 Pong! Бот работает!")
     
     @handle_errors
+    async def restart_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /restart - перезапуск бота"""
+        await update.message.reply_text("🔄 Перезапуск бота...")
+        
+        # Запускаем скрипт перезапуска
+        import subprocess
+        try:
+            subprocess.Popen(["./restart_bot.sh"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            await update.message.reply_text("✅ Команда перезапуска отправлена!")
+        except Exception as e:
+            await update.message.reply_text(f"❌ Ошибка перезапуска: {e}")
+    
+    @handle_errors
     async def scan_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /scan - принудительное сканирование"""
         user_id = update.effective_user.id
@@ -489,8 +502,9 @@ class ConcertMonitorBot:
         
         try:
             headers = {'User-Agent': USER_AGENT}
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url, timeout=HTTP_TIMEOUT, headers=headers) as response:
+            timeout = aiohttp.ClientTimeout(total=HTTP_TIMEOUT, connect=10)
+            async with aiohttp.ClientSession(timeout=timeout) as session:
+                async with session.get(url, headers=headers) as response:
                     if response.status != 200:
                         await update.message.reply_text(f"❌ Ошибка загрузки страницы: статус {response.status}")
                         return
@@ -944,8 +958,9 @@ NOTIFICATION_SETTINGS = {{
         """Парсинг событий со страницы"""
         try:
             headers = {'User-Agent': USER_AGENT}
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url, timeout=HTTP_TIMEOUT, headers=headers) as response:
+            timeout = aiohttp.ClientTimeout(total=HTTP_TIMEOUT, connect=10)
+            async with aiohttp.ClientSession(timeout=timeout) as session:
+                async with session.get(url, headers=headers) as response:
                     if response.status != 200:
                         logger.error(f"Ошибка загрузки страницы {url}: статус {response.status}")
                         return []
@@ -1246,14 +1261,24 @@ NOTIFICATION_SETTINGS = {{
                 logger.info("Начало цикла мониторинга")
                 
                 if self.monitored_urls:
-                    # Проверяем все отслеживаемые URL
+                    # Проверяем все отслеживаемые URL с таймаутом
                     tasks = []
                     for url, monitored in self.monitored_urls.items():
-                        task = self.check_url_for_updates(url, monitored, application)
+                        # Добавляем таймаут для каждой проверки
+                        task = asyncio.wait_for(
+                            self.check_url_for_updates(url, monitored, application),
+                            timeout=30  # 30 секунд на каждую ссылку
+                        )
                         tasks.append(task)
                     
-                    # Выполняем проверки параллельно
-                    await asyncio.gather(*tasks, return_exceptions=True)
+                    # Выполняем проверки параллельно с обработкой ошибок
+                    results = await asyncio.gather(*tasks, return_exceptions=True)
+                    
+                    # Логируем ошибки
+                    for i, result in enumerate(results):
+                        if isinstance(result, Exception):
+                            url = list(self.monitored_urls.keys())[i]
+                            logger.error(f"Ошибка при проверке {url}: {result}")
                 
                 logger.info("Цикл мониторинга завершен")
                 
@@ -1272,6 +1297,7 @@ NOTIFICATION_SETTINGS = {{
         application.add_handler(CommandHandler("start", self.start_command))
         application.add_handler(CommandHandler("help", self.help_command))
         application.add_handler(CommandHandler("ping", self.ping_command))
+        application.add_handler(CommandHandler("restart", self.restart_command))
         application.add_handler(CommandHandler("add", self.add_url_command))
         application.add_handler(CommandHandler("list", self.list_urls_command))
         application.add_handler(CommandHandler("remove", self.remove_url_command))
