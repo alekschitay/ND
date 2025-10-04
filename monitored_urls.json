@@ -2,7 +2,7 @@
   "https://vk-stadium.ru/": {
     "url": "https://vk-stadium.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:29:48.026560",
+    "last_check": "2025-10-04T14:39:12.829523",
     "last_hash": "df66dd2b034d4ec2ce1003a4807e86df",
     "events": [
       {
@@ -26,7 +26,7 @@
   "https://livearena.ru/performances": {
     "url": "https://livearena.ru/performances",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:29:50.804222",
+    "last_check": "2025-10-04T14:39:14.031932",
     "last_hash": "d784d5fbb9f597e85854fafbfb58601c",
     "events": [
       {
@@ -162,7 +162,7 @@
   "https://sohorooms.com/anons": {
     "url": "https://sohorooms.com/anons",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:29:54.156394",
+    "last_check": "2025-10-04T14:39:13.644409",
     "last_hash": "d2c112c61ab40e2eff25c61a858e6018",
     "events": [
       {
@@ -210,7 +210,7 @@
   "https://kremlinpalace.org/": {
     "url": "https://kremlinpalace.org/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:29:57.642851",
+    "last_check": "2025-10-04T14:39:17.976181",
     "last_hash": "d102c617a8a29abfba3e9f50b50508ea",
     "events": [
       {
@@ -378,14 +378,14 @@
   "https://assuntamadre.ru/blog/": {
     "url": "https://assuntamadre.ru/blog/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:29:02.246921",
+    "last_check": "2025-10-04T14:39:12.970380",
     "last_hash": "",
     "events": []
   },
   "https://letolifefest.ru/": {
     "url": "https://letolifefest.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:30:01.590221",
+    "last_check": "2025-10-04T14:39:13.231945",
     "last_hash": "688b25115047f37e69c453f18f9a4a86",
     "events": [
       {
@@ -593,49 +593,682 @@
   "https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop": {
     "url": "https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:29:01.554512",
+    "last_check": "2025-10-04T14:39:12.088675",
     "last_hash": "",
     "events": []
   },
   "https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates": {
     "url": "https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:29:01.792628",
+    "last_check": "2025-10-04T14:39:17.979000",
     "last_hash": "",
     "events": []
   },
   "https://peachrest.ru/events/": {
     "url": "https://peachrest.ru/events/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:30:36.157878",
-    "last_hash": "",
-    "events": []
+    "last_check": "2025-10-04T14:39:13.234027",
+    "last_hash": "9b0bb02e2fa6f5074ede8d19252d94a7",
+    "events": [
+      {
+        "title": "МенюОсновное менюБарное менюВинная карта",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/menu/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Меню",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Основное меню",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/upload/menu/osn.pdf",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Основное меню",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Барное меню",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/upload/menu/bar.pdf",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Барное меню",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Винная карта",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/upload/menu/wine.pdf",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Винная карта",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "О ресторанеИнтерьерКоманда",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/about/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "О ресторане",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Интерьер",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/about/interior/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Интерьер",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Команда",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/about/team/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Команда",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "СобытияNew",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "СобытияNew",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Новости",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/news/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Новости",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Divas Караоке",
+        "date": "Дата не указана",
+        "url": "https://divaskaraoke.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Divas Караоке",
+        "date": "Дата не указана",
+        "url": "https://peachrest.ru/events/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      }
+    ]
   },
   "https://bolshoi.ru/timetable/all": {
     "url": "https://bolshoi.ru/timetable/all",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:31:38.703704",
+    "last_check": "2025-10-04T14:39:13.015939",
     "last_hash": "",
     "events": []
   },
   "https://mxat.ru/afisha/": {
     "url": "https://mxat.ru/afisha/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:32:28.989070",
-    "last_hash": "",
-    "events": []
+    "last_check": "2025-10-04T14:39:17.972088",
+    "last_hash": "2e2d27e6e7ee83332f5b7f032965e5f3",
+    "events": [
+      {
+        "title": "19:00Основная сцена8 разгневанных женщин",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/8_women/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/292/tgb76xi40vxf7zxaomifybez36bo3kqe/700_700_2/92512.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Малая сцена19.14",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/1914/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/e18/e06am4x6ncrlerdoi0fheuhhln5f7h9k/700_700_2/DSC_4514.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Новая сценаСоня-9",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/sonya9/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/b40/j1u2yxqcmpd9owxilyczpziphumr0zly/700_700_2/90630.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Основная сценаНе покидай свою планету",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/planet/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/73c/1ucdr5am83whg67fqvfdejd6pyj8ird2/700_700_2/88143.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Малая сценаВесёлые времена",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/ninochka/",
+        "image_url": "https://mxat.ru/upload/iblock/ed1/esj82jj18gpw9lnen683vghxco9y1yrl/veselye-vremena-kolpakova.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Новая сценаОсень",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/strindberg/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/e94/38kaucpv005nlj5dv6dmkb8jw8fj3en4/700_700_2/38d1ecfa_6765_4a60_aded_9d0e5ac54939.jpeg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Основная сценаНе покидай свою планету",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/planet/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/73c/1ucdr5am83whg67fqvfdejd6pyj8ird2/700_700_2/88143.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Малая сценаМорж, учитель и поэт",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/walrus/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/3c6/nbt4z4j46lo455hak4n5kk263glwtryo/700_700_2/morzh-ktrelev.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Новая сценаМоё загляденье",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/lovely_sight/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/8b2/pcukiisf2pob3wm7jlr0qjaxa1dcjanr/700_700_2/zaglyadenie.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Основная сценаСирано де Бержерак",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/sirano_2022/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/528/1c8lxv8tlhrecw07m79ohgeovryz14x3/700_700_2/chursin-sirano.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Малая сценаЖизель Ботаническая",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/giselle/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/962/alkiqfmvwd53ljx4zhilnl99zh59i6sh/700_700_2/TOR_0406-copy.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Новая сценаЧрево",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/womb/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/49f/ta83c6q1dsn0na3o0evimbol8gzga2v8/700_700_2/86677.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Основная сцена9 ряд. 10, 11 место",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/9_10_11/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/ce9/hi2hwmzn8uip80rn27gje0bo5m4r1lv0/700_700_2/90358.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Малая сцена350 Сентрал-парк Вест, New York, NY 10025",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/centralpark/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/562/x0quc0e6cy6s2zu1a27m7juyesfb4cqe/700_700_2/77947.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Основная сценаВраки, или Завещание барона Мюнхгаузена",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/munchausen/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/11b/90d5xo9ih7kmqwi67o3hvdvwgjxyf5ny/700_700_2/85861.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Малая сцена350 Сентрал-парк Вест, New York, NY 10025",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/centralpark/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/562/x0quc0e6cy6s2zu1a27m7juyesfb4cqe/700_700_2/77947.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Основная сценаЖил. Был. Дом.",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/home2025/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/70a/cv1q9jky1gz4q242l1xfbnvu0t0e0gih/700_700_2/92963.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Малая сценаМеханика любви",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/engineering/",
+        "image_url": "https://mxat.ru/upload/iblock/323/ak23lkak22zss4nnjw3y1drgpgpbfyln/mekhanika.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Новая сценаФлешбэк 2002",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/flashback/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/186/bblqcgwrsoq1r2na05cf7aeu9o79biz5/700_700_2/fleshbek2.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "19:00Основная сценаАвлабар, или Новая Ханума",
+        "date": "Дата не указана",
+        "url": "https://mxat.ru/repertuar/show/hanuma/",
+        "image_url": "https://mxat.ru/upload/resize_cache/iblock/f1f/uv3ic0pokq654a8rc89bayg3mln1jcyn/700_700_2/89539.jpg",
+        "venue": null,
+        "price": null
+      }
+    ]
   },
   "https://msk-live-hall.mts.ru/": {
     "url": "https://msk-live-hall.mts.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:33:51.248274",
-    "last_hash": "",
-    "events": []
+    "last_check": "2025-10-04T14:39:14.034526",
+    "last_hash": "4b70735a6bfcaf42fa806c04112e56b0",
+    "events": [
+      {
+        "title": "афиша",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "афиша",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "изменения в афише",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/changes",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "изменения в афише",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "о площадке",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/about",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "о площадке",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "бар",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/bar",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "бар",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "аренда",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/orgs",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "аренда",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "галерея",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/gallereis",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "галерея",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "сми о нас",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/press",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "сми о нас",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "контакты",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/contacts",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "контакты",
+        "date": "Дата не указана",
+        "url": "https://msk-live-hall.mts.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      }
+    ]
   },
   "https://vtb-arena.com/poster/": {
     "url": "https://vtb-arena.com/poster/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T14:36:44.120041",
+    "last_check": "2025-10-04T14:39:14.036640",
+    "last_hash": "5af5273e1ced26fc81a6825eaf823e7c",
+    "events": [
+      {
+        "title": "Вернуться к началу",
+        "date": "Дата не указана",
+        "url": "https://vtb-arena.com/poster/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      }
+    ]
+  },
+  "https://icearenamsk.ru/": {
+    "url": "https://icearenamsk.ru/",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T14:39:20.585503",
+    "last_hash": "bf8ed03139d4ae87ce4b86e9bcf4ba81",
+    "events": [
+      {
+        "title": "Панк-сказка «Король и Шут»",
+        "date": "18 ОКТЯБРЯ 14:00 | 19:00",
+        "url": "https://icearenamsk.ru/media/news/punk_fairy_tale_at_cska_arena/",
+        "image_url": "https://icearenamsk.ru/upload/resize_cache/iblock/19b/rqtn4kmvqgplw0gow4mwqckcu62vagh4/1100_733_1/1200kh800.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Guf. Прощальный тур",
+        "date": "29 НОЯБРЯ | 30 НОЯБРЯ | 02 ДЕКАБРЯ",
+        "url": "https://icearenamsk.ru/media/news/guf-29-nov-2025/",
+        "image_url": "https://icearenamsk.ru/upload/resize_cache/iblock/6dc/1twtolyzo905ng6zu3kut8fcmkpggd1j/1100_733_1/1200kh800.png",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Павел Воля Большой Стендап",
+        "date": "12–13 ДЕКАБРЯ",
+        "url": "https://icearenamsk.ru/media/news/pavel-volya-stand-up-show-12-13-dec-2025/",
+        "image_url": "https://icearenamsk.ru/upload/resize_cache/iblock/dbc/vnspkqu4iogbyymjzyvu7zruwe4wrde7/1100_733_1/1200_800_100.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "RADIO TAPOK",
+        "date": "19–20 ДЕКАБРЯ",
+        "url": "https://icearenamsk.ru/afisha-and-tickets/afisha/radio-tapok-20-dec-2025-20-00/?event=847#event-order",
+        "image_url": "https://icearenamsk.ru/upload/resize_cache/iblock/ba2/b7xznj2tn8ekp98jqnppz0q2neeiedhv/1100_733_1/1200_800.jpg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Новый год в Хогвартсе",
+        "date": "31 ДЕКАБРЯ – 02 ЯНВАРЯ",
+        "url": "https://icearenamsk.ru/media/news/new-year-at-hogwarts-31-dec-2025/",
+        "image_url": "https://icearenamsk.ru/upload/resize_cache/iblock/16c/xcppf80hmio52e8naua3j0l5zva2zae2/1100_733_1/Hogwarts_banners_1.jpeg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Панк-сказка «Король и Шут»",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/afisha-and-tickets/afisha/punk-fairytale-korol-i-shut-18-oct-2025-14-00/#event-order",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Панк-сказка «Король и Шут»",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/afisha-and-tickets/afisha/punk-fairytale-korol-i-shut-18-oct-2025-14-00/#event-order",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Панк-сказка «Король и Шут»",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "18 Октября | 14:00",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/afisha-and-tickets/afisha/punk-fairytale-korol-i-shut-18-oct-2025-14-00/#event-order",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "18 Октября | 14:00",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/afisha-and-tickets/afisha/punk-fairytale-korol-i-shut-18-oct-2025-14-00/#event-order",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "18 Октября | 14:00",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Купить",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "18 Октября | 19:00",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/afisha-and-tickets/afisha/punk-fairytale-korol-i-shut-18-oct-2025-19-00/#event-order",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "18 Октября | 19:00",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Купить",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Guf. Прощальный тур",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/afisha-and-tickets/afisha/guf-29-nov-2025-19-00/#event-order",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Guf. Прощальный тур",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/afisha-and-tickets/afisha/guf-29-nov-2025-19-00/#event-order",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Guf. Прощальный тур",
+        "date": "Дата не указана",
+        "url": "https://icearenamsk.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      }
+    ]
+  },
+  "https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f": {
+    "url": "https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T14:39:14.288302",
+    "last_hash": "",
+    "events": []
+  },
+  "https://spartak.com/": {
+    "url": "https://spartak.com/",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T14:39:13.105649",
+    "last_hash": "",
+    "events": []
+  },
+  "https://pfc-cska.com/matches/spisok-matchej/": {
+    "url": "https://pfc-cska.com/matches/spisok-matchej/",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T14:42:38.572133",
     "last_hash": "",
     "events": []
   }
