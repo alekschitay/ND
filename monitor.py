@@ -56,7 +56,7 @@ class PageMonitor:
     def extract_events_from_html(self, html: str, url: str) -> List[Dict]:
         """Извлечение событий из HTML"""
         try:
-            soup = BeautifulSoup(html, 'lxml')
+            soup = BeautifulSoup(html, 'html.parser')
             events = []
             
             # Получаем паттерны для сайта
