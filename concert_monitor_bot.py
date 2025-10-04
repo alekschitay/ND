@@ -20,6 +20,7 @@ import requests
 from bs4 import BeautifulSoup
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
+from functools import wraps
 
 # Импортируем конфигурацию
 from config import *
@@ -30,6 +31,20 @@ logging.basicConfig(
     level=getattr(logging, LOG_LEVEL)
 )
 logger = logging.getLogger(__name__)
+
+def handle_errors(func):
+    """Декоратор для обработки ошибок в командах бота"""
+    @wraps(func)
+    async def wrapper(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        try:
+            return await func(self, update, context)
+        except Exception as e:
+            logger.error(f"Ошибка в {func.__name__}: {e}")
+            try:
+                await update.message.reply_text("❌ Произошла ошибка. Попробуйте позже.")
+            except:
+                logger.error(f"Не удалось отправить сообщение об ошибке в {func.__name__}")
+    return wrapper
 
 @dataclass
 class ConcertEvent:
@@ -108,6 +123,7 @@ class ConcertMonitorBot:
         except Exception as e:
             logger.error(f"Ошибка сохранения данных: {e}")
     
+    @handle_errors
     async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /start"""
         welcome_text = """
@@ -140,6 +156,7 @@ class ConcertMonitorBot:
         """
         await update.message.reply_text(welcome_text)
     
+    @handle_errors
     async def help_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /help"""
         help_text = """
@@ -180,6 +197,7 @@ class ConcertMonitorBot:
         """
         await update.message.reply_text(help_text)
     
+    @handle_errors
     async def add_url_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /add"""
         if not context.args:
@@ -258,6 +276,7 @@ class ConcertMonitorBot:
         except ValueError:
             await update.message.reply_text("❌ Неверный формат номера. Укажите число.")
     
+    @handle_errors
     async def status_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /status"""
         total_urls = len(self.monitored_urls)
@@ -287,6 +306,12 @@ class ConcertMonitorBot:
         
         await update.message.reply_text(status_text)
     
+    @handle_errors
+    async def ping_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /ping - проверка работоспособности бота"""
+        await update.message.reply_text("🏓 Pong! Бот работает!")
+    
+    @handle_errors
     async def scan_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /scan - принудительное сканирование"""
         user_id = update.effective_user.id
@@ -397,6 +422,7 @@ class ConcertMonitorBot:
             logger.error(f"Ошибка принудительного сканирования {url}: {e}")
             await update.message.reply_text(error_text)
     
+    @handle_errors
     async def test_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /test - тестирование парсинга ссылки"""
         if not context.args:
@@ -1245,6 +1271,7 @@ NOTIFICATION_SETTINGS = {{
         # Добавляем обработчики команд
         application.add_handler(CommandHandler("start", self.start_command))
         application.add_handler(CommandHandler("help", self.help_command))
+        application.add_handler(CommandHandler("ping", self.ping_command))
         application.add_handler(CommandHandler("add", self.add_url_command))
         application.add_handler(CommandHandler("list", self.list_urls_command))
         application.add_handler(CommandHandler("remove", self.remove_url_command))
