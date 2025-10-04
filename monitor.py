@@ -67,7 +67,10 @@ class PageMonitor:
             
             for element in event_elements:
                 event_data = self._extract_event_data(element, url, patterns)
-                if event_data and (event_data['title'] or event_data.get('image_url')):
+                if event_data:
+                    # Если нет заголовка, но есть изображение, используем изображение
+                    if not event_data['title'] and event_data.get('image_url'):
+                        event_data['title'] = "🎵 Новое событие"
                     events.append(event_data)
             
             # Если не нашли события по селекторам, ищем по ключевым словам
@@ -108,8 +111,25 @@ class PageMonitor:
             title_element = element.select_one(patterns['title_selector'])
             title = title_element.get_text(strip=True) if title_element else ""
             
+            # Если нет заголовка, пытаемся извлечь из alt или title изображения
             if not title:
-                return None
+                img_element = element.select_one(patterns['image_selector'])
+                if img_element:
+                    title = img_element.get('alt', '') or img_element.get('title', '')
+            
+            # Если все еще нет заголовка, извлекаем из текста элемента
+            if not title:
+                element_text = element.get_text(strip=True)
+                if element_text and len(element_text) > 10:
+                    title = element_text[:100]  # Первые 100 символов
+            
+            # Если заголовок все еще пустой, но есть изображение, создаем общий заголовок
+            if not title:
+                img_element = element.select_one(patterns['image_selector'])
+                if img_element and img_element.get('src'):
+                    title = "🎵 Новое событие"
+                else:
+                    return None  # Нет ни заголовка, ни изображения
             
             # Извлекаем дату
             date_element = element.select_one(patterns['date_selector'])
@@ -125,10 +145,13 @@ class PageMonitor:
             image_element = element.select_one(patterns['image_selector'])
             image_url = ""
             if image_element and image_element.get('src'):
-                image_url = urljoin(base_url, image_element['src'])
+                src = image_element.get('src')
+                # Проверяем, что это не служебное изображение
+                if self._is_event_image(image_element):
+                    image_url = urljoin(base_url, src)
             
             # Создаем хеш для уникальности события
-            content_hash = hashlib.md5(f"{title}{date}{link}".encode()).hexdigest()
+            content_hash = hashlib.md5(f"{title}{date}{link}{image_url}".encode()).hexdigest()
             
             return {
                 'title': title,
@@ -255,12 +278,18 @@ class PageMonitor:
             title = img_element.get('title', '').lower()
             class_name = ' '.join(img_element.get('class', [])).lower()
             
-            # Исключаем служебные изображения
+            # Исключаем явно служебные изображения
             exclude_keywords = [
                 'logo', 'icon', 'avatar', 'profile', 'banner', 'header', 'footer',
                 'social', 'facebook', 'twitter', 'instagram', 'vk', 'youtube',
-                'loading', 'spinner', 'placeholder', 'default', 'no-image'
+                'loading', 'spinner', 'placeholder', 'default', 'no-image',
+                'svg', 'gif', 'favicon', 'apple-touch'
             ]
+            
+            # Проверяем, что это не служебное изображение
+            for keyword in exclude_keywords:
+                if keyword in src or keyword in alt or keyword in title or keyword in class_name:
+                    return False
             
             # Проверяем размеры изображения (примерно)
             width = img_element.get('width', '')
@@ -271,22 +300,14 @@ class PageMonitor:
                 try:
                     w = int(width.replace('px', ''))
                     h = int(height.replace('px', ''))
-                    if w < 100 or h < 100:  # Слишком маленькое изображение
+                    if w < 50 or h < 50:  # Снизили порог до 50x50
                         return False
                 except:
                     pass
             
-            # Проверяем, что это не служебное изображение
-            for keyword in exclude_keywords:
-                if keyword in src or keyword in alt or keyword in title or keyword in class_name:
-                    return False
-            
-            # Проверяем, что изображение достаточно большое по URL или атрибутам
-            if any(keyword in src for keyword in ['poster', 'event', 'concert', 'show', 'afisha']):
-                return True
-            
-            if any(keyword in alt for keyword in ['концерт', 'concert', 'событие', 'event', 'афиша']):
-                return True
+            # Проверяем расширение файла
+            if src.endswith(('.svg', '.gif', '.ico')):
+                return False
             
             # Если изображение имеет разумные размеры и не исключено, считаем его событием
             return True

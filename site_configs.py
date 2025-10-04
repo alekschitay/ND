@@ -92,6 +92,16 @@ SITE_CONFIGS = {
         'link_selector': 'a',
         'image_selector': 'img',
         'description': 'Сайт с графическими афишами (без текстовых описаний)'
+    },
+    
+    'memobar.ru': {
+        'name': 'MemoBar',
+        'event_selector': '.event-item, .concert-item, .poster-item, img',
+        'title_selector': '.event-title, .concert-title, img[alt], img[title]',
+        'date_selector': '.event-date, .concert-date',
+        'link_selector': 'a',
+        'image_selector': 'img',
+        'description': 'Сайт с графическими афишами концертов'
     }
 }
 

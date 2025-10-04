@@ -159,7 +159,13 @@ class ConcertMonitorBot:
                         text += f"   📅 {event['date']}\n"
                     if event['link']:
                         text += f"   🔗 {event['link']}\n"
+                    if event.get('image_url'):
+                        text += f"   🖼️ Изображение: {event['image_url'][:50]}...\n"
                     text += "\n"
+                
+                # Показываем статистику по изображениям
+                images_count = sum(1 for event in result['events'] if event.get('image_url'))
+                text += f"🖼️ Событий с изображениями: {images_count} из {len(result['events'])}\n"
             else:
                 text += "⚠️ События не найдены. Возможно, нужно настроить селекторы для этого сайта."
             
