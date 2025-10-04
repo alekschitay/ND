@@ -49,6 +49,7 @@ class MonitoredUrl:
     last_check: str
     last_hash: str
     events: List[ConcertEvent]
+    group_chat_id: Optional[int] = None  # ID чата для групповых уведомлений
 
 class ConcertMonitorBot:
     """Основной класс телеграм-бота для мониторинга концертов"""
@@ -130,6 +131,11 @@ class ConcertMonitorBot:
 /analyze <ссылка> - проанализировать структуру сайта
 /config <домен> <селектор> - настроить селекторы
 
+👥 Команды для групп:
+/setgroup [номер] - настроить групповые уведомления
+/unsetgroup [номер] - отключить групповые уведомления
+/groupstatus - статус групповых уведомлений
+
 Просто отправьте ссылку на страницу с событиями, и я начну её отслеживать!
         """
         await update.message.reply_text(welcome_text)
@@ -164,6 +170,11 @@ class ConcertMonitorBot:
 🔧 Команды настройки:
 /analyze <ссылка> - проанализировать структуру сайта
 /config <домен> <селектор> - настроить селекторы для сайта
+
+👥 Команды для групп:
+/setgroup [номер] - настроить групповые уведомления
+/unsetgroup [номер] - отключить групповые уведомления
+/groupstatus - статус групповых уведомлений
 
 💡 Совет: Добавляйте ссылки на конкретные разделы сайтов (например, /events, /concerts, /afisha)
         """
@@ -581,6 +592,131 @@ class ConcertMonitorBot:
             logs_text += f"   🔄 Статус: {'✅ Активен' if time_diff.total_seconds() < MONITORING_INTERVAL * 2 else '⚠️ Долго не проверялся'}\n\n"
         
         await update.message.reply_text(logs_text)
+    
+    async def set_group_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /setgroup - настройка группового чата для уведомлений"""
+        chat_id = update.effective_chat.id
+        user_id = update.effective_user.id
+        
+        # Проверяем, что команда вызвана в групповом чате
+        if update.effective_chat.type not in ['group', 'supergroup']:
+            await update.message.reply_text("❌ Эта команда работает только в групповых чатах!")
+            return
+        
+        # Получаем список ссылок пользователя
+        user_urls = [url for url, data in self.monitored_urls.items() if data.user_id == user_id]
+        
+        if not user_urls:
+            await update.message.reply_text("❌ У вас нет отслеживаемых ссылок для настройки групповых уведомлений.")
+            return
+        
+        # Если указан номер ссылки
+        if context.args:
+            try:
+                index = int(context.args[0]) - 1
+                if index < 0 or index >= len(user_urls):
+                    await update.message.reply_text("❌ Неверный номер ссылки.")
+                    return
+                
+                url_to_update = user_urls[index]
+                self.monitored_urls[url_to_update].group_chat_id = chat_id
+                
+                await update.message.reply_text(f"""
+✅ Групповые уведомления настроены!
+
+🔗 Ссылка: {url_to_update}
+👥 Чат: {update.effective_chat.title}
+📱 Уведомления будут приходить в этот чат
+                """)
+                
+            except ValueError:
+                await update.message.reply_text("❌ Неверный формат номера. Укажите число.")
+        else:
+            # Настраиваем все ссылки пользователя
+            updated_count = 0
+            for url in user_urls:
+                self.monitored_urls[url].group_chat_id = chat_id
+                updated_count += 1
+            
+            await update.message.reply_text(f"""
+✅ Групповые уведомления настроены!
+
+👥 Чат: {update.effective_chat.title}
+🔗 Обновлено ссылок: {updated_count}
+📱 Все уведомления будут приходить в этот чат
+            """)
+        
+        self.save_data()
+    
+    async def unset_group_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /unsetgroup - отключение групповых уведомлений"""
+        user_id = update.effective_user.id
+        
+        # Получаем список ссылок пользователя
+        user_urls = [url for url, data in self.monitored_urls.items() if data.user_id == user_id]
+        
+        if not user_urls:
+            await update.message.reply_text("❌ У вас нет отслеживаемых ссылок.")
+            return
+        
+        # Если указан номер ссылки
+        if context.args:
+            try:
+                index = int(context.args[0]) - 1
+                if index < 0 or index >= len(user_urls):
+                    await update.message.reply_text("❌ Неверный номер ссылки.")
+                    return
+                
+                url_to_update = user_urls[index]
+                self.monitored_urls[url_to_update].group_chat_id = None
+                
+                await update.message.reply_text(f"""
+✅ Групповые уведомления отключены!
+
+🔗 Ссылка: {url_to_update}
+📱 Уведомления будут приходить только вам
+                """)
+                
+            except ValueError:
+                await update.message.reply_text("❌ Неверный формат номера. Укажите число.")
+        else:
+            # Отключаем все ссылки пользователя
+            updated_count = 0
+            for url in user_urls:
+                self.monitored_urls[url].group_chat_id = None
+                updated_count += 1
+            
+            await update.message.reply_text(f"""
+✅ Групповые уведомления отключены!
+
+🔗 Обновлено ссылок: {updated_count}
+📱 Все уведомления будут приходить только вам
+            """)
+        
+        self.save_data()
+    
+    async def group_status_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /groupstatus - статус групповых уведомлений"""
+        user_id = update.effective_user.id
+        user_urls = [url for url, data in self.monitored_urls.items() if data.user_id == user_id]
+        
+        if not user_urls:
+            await update.message.reply_text("❌ У вас нет отслеживаемых ссылок.")
+            return
+        
+        status_text = "👥 Статус групповых уведомлений:\n\n"
+        
+        for i, url in enumerate(user_urls, 1):
+            monitored = self.monitored_urls[url]
+            if monitored.group_chat_id:
+                status_text += f"{i}. {url[:50]}...\n"
+                status_text += f"   👥 Групповые уведомления: ✅ Включены\n"
+                status_text += f"   📱 ID чата: {monitored.group_chat_id}\n\n"
+            else:
+                status_text += f"{i}. {url[:50]}...\n"
+                status_text += f"   👥 Групповые уведомления: ❌ Отключены\n\n"
+        
+        await update.message.reply_text(status_text)
     
     async def config_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /config - настройка селекторов для сайта"""
@@ -1041,6 +1177,10 @@ NOTIFICATION_SETTINGS = {{
     async def send_new_events_notification(self, user_id: int, url: str, new_events: List[ConcertEvent], application):
         """Отправка уведомления о новых событиях"""
         try:
+            # Определяем куда отправлять уведомление
+            monitored = self.monitored_urls.get(url)
+            chat_id = monitored.group_chat_id if monitored and monitored.group_chat_id else user_id
+            
             message_text = f"🎵 Новые события на сайте!\n🔗 {url}\n\n"
             
             for i, event in enumerate(new_events[:MAX_EVENTS_PER_NOTIFICATION], 1):  # Ограничиваем количество событий
@@ -1055,7 +1195,7 @@ NOTIFICATION_SETTINGS = {{
             if len(new_events) > MAX_EVENTS_PER_NOTIFICATION:
                 message_text += f"... и ещё {len(new_events) - MAX_EVENTS_PER_NOTIFICATION} событий"
             
-            await application.bot.send_message(chat_id=user_id, text=message_text)
+            await application.bot.send_message(chat_id=chat_id, text=message_text)
             
             # Отправляем изображения отдельными сообщениями
             if NOTIFICATION_SETTINGS["enable_images"]:
@@ -1063,10 +1203,10 @@ NOTIFICATION_SETTINGS = {{
                     if event.image_url:
                         try:
                             await application.bot.send_photo(
-                                chat_id=user_id,
-                                photo=event.image_url,
-                                caption=f"🎵 {event.title}"
-                            )
+                            chat_id=chat_id,
+                            photo=event.image_url,
+                            caption=f"🎵 {event.title}"
+                        )
                         except Exception as e:
                             logger.error(f"Ошибка отправки изображения {event.image_url}: {e}")
             
@@ -1114,6 +1254,9 @@ NOTIFICATION_SETTINGS = {{
         application.add_handler(CommandHandler("logs", self.logs_command))
         application.add_handler(CommandHandler("analyze", self.analyze_command))
         application.add_handler(CommandHandler("config", self.config_command))
+        application.add_handler(CommandHandler("setgroup", self.set_group_command))
+        application.add_handler(CommandHandler("unsetgroup", self.unset_group_command))
+        application.add_handler(CommandHandler("groupstatus", self.group_status_command))
         
         # Добавляем обработчик сообщений с URL
         application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_url_message))
