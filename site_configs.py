@@ -96,12 +96,12 @@ SITE_CONFIGS = {
     
     'memobar.ru': {
         'name': 'MemoBar',
-        'event_selector': '.event-item, .concert-item, .poster-item, img',
-        'title_selector': '.event-title, .concert-title, img[alt], img[title]',
-        'date_selector': '.event-date, .concert-date',
+        'event_selector': '#rec355567016 img, .t-popup__container img',
+        'title_selector': 'img[alt], img[title]',
+        'date_selector': '',  # Дата в изображении
         'link_selector': 'a',
         'image_selector': 'img',
-        'description': 'Сайт с графическими афишами концертов'
+        'description': 'Сайт с графическими афишами концертов (блок афиш)'
     }
 }
 
