@@ -102,6 +102,16 @@ SITE_CONFIGS = {
         'link_selector': 'a',
         'image_selector': 'img',
         'description': 'Сайт с графическими афишами концертов (блок афиш)'
+    },
+    
+    'viagogo.com': {
+        'name': 'Viagogo',
+        'event_selector': '.event-item, .concert-item, [data-testid="event-card"], .event-card',
+        'title_selector': '.event-title, .concert-title, h3, h4, [data-testid="event-title"]',
+        'date_selector': '.event-date, .concert-date, .date, [data-testid="event-date"]',
+        'link_selector': 'a',
+        'image_selector': 'img',
+        'description': 'Билетный оператор Viagogo'
     }
 }
 

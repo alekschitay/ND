@@ -310,6 +310,60 @@ class ConcertMonitorBot:
         except Exception as e:
             await update.message.reply_text(f"❌ Ошибка симуляции: {str(e)}")
 
+    async def check_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /check для принудительной проверки страниц"""
+        user_id = update.effective_user.id
+        
+        try:
+            # Получаем отслеживаемые страницы пользователя
+            pages = await self.db.get_user_pages(user_id)
+            
+            if not pages:
+                await update.message.reply_text(
+                    "📝 У вас пока нет отслеживаемых страниц.\n\n"
+                    "Используйте /add для добавления страницы."
+                )
+                return
+            
+            await update.message.reply_text("🔍 Принудительная проверка страниц...")
+            
+            found_events = 0
+            for page in pages:
+                try:
+                    site_name = page['site_name'] or self._extract_domain(page['url'])
+                    await update.message.reply_text(f"🔍 Проверяю {site_name}...")
+                    
+                    new_events = await self.monitor.check_page_for_updates(page)
+                    
+                    if new_events:
+                        found_events += len(new_events)
+                        await self.send_notification(user_id, page, new_events)
+                        
+                        # Сохраняем новые события в базу
+                        for event in new_events:
+                            await self.db.add_event(
+                                page_id=page['id'],
+                                title=event['title'],
+                                date=event.get('date'),
+                                link=event.get('link'),
+                                image_url=event.get('image_url'),
+                                content_hash=event.get('content_hash')
+                            )
+                    
+                except Exception as e:
+                    logger.error(f"Ошибка проверки {page['url']}: {e}")
+                    await update.message.reply_text(f"❌ Ошибка проверки {site_name}: {str(e)}")
+            
+            await update.message.reply_text(
+                f"✅ Проверка завершена!\n\n"
+                f"📊 Найдено новых событий: {found_events}\n"
+                f"🔗 Проверено страниц: {len(pages)}\n\n"
+                f"💡 Автоматическая проверка происходит каждые {config.CHECK_INTERVAL_MINUTES} минут."
+            )
+            
+        except Exception as e:
+            await update.message.reply_text(f"❌ Ошибка проверки: {str(e)}")
+
     async def images_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /images для тестирования извлечения изображений"""
         if not context.args:
@@ -532,15 +586,20 @@ class ConcertMonitorBot:
 
     async def run_monitoring(self):
         """Запуск мониторинга страниц"""
+        logger.info("🔄 Запуск мониторинга страниц...")
+        
         while True:
             try:
                 pages = await self.db.get_all_monitored_pages()
+                logger.info(f"📊 Проверяю {len(pages)} страниц...")
                 
                 for page in pages:
                     try:
+                        logger.info(f"🔍 Проверяю страницу: {page['url']}")
                         new_events = await self.monitor.check_page_for_updates(page)
                         
                         if new_events:
+                            logger.info(f"🎵 Найдено {len(new_events)} новых событий на {page['url']}")
                             await self.send_notification(page['user_id'], page, new_events)
                             
                             # Сохраняем новые события в базу
@@ -553,10 +612,13 @@ class ConcertMonitorBot:
                                     image_url=event.get('image_url'),
                                     content_hash=event.get('content_hash')
                                 )
+                        else:
+                            logger.info(f"✅ Новых событий нет на {page['url']}")
                     
                     except Exception as e:
                         logger.error(f"Ошибка мониторинга страницы {page['url']}: {e}")
                 
+                logger.info(f"⏰ Жду {config.CHECK_INTERVAL_MINUTES} минут до следующей проверки...")
                 # Ждем перед следующей проверкой
                 await asyncio.sleep(config.CHECK_INTERVAL_MINUTES * 60)
                 
@@ -583,6 +645,7 @@ class ConcertMonitorBot:
         self.application.add_handler(CommandHandler("images", self.images_command))
         self.application.add_handler(CommandHandler("status", self.status_command))
         self.application.add_handler(CommandHandler("simulate", self.simulate_command))
+        self.application.add_handler(CommandHandler("check", self.check_command))
         self.application.add_handler(CallbackQueryHandler(self.handle_callback_query))
         self.application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_url_message))
         
