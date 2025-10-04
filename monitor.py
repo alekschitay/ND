@@ -153,6 +153,9 @@ class PageMonitor:
                         image_url = src
                     else:
                         image_url = urljoin(base_url, src)
+                    
+                    # Пытаемся получить полноразмерную версию изображения
+                    image_url = self._get_fullsize_image_url(image_url)
             
             # Создаем хеш для уникальности события
             content_hash = hashlib.md5(f"{title}{date}{link}{image_url}".encode()).hexdigest()
@@ -287,7 +290,8 @@ class PageMonitor:
                 'logo', 'icon', 'avatar', 'profile', 'banner', 'header', 'footer',
                 'social', 'facebook', 'twitter', 'instagram', 'vk', 'youtube',
                 'loading', 'spinner', 'placeholder', 'default', 'no-image',
-                'svg', 'gif', 'favicon', 'apple-touch'
+                'svg', 'gif', 'favicon', 'apple-touch', 'yandex', 'google',
+                'analytics', 'tracking', 'pixel', 'beacon'
             ]
             
             # Проверяем, что это не служебное изображение
@@ -304,10 +308,14 @@ class PageMonitor:
                 try:
                     w = int(width.replace('px', ''))
                     h = int(height.replace('px', ''))
-                    if w < 50 or h < 50:  # Снизили порог до 50x50
+                    if w < 100 or h < 100:  # Повысили порог до 100x100
                         return False
                 except:
                     pass
+            
+            # Проверяем URL на наличие параметров уменьшения
+            if '/resize/' in src and ('20x' in src or '50x' in src or '100x' in src):
+                return False
             
             # Проверяем расширение файла
             if src.endswith(('.svg', '.gif', '.ico')):
@@ -319,6 +327,44 @@ class PageMonitor:
         except Exception as e:
             logger.error(f"Ошибка проверки изображения: {e}")
             return False
+
+    def _get_fullsize_image_url(self, image_url: str) -> str:
+        """Попытка получить полноразмерную версию изображения"""
+        try:
+            # Для Tilda CDN убираем параметры resize
+            if 'tildacdn.com' in image_url:
+                # Убираем параметры resize
+                if '/resize/' in image_url:
+                    # Заменяем resize параметры на пустые
+                    image_url = image_url.replace('/resize/20x/', '/empty/')
+                    image_url = image_url.replace('/resize/50x/', '/empty/')
+                    image_url = image_url.replace('/resize/100x/', '/empty/')
+                    image_url = image_url.replace('/resize/200x/', '/empty/')
+                    image_url = image_url.replace('/resize/300x/', '/empty/')
+                    image_url = image_url.replace('/resize/400x/', '/empty/')
+                    image_url = image_url.replace('/resize/500x/', '/empty/')
+                    image_url = image_url.replace('/resize/600x/', '/empty/')
+                    image_url = image_url.replace('/resize/800x/', '/empty/')
+                    image_url = image_url.replace('/resize/1000x/', '/empty/')
+            
+            # Для Cloudinary
+            elif 'cloudinary.com' in image_url:
+                # Убираем параметры трансформации
+                if '/w_' in image_url or '/h_' in image_url:
+                    # Простое удаление параметров размера
+                    import re
+                    image_url = re.sub(r'/w_\d+/', '/', image_url)
+                    image_url = re.sub(r'/h_\d+/', '/', image_url)
+                    image_url = re.sub(r'/c_[^/]+/', '/', image_url)
+            
+            # Для других CDN также можно добавить логику
+            # Например, для ImageKit, Cloudflare Images и т.д.
+            
+            return image_url
+            
+        except Exception as e:
+            logger.error(f"Ошибка получения полноразмерного изображения: {e}")
+            return image_url
 
     def _extract_event_from_image(self, img_element, base_url: str) -> Optional[Dict]:
         """Извлечение данных события из изображения"""
