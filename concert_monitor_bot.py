@@ -126,6 +126,10 @@ class ConcertMonitorBot:
 /test <ссылка> - протестировать парсинг ссылки
 /logs - показать последние проверки
 
+🔧 Команды настройки:
+/analyze <ссылка> - проанализировать структуру сайта
+/config <домен> <селектор> - настроить селекторы
+
 Просто отправьте ссылку на страницу с событиями, и я начну её отслеживать!
         """
         await update.message.reply_text(welcome_text)
@@ -156,6 +160,10 @@ class ConcertMonitorBot:
 /scan <номер> - сканировать конкретную ссылку
 /test <ссылка> - протестировать парсинг ссылки
 /logs - показать последние проверки ссылок
+
+🔧 Команды настройки:
+/analyze <ссылка> - проанализировать структуру сайта
+/config <домен> <селектор> - настроить селекторы для сайта
 
 💡 Совет: Добавляйте ссылки на конкретные разделы сайтов (например, /events, /concerts, /afisha)
         """
@@ -410,12 +418,128 @@ class ConcertMonitorBot:
                     result_text += f"... и ещё {len(events) - 5} событий"
             else:
                 result_text += "\n⚠️ События не найдены. Возможно, нужно настроить селекторы для этого сайта."
+                result_text += "\n\n🔍 Попробуйте команду /analyze для анализа структуры сайта."
             
             await update.message.reply_text(result_text)
             
         except Exception as e:
             error_text = f"❌ Ошибка тестирования {url}:\n{str(e)}"
             logger.error(f"Ошибка тестирования {url}: {e}")
+            await update.message.reply_text(error_text)
+    
+    async def analyze_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /analyze - анализ структуры сайта"""
+        if not context.args:
+            await update.message.reply_text("❌ Пожалуйста, укажите ссылку для анализа.\nПример: /analyze https://example.com/events")
+            return
+        
+        url = context.args[0]
+        
+        if not self.is_valid_url(url):
+            await update.message.reply_text("❌ Неверный формат ссылки. Пожалуйста, укажите корректный URL.")
+            return
+        
+        await update.message.reply_text(f"🔍 Анализ структуры сайта...\n🔗 {url}")
+        
+        try:
+            headers = {'User-Agent': USER_AGENT}
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, timeout=HTTP_TIMEOUT, headers=headers) as response:
+                    if response.status != 200:
+                        await update.message.reply_text(f"❌ Ошибка загрузки страницы: статус {response.status}")
+                        return
+                    
+                    html = await response.text()
+                    soup = BeautifulSoup(html, 'html.parser')
+                    
+                    # Анализируем структуру
+                    analysis_text = f"""
+🔍 Анализ структуры сайта:
+🔗 {url}
+
+📊 Общая информация:
+• Размер страницы: {len(html)} символов
+• Количество тегов: {len(soup.find_all())}
+• Заголовок страницы: {soup.title.string if soup.title else 'Не найден'}
+                    """
+                    
+                    # Ищем потенциальные контейнеры событий
+                    potential_containers = []
+                    
+                    # Ищем по классам
+                    for tag in ['div', 'article', 'section']:
+                        elements = soup.find_all(tag, class_=True)
+                        for elem in elements:
+                            class_name = ' '.join(elem.get('class', []))
+                            if any(keyword in class_name.lower() for keyword in ['event', 'concert', 'show', 'card', 'item', 'poster', 'anons']):
+                                potential_containers.append({
+                                    'tag': tag,
+                                    'class': class_name,
+                                    'text_preview': elem.get_text(strip=True)[:100]
+                                })
+                    
+                    if potential_containers:
+                        analysis_text += "\n🎯 Найденные потенциальные контейнеры событий:\n"
+                        for i, container in enumerate(potential_containers[:10], 1):
+                            analysis_text += f"{i}. <{container['tag']}> class='{container['class']}'\n"
+                            analysis_text += f"   Текст: {container['text_preview']}...\n\n"
+                    
+                    # Ищем заголовки
+                    headers_found = []
+                    for tag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+                        elements = soup.find_all(tag)
+                        for elem in elements:
+                            text = elem.get_text(strip=True)
+                            if text and len(text) > 3:
+                                headers_found.append({
+                                    'tag': tag,
+                                    'text': text[:50],
+                                    'class': ' '.join(elem.get('class', []))
+                                })
+                    
+                    if headers_found:
+                        analysis_text += "\n📋 Найденные заголовки:\n"
+                        for i, header in enumerate(headers_found[:10], 1):
+                            analysis_text += f"{i}. <{header['tag']}> {header['text']}\n"
+                            if header['class']:
+                                analysis_text += f"   class='{header['class']}'\n"
+                            analysis_text += "\n"
+                    
+                    # Ищем ссылки
+                    links_found = []
+                    for link in soup.find_all('a', href=True):
+                        href = link.get('href')
+                        text = link.get_text(strip=True)
+                        if text and len(text) > 3:
+                            links_found.append({
+                                'href': href,
+                                'text': text[:50],
+                                'class': ' '.join(link.get('class', []))
+                            })
+                    
+                    if links_found:
+                        analysis_text += "\n🔗 Найденные ссылки:\n"
+                        for i, link in enumerate(links_found[:10], 1):
+                            analysis_text += f"{i}. {link['text']}\n"
+                            analysis_text += f"   href='{link['href']}'\n"
+                            if link['class']:
+                                analysis_text += f"   class='{link['class']}'\n"
+                            analysis_text += "\n"
+                    
+                    # Предлагаем селекторы
+                    analysis_text += "\n💡 Рекомендуемые селекторы:\n"
+                    
+                    if potential_containers:
+                        for container in potential_containers[:3]:
+                            analysis_text += f"• .{container['class'].split()[0]}\n"
+                    
+                    analysis_text += "\n🔧 Для настройки селекторов используйте команду /config"
+                    
+                    await update.message.reply_text(analysis_text)
+                    
+        except Exception as e:
+            error_text = f"❌ Ошибка анализа {url}:\n{str(e)}"
+            logger.error(f"Ошибка анализа {url}: {e}")
             await update.message.reply_text(error_text)
     
     async def logs_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -448,6 +572,167 @@ class ConcertMonitorBot:
             logs_text += f"   🔄 Статус: {'✅ Активен' if time_diff.total_seconds() < MONITORING_INTERVAL * 2 else '⚠️ Долго не проверялся'}\n\n"
         
         await update.message.reply_text(logs_text)
+    
+    async def config_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /config - настройка селекторов для сайта"""
+        if not context.args:
+            await update.message.reply_text("""
+🔧 Настройка селекторов для сайта
+
+Использование:
+/config <домен> <селектор_событий> [селектор_заголовка] [селектор_даты]
+
+Примеры:
+/config sohorooms.com ".event-card" ".event-title" ".event-date"
+/config example.com ".concert-item" "h3" ".date"
+            """)
+            return
+        
+        if len(context.args) < 2:
+            await update.message.reply_text("❌ Недостаточно параметров. Нужно указать домен и селектор событий.")
+            return
+        
+        domain = context.args[0]
+        event_selector = context.args[1]
+        title_selector = context.args[2] if len(context.args) > 2 else None
+        date_selector = context.args[3] if len(context.args) > 3 else None
+        
+        # Обновляем конфигурацию
+        if domain not in SITE_SPECIFIC_CONFIGS:
+            SITE_SPECIFIC_CONFIGS[domain] = {}
+        
+        SITE_SPECIFIC_CONFIGS[domain]['event_selector'] = event_selector
+        if title_selector:
+            SITE_SPECIFIC_CONFIGS[domain]['title_selector'] = title_selector
+        if date_selector:
+            SITE_SPECIFIC_CONFIGS[domain]['date_selector'] = date_selector
+        
+        # Сохраняем конфигурацию
+        try:
+            import config
+            config.SITE_SPECIFIC_CONFIGS = SITE_SPECIFIC_CONFIGS
+            
+            # Записываем в файл
+            config_content = f"""#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+\"\"\"
+Конфигурационный файл для телеграм-бота мониторинга концертов
+\"\"\"
+
+import os
+from typing import List
+
+# Токен бота (можно переопределить через переменную окружения)
+BOT_TOKEN = os.getenv("BOT_TOKEN", "7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU")
+
+# Интервал мониторинга в секундах (10 минут = 600 секунд)
+MONITORING_INTERVAL = int(os.getenv("MONITORING_INTERVAL", "600"))
+
+# Максимальное количество событий для отправки в одном уведомлении
+MAX_EVENTS_PER_NOTIFICATION = int(os.getenv("MAX_EVENTS_PER_NOTIFICATION", "5"))
+
+# Максимальное количество изображений для отправки
+MAX_IMAGES_PER_NOTIFICATION = int(os.getenv("MAX_IMAGES_PER_NOTIFICATION", "3"))
+
+# Таймаут для HTTP запросов в секундах
+HTTP_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", "30"))
+
+# Максимальное количество элементов для парсинга на странице
+MAX_ELEMENTS_TO_PARSE = int(os.getenv("MAX_ELEMENTS_TO_PARSE", "20"))
+
+# Файлы для хранения данных
+DATA_FILE = os.getenv("DATA_FILE", "monitored_urls.json")
+EVENTS_FILE = os.getenv("EVENTS_FILE", "events_cache.json")
+
+# Селекторы для поиска событий (можно расширить)
+EVENT_SELECTORS = [
+    '.event', '.concert', '.show', '.performance',
+    '[class*="event"]', '[class*="concert"]', '[class*="show"]',
+    '.card', '.item', '.poster', '.ticket',
+    '[class*="card"]', '[class*="item"]', '[class*="poster"]'
+]
+
+# Селекторы для заголовков событий
+TITLE_SELECTORS = [
+    'h1', 'h2', 'h3', 'h4', 
+    '.title', '.name', '.event-title', '.concert-title',
+    '[class*="title"]', '[class*="name"]'
+]
+
+# Селекторы для дат
+DATE_SELECTORS = [
+    '.date', '.time', '.datetime', 
+    '[class*="date"]', '[class*="time"]', '[class*="datetime"]'
+]
+
+# Селекторы для мест проведения
+VENUE_SELECTORS = [
+    '.venue', '.place', '.location', '.address',
+    '[class*="venue"]', '[class*="place"]', '[class*="location"]'
+]
+
+# Селекторы для цен
+PRICE_SELECTORS = [
+    '.price', '.cost', '.ticket', '.ticket-price',
+    '[class*="price"]', '[class*="cost"]', '[class*="ticket"]'
+]
+
+# User-Agent для HTTP запросов
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+
+# Настройки логирования
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Настройки для конкретных сайтов (можно расширить)
+SITE_SPECIFIC_CONFIGS = {SITE_SPECIFIC_CONFIGS}
+
+# Черный список доменов (сайты, которые не стоит мониторить)
+BLOCKED_DOMAINS = [
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0"
+]
+
+# Минимальная длина заголовка события
+MIN_TITLE_LENGTH = int(os.getenv("MIN_TITLE_LENGTH", "3"))
+
+# Максимальная длина заголовка события
+MAX_TITLE_LENGTH = int(os.getenv("MAX_TITLE_LENGTH", "200"))
+
+# Поддерживаемые форматы изображений
+SUPPORTED_IMAGE_FORMATS = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
+
+# Настройки для обработки ошибок
+MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
+RETRY_DELAY = int(os.getenv("RETRY_DELAY", "5"))  # секунды
+
+# Настройки для уведомлений
+NOTIFICATION_SETTINGS = {{
+    "enable_images": os.getenv("ENABLE_IMAGES", "true").lower() == "true",
+    "enable_venue_info": os.getenv("ENABLE_VENUE_INFO", "true").lower() == "true",
+    "enable_price_info": os.getenv("ENABLE_PRICE_INFO", "true").lower() == "true",
+    "enable_date_info": os.getenv("ENABLE_DATE_INFO", "true").lower() == "true"
+}}
+"""
+            
+            with open('config.py', 'w', encoding='utf-8') as f:
+                f.write(config_content)
+            
+            await update.message.reply_text(f"""
+✅ Конфигурация обновлена для домена: {domain}
+
+🔧 Настройки:
+• Селектор событий: {event_selector}
+• Селектор заголовка: {title_selector or 'по умолчанию'}
+• Селектор даты: {date_selector or 'по умолчанию'}
+
+🧪 Теперь протестируйте парсинг командой:
+/test https://{domain}/anons
+            """)
+            
+        except Exception as e:
+            await update.message.reply_text(f"❌ Ошибка сохранения конфигурации: {str(e)}")
     
     async def handle_url_message(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик сообщений с URL"""
@@ -499,13 +784,23 @@ class ConcertMonitorBot:
                     
                     events = []
                     
-                    # Используем селекторы из конфигурации
+                    # Проверяем есть ли специфичные селекторы для этого домена
+                    domain = urlparse(url).netloc
+                    site_config = SITE_SPECIFIC_CONFIGS.get(domain, {})
+                    
                     elements = []
-                    for selector in EVENT_SELECTORS:
+                    if site_config.get('event_selector'):
+                        # Используем специфичный селектор для сайта
+                        selector = site_config['event_selector']
                         elements = soup.select(selector)
-                        if elements:
-                            logger.info(f"Найдены элементы с селектором {selector}: {len(elements)}")
-                            break
+                        logger.info(f"Используем специфичный селектор {selector} для {domain}: {len(elements)} элементов")
+                    else:
+                        # Используем универсальные селекторы
+                        for selector in EVENT_SELECTORS:
+                            elements = soup.select(selector)
+                            if elements:
+                                logger.info(f"Найдены элементы с селектором {selector}: {len(elements)}")
+                                break
                     
                     if not elements:
                         # Если не найдены специфичные селекторы, ищем по общим паттернам
@@ -527,13 +822,24 @@ class ConcertMonitorBot:
     def extract_event_data(self, element, base_url: str) -> Optional[ConcertEvent]:
         """Извлечение данных о событии из HTML элемента"""
         try:
+            # Проверяем есть ли специфичные селекторы для этого домена
+            domain = urlparse(base_url).netloc
+            site_config = SITE_SPECIFIC_CONFIGS.get(domain, {})
+            
             # Поиск заголовка
             title = None
-            for selector in TITLE_SELECTORS:
-                title_elem = element.select_one(selector)
+            if site_config.get('title_selector'):
+                # Используем специфичный селектор
+                title_elem = element.select_one(site_config['title_selector'])
                 if title_elem:
                     title = title_elem.get_text(strip=True)
-                    break
+            else:
+                # Используем универсальные селекторы
+                for selector in TITLE_SELECTORS:
+                    title_elem = element.select_one(selector)
+                    if title_elem:
+                        title = title_elem.get_text(strip=True)
+                        break
             
             if not title:
                 # Пробуем найти текст в самом элементе
@@ -548,11 +854,18 @@ class ConcertMonitorBot:
             
             # Поиск даты
             date_text = None
-            for selector in DATE_SELECTORS:
-                date_elem = element.select_one(selector)
+            if site_config.get('date_selector'):
+                # Используем специфичный селектор
+                date_elem = element.select_one(site_config['date_selector'])
                 if date_elem:
                     date_text = date_elem.get_text(strip=True)
-                    break
+            else:
+                # Используем универсальные селекторы
+                for selector in DATE_SELECTORS:
+                    date_elem = element.select_one(selector)
+                    if date_elem:
+                        date_text = date_elem.get_text(strip=True)
+                        break
             
             # Поиск изображения
             img_elem = element.find('img')
@@ -720,6 +1033,8 @@ class ConcertMonitorBot:
         application.add_handler(CommandHandler("scan", self.scan_command))
         application.add_handler(CommandHandler("test", self.test_command))
         application.add_handler(CommandHandler("logs", self.logs_command))
+        application.add_handler(CommandHandler("analyze", self.analyze_command))
+        application.add_handler(CommandHandler("config", self.config_command))
         
         # Добавляем обработчик сообщений с URL
         application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_url_message))

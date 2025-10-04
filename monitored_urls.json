@@ -2,7 +2,7 @@
   "https://vk-stadium.ru/": {
     "url": "https://vk-stadium.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T12:47:16.658500",
+    "last_check": "2025-10-04T12:51:06.630783",
     "last_hash": "df66dd2b034d4ec2ce1003a4807e86df",
     "events": [
       {
@@ -26,14 +26,143 @@
   "https://livearena.ru/performances": {
     "url": "https://livearena.ru/performances",
     "user_id": 268477119,
-    "last_check": "2025-10-04T12:47:36.841902",
-    "last_hash": "",
-    "events": []
+    "last_check": "2025-10-04T12:51:08.085412",
+    "last_hash": "d784d5fbb9f597e85854fafbfb58601c",
+    "events": [
+      {
+        "title": "МероприятияVIP и ПремиумНовостиАренаОб АренеВопрос-ответПартнерыКонтактыКорзинаВойтиКупить билетПарк",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/",
+        "image_url": "https://livearena.ru/icons/logo.png",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "МероприятияVIP и ПремиумНовостиАренаОб АренеВопрос-ответПартнерыКонтактыКорзинаВойти",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/",
+        "image_url": "https://livearena.ru/icons/logo.png",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "МероприятияVIP и ПремиумНовостиАренаОб АренеВопрос-ответПартнерыКонтакты",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "КорзинаВойти",
+        "date": "Дата не указана",
+        "url": "https://www.instagram.com/livearena.ru/",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Корзина",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Купить билетПарковкаЭкспресс-входПредзаказ еды и напитков к мероприятиюПодарочные сертификаты",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Все событияКонцертПремияСпорт",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": "",
+        "price": null
+      },
+      {
+        "title": "Все события",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Концерт",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Премия",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Спорт",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "всесегодняна этой неделена выходныхКалендарь",
+        "date": "Календарь",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Календарь",
+        "date": "Календарь",
+        "url": "https://livearena.ru/performances",
+        "image_url": null,
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Ahmad Tea",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": "https://server.livearena.ru/api/img/public/images/partners/3r1dUswYmcc6S34n66dt3fA3XE0yqnp4C4aHiGH9.png?w=320",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "ТАЙРАЙ",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": "https://server.livearena.ru/api/img/public/images/partners/E2PU6yjjeR6erec70Kig18xmT5953AHnEKd277M5.jpg?w=320",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Monterra",
+        "date": "Дата не указана",
+        "url": "https://livearena.ru/performances",
+        "image_url": "https://server.livearena.ru/api/img/public/images/partners/N86KJPM4ZCxtpqxblWDCjE2IoAU0EB5QF0MnU1ay.jpg?w=320",
+        "venue": null,
+        "price": null
+      }
+    ]
   },
   "https://sohorooms.com/anons": {
     "url": "https://sohorooms.com/anons",
     "user_id": 268477119,
-    "last_check": "2025-10-04T12:47:55.347437",
+    "last_check": "2025-10-04T12:51:07.572495",
     "last_hash": "",
     "events": []
   }
