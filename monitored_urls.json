@@ -2,7 +2,7 @@
   "https://vk-stadium.ru/": {
     "url": "https://vk-stadium.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:18:02.704580",
+    "last_check": "2025-10-04T13:28:04.439024",
     "last_hash": "df66dd2b034d4ec2ce1003a4807e86df",
     "events": [
       {
@@ -26,7 +26,7 @@
   "https://livearena.ru/performances": {
     "url": "https://livearena.ru/performances",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:18:02.701835",
+    "last_check": "2025-10-04T13:28:04.440984",
     "last_hash": "d784d5fbb9f597e85854fafbfb58601c",
     "events": [
       {
@@ -162,7 +162,7 @@
   "https://sohorooms.com/anons": {
     "url": "https://sohorooms.com/anons",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:18:02.707773",
+    "last_check": "2025-10-04T13:28:05.252866",
     "last_hash": "d2c112c61ab40e2eff25c61a858e6018",
     "events": [
       {
@@ -210,7 +210,7 @@
   "https://kremlinpalace.org/": {
     "url": "https://kremlinpalace.org/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:18:02.709223",
+    "last_check": "2025-10-04T13:28:04.442620",
     "last_hash": "d102c617a8a29abfba3e9f50b50508ea",
     "events": [
       {
@@ -378,14 +378,14 @@
   "https://assuntamadre.ru/blog/": {
     "url": "https://assuntamadre.ru/blog/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:18:01.588356",
+    "last_check": "2025-10-04T13:28:03.402175",
     "last_hash": "",
     "events": []
   },
   "https://letolifefest.ru/": {
     "url": "https://letolifefest.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:18:02.706219",
+    "last_check": "2025-10-04T13:28:04.444150",
     "last_hash": "688b25115047f37e69c453f18f9a4a86",
     "events": [
       {
@@ -589,5 +589,12 @@
         "price": null
       }
     ]
+  },
+  "https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop": {
+    "url": "https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T13:38:25.025824",
+    "last_hash": "",
+    "events": []
   }
 }
