@@ -518,11 +518,11 @@ class ConcertMonitorBot:
         # Добавляем обработчик сообщений с URL
         application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_url_message))
         
-        # Запускаем мониторинг в фоне
-        application.job_queue.run_once(
-            lambda context: asyncio.create_task(self.monitoring_task(application)),
-            when=1
-        )
+        # Запускаем мониторинг в фоне через JobQueue
+        def start_monitoring(context):
+            asyncio.create_task(self.monitoring_task(application))
+        
+        application.job_queue.run_once(start_monitoring, when=1)
         
         # Запускаем бота
         logger.info("Запуск бота...")
