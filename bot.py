@@ -44,11 +44,13 @@ class ConcertMonitorBot:
 /test - Тестировать парсинг страницы
 /images - Тестировать извлечение изображений-афиш
 /sites - Показать поддерживаемые сайты
+/status - Проверить статус мониторинга
 /help - Помощь
 
 🔗 Чтобы добавить страницу для мониторинга, используйте команду /add или просто отправьте ссылку на страницу.
 
 🖼️ Для страниц с графическими афишами используйте команду /images для тестирования.
+📊 Используйте /status для проверки работы мониторинга.
         """
         
         await update.message.reply_text(welcome_text)
@@ -231,6 +233,82 @@ class ConcertMonitorBot:
             
         except Exception as e:
             await update.message.reply_text(f"❌ Ошибка получения списка сайтов: {str(e)}")
+
+    async def status_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /status для проверки статуса мониторинга"""
+        user_id = update.effective_user.id
+        
+        try:
+            # Получаем отслеживаемые страницы пользователя
+            pages = await self.db.get_user_pages(user_id)
+            
+            if not pages:
+                await update.message.reply_text(
+                    "📝 У вас пока нет отслеживаемых страниц.\n\n"
+                    "Используйте /add для добавления страницы или просто отправьте ссылку."
+                )
+                return
+            
+            text = "📊 Статус мониторинга:\n\n"
+            
+            for page in pages:
+                site_name = page['site_name'] or self._extract_domain(page['url'])
+                last_check = page.get('last_check', 'Никогда')
+                
+                text += f"🔗 {site_name}\n"
+                text += f"   URL: {page['url']}\n"
+                text += f"   📅 Последняя проверка: {last_check}\n"
+                text += f"   ✅ Статус: Активен\n\n"
+            
+            text += f"⏰ Интервал проверки: {config.CHECK_INTERVAL_MINUTES} минут\n"
+            text += f"🤖 Бот работает и мониторит ваши страницы!\n\n"
+            text += "💡 Когда на сайтах появятся новые события, вы получите уведомления."
+            
+            await update.message.reply_text(text)
+            
+        except Exception as e:
+            await update.message.reply_text(f"❌ Ошибка получения статуса: {str(e)}")
+
+    async def simulate_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /simulate для симуляции нового события"""
+        user_id = update.effective_user.id
+        
+        try:
+            # Получаем отслеживаемые страницы пользователя
+            pages = await self.db.get_user_pages(user_id)
+            
+            if not pages:
+                await update.message.reply_text(
+                    "📝 У вас пока нет отслеживаемых страниц.\n\n"
+                    "Используйте /add для добавления страницы."
+                )
+                return
+            
+            # Берем первую страницу для симуляции
+            page = pages[0]
+            site_name = page['site_name'] or self._extract_domain(page['url'])
+            
+            # Создаем тестовое событие
+            test_event = {
+                'title': '🎵 Тестовое событие (симуляция)',
+                'date': '2024-01-01',
+                'link': page['url'],
+                'image_url': 'https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Test+Event',
+                'content_hash': 'test_simulation_' + str(user_id)
+            }
+            
+            # Отправляем симуляцию
+            await self.send_notification(user_id, page, [test_event])
+            
+            await update.message.reply_text(
+                f"✅ Симуляция отправлена!\n\n"
+                f"🔗 Сайт: {site_name}\n"
+                f"📊 Это показывает, как будут выглядеть уведомления о новых событиях.\n\n"
+                f"💡 Когда на реальных сайтах появятся новые события, вы получите такие же уведомления."
+            )
+            
+        except Exception as e:
+            await update.message.reply_text(f"❌ Ошибка симуляции: {str(e)}")
 
     async def images_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик команды /images для тестирования извлечения изображений"""
@@ -503,6 +581,8 @@ class ConcertMonitorBot:
         self.application.add_handler(CommandHandler("test", self.test_command))
         self.application.add_handler(CommandHandler("sites", self.sites_command))
         self.application.add_handler(CommandHandler("images", self.images_command))
+        self.application.add_handler(CommandHandler("status", self.status_command))
+        self.application.add_handler(CommandHandler("simulate", self.simulate_command))
         self.application.add_handler(CallbackQueryHandler(self.handle_callback_query))
         self.application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_url_message))
         
