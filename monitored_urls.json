@@ -2,7 +2,38 @@
   "https://vk-stadium.ru/": {
     "url": "https://vk-stadium.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T12:43:36.590782",
+    "last_check": "2025-10-04T12:47:16.658500",
+    "last_hash": "df66dd2b034d4ec2ce1003a4807e86df",
+    "events": [
+      {
+        "title": "Уважаемые гости! Просим вас ознакомиться с правилами посещения площадки.ОЗНАКОМИТЬСЯ",
+        "date": "Дата не указана",
+        "url": "https://vk-stadium.ru/rules",
+        "image_url": "https://static.tildacdn.com/tild3533-3262-4133-b434-646632386162/Frame_24.svg",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "Открытие дверей - за два часа до времени начала, указанного на билете.",
+        "date": "Дата не указана",
+        "url": "https://vk-stadium.ru/#close-dors",
+        "image_url": "https://static.tildacdn.com/tild6465-3866-4366-b362-623535626636/blue_cross.svg",
+        "venue": null,
+        "price": null
+      }
+    ]
+  },
+  "https://livearena.ru/performances": {
+    "url": "https://livearena.ru/performances",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T12:47:36.841902",
+    "last_hash": "",
+    "events": []
+  },
+  "https://sohorooms.com/anons": {
+    "url": "https://sohorooms.com/anons",
+    "user_id": 268477119,
+    "last_check": "2025-10-04T12:47:55.347437",
     "last_hash": "",
     "events": []
   }
