@@ -148,7 +148,11 @@ class PageMonitor:
                 src = image_element.get('src')
                 # Проверяем, что это не служебное изображение
                 if self._is_event_image(image_element):
-                    image_url = urljoin(base_url, src)
+                    # Обрабатываем относительные и абсолютные URL
+                    if src.startswith(('http://', 'https://')):
+                        image_url = src
+                    else:
+                        image_url = urljoin(base_url, src)
             
             # Создаем хеш для уникальности события
             content_hash = hashlib.md5(f"{title}{date}{link}{image_url}".encode()).hexdigest()

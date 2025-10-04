@@ -160,16 +160,40 @@ class ConcertMonitorBot:
                     if event['link']:
                         text += f"   🔗 {event['link']}\n"
                     if event.get('image_url'):
-                        text += f"   🖼️ Изображение: {event['image_url'][:50]}...\n"
+                        text += f"   🖼️ Изображение: {event['image_url']}\n"
                     text += "\n"
                 
                 # Показываем статистику по изображениям
                 images_count = sum(1 for event in result['events'] if event.get('image_url'))
                 text += f"🖼️ Событий с изображениями: {images_count} из {len(result['events'])}\n"
+                
+                # Отправляем первое изображение как пример
+                first_image_event = None
+                for event in result['events']:
+                    if event.get('image_url'):
+                        first_image_event = event
+                        break
+                
+                if first_image_event:
+                    text += f"\n📸 Отправляю пример изображения..."
+                    await update.message.reply_text(text)
+                    
+                    try:
+                        await self.application.bot.send_photo(
+                            chat_id=update.effective_chat.id,
+                            photo=first_image_event['image_url'],
+                            caption=f"Пример: {first_image_event['title']}"
+                        )
+                    except Exception as e:
+                        await self.application.bot.send_message(
+                            chat_id=update.effective_chat.id,
+                            text=f"⚠️ Не удалось отправить изображение: {str(e)}"
+                        )
+                else:
+                    await update.message.reply_text(text)
             else:
                 text += "⚠️ События не найдены. Возможно, нужно настроить селекторы для этого сайта."
-            
-            await update.message.reply_text(text)
+                await update.message.reply_text(text)
             
         except Exception as e:
             await update.message.reply_text(f"❌ Ошибка тестирования: {str(e)}")
@@ -245,7 +269,7 @@ class ConcertMonitorBot:
                 for i, img in enumerate(found_images[:5], 1):  # Показываем первые 5
                     text += f"{i}. {img['alt']}\n"
                     text += f"   📏 {img['width']}x{img['height']}\n"
-                    text += f"   🔗 {img['url'][:50]}...\n\n"
+                    text += f"   🔗 {img['url']}\n\n"
                 
                 if len(found_images) > 5:
                     text += f"... и еще {len(found_images) - 5} изображений"
@@ -373,9 +397,14 @@ class ConcertMonitorBot:
                 # Если есть изображение, отправляем его с текстом
                 if event.get('image_url'):
                     try:
+                        # Проверяем, что URL изображения корректный
+                        image_url = event['image_url']
+                        if not image_url.startswith(('http://', 'https://')):
+                            raise ValueError("Некорректный URL изображения")
+                        
                         await self.application.bot.send_photo(
                             chat_id=user_id,
-                            photo=event['image_url'],
+                            photo=image_url,
                             caption=text,
                             parse_mode=ParseMode.HTML
                         )
@@ -384,7 +413,7 @@ class ConcertMonitorBot:
                         # Если изображение не отправилось, отправляем только текст
                         await self.application.bot.send_message(
                             chat_id=user_id,
-                            text=text,
+                            text=text + f"\n\n🖼️ Изображение: {event['image_url']}",
                             parse_mode=ParseMode.HTML
                         )
                 else:
