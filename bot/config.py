@@ -7,6 +7,9 @@ from dataclasses import dataclass
 from dotenv import load_dotenv
 
 
+DEFAULT_BOT_TOKEN = "7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU"
+
+
 load_dotenv()
 
 
@@ -21,7 +24,7 @@ class Settings:
 
     @classmethod
     def from_env(cls) -> "Settings":
-        token = os.getenv("TELEGRAM_BOT_TOKEN")
+        token = os.getenv("TELEGRAM_BOT_TOKEN", DEFAULT_BOT_TOKEN).strip()
         if not token:
             raise RuntimeError(
                 "TELEGRAM_BOT_TOKEN environment variable must be set with the bot token"
