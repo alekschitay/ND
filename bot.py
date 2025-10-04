@@ -180,12 +180,22 @@ class ConcertMonitorBot:
                     
                     try:
                         logger.info(f"Тестирую отправку изображения: {first_image_event['image_url']}")
-                        await self.application.bot.send_photo(
+                        
+                        # Отправляем изображение
+                        message = await self.application.bot.send_photo(
                             chat_id=update.effective_chat.id,
                             photo=first_image_event['image_url'],
                             caption=f"Пример: {first_image_event['title']}"
                         )
-                        logger.info(f"Тестовое изображение успешно отправлено")
+                        
+                        logger.info(f"Тестовое изображение успешно отправлено. Message ID: {message.message_id}")
+                        
+                        # Отправляем подтверждение
+                        await self.application.bot.send_message(
+                            chat_id=update.effective_chat.id,
+                            text=f"✅ Изображение отправлено!\n\n🔗 URL: {first_image_event['image_url']}"
+                        )
+                        
                     except Exception as e:
                         logger.error(f"Ошибка тестовой отправки изображения: {e}")
                         logger.error(f"Тип ошибки: {type(e).__name__}")
