@@ -82,6 +82,16 @@ async def handle_start(message: Message):
     )
 
 
+async def handle_health(message: Message):
+    await message.reply("OK")
+
+
+async def handle_check(message: Message, db: Database, bot: Bot):
+    await message.reply("Запускаю проверку…")
+    await check_updates(bot, db)
+    await message.reply("Готово.")
+
+
 async def check_updates(bot: Bot, db: Database):
     urls = db.list_all_subscription_urls()
     if not urls:
@@ -131,6 +141,14 @@ async def main():
     @router.message(Command(commands=["start", "help"]))
     async def _start(message: Message):
         await handle_start(message)
+
+    @router.message(Command(commands=["health"]))
+    async def _health(message: Message):
+        await handle_health(message)
+
+    @router.message(Command(commands=["check"]))
+    async def _check(message: Message):
+        await handle_check(message, db, bot)
 
     dp.include_router(router)
 

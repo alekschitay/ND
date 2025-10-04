@@ -42,14 +42,25 @@ def extract_events_from_html(base_url: str, html: str) -> List[ScrapedEvent]:
         date_text: Optional[str] = None
         image_url: Optional[str] = None
 
+        def class_has_date(val) -> bool:
+            if not val:
+                return False
+            if isinstance(val, str):
+                return "date" in val.lower()
+            if isinstance(val, (list, tuple, set)):
+                return any("date" in str(item).lower() for item in val)
+            return "date" in str(val).lower()
+
         if parent:
-            time_el = parent.find(["time", "span", "div"], attrs={"class": lambda v: v and "date" in v.lower()})
+            time_el = parent.find(["time", "span", "div"], attrs={"class": class_has_date})
             if time_el and time_el.get_text(strip=True):
                 date_text = time_el.get_text(strip=True)
 
             img_el = parent.find("img")
-            if img_el and img_el.get("src"):
-                image_url = urljoin(base_url, img_el.get("src"))
+            if img_el and (src := (img_el.get("src") or img_el.get("data-src") or img_el.get("srcset"))):
+                # If srcset is present, take the first URL
+                src = str(src).split()[0]
+                image_url = urljoin(base_url, src)
 
         candidates.append(ScrapedEvent(event_url=full_url, title=title, date_text=date_text, image_url=image_url))
 
