@@ -802,6 +802,27 @@ NOTIFICATION_SETTINGS = {{
                                 logger.info(f"Найдены элементы с селектором {selector}: {len(elements)}")
                                 break
                     
+                    # Специальная фильтрация для crave.ru
+                    if domain == "crave.ru" and site_config.get('exclude_navigation'):
+                        # Фильтруем навигационные элементы
+                        filtered_elements = []
+                        navigation_keywords = ['театр', 'новости', 'команда', 'кастинг', 'пресса', 'история', 'афиша', 'посещение', 'бар', 'схема']
+                        
+                        for element in elements:
+                            text = element.get_text(strip=True).lower()
+                            # Проверяем, не является ли элемент навигационным
+                            is_navigation = any(keyword in text for keyword in navigation_keywords)
+                            
+                            # Проверяем, есть ли в элементе дату или время (признак события)
+                            has_date = any(word in text for word in ['2024', '2025', 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'])
+                            
+                            # Если это не навигация и есть дата - это событие
+                            if not is_navigation and has_date:
+                                filtered_elements.append(element)
+                        
+                        elements = filtered_elements
+                        logger.info(f"После фильтрации навигации для {domain}: {len(elements)} элементов")
+                    
                     if not elements:
                         # Если не найдены специфичные селекторы, ищем по общим паттернам
                         elements = soup.find_all(['div', 'article', 'section'], 
@@ -842,12 +863,27 @@ NOTIFICATION_SETTINGS = {{
                         break
             
             if not title:
-                # Специальная логика для sohorooms.com
+                # Специальная логика для разных сайтов
                 if domain == "sohorooms.com":
                     text = element.get_text(strip=True)
                     lines = text.split('\n')
                     # Первая строка обычно содержит название события
                     title = lines[0] if lines else text[:100]
+                elif domain == "crave.ru":
+                    # Для crave.ru ищем заголовок без навигационных слов
+                    text = element.get_text(strip=True)
+                    navigation_keywords = ['театр', 'новости', 'команда', 'кастинг', 'пресса', 'история', 'афиша', 'посещение', 'бар', 'схема']
+                    
+                    # Ищем строку, которая не является навигацией
+                    lines = text.split('\n')
+                    for line in lines:
+                        line_clean = line.strip()
+                        if line_clean and not any(keyword in line_clean.lower() for keyword in navigation_keywords):
+                            title = line_clean
+                            break
+                    
+                    if not title:
+                        title = text[:100]
                 else:
                     # Пробуем найти текст в самом элементе
                     title = element.get_text(strip=True)[:100]  # Ограничиваем длину

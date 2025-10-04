@@ -75,6 +75,12 @@ SITE_SPECIFIC_CONFIGS = {
         "event_selector": ".t776__col.t-col.t-col_4.t-align_left.t-item.t776__col_mobile-grid.js-product",
         "title_selector": None,  # Будем извлекать из текста
         "date_selector": None    # Будем извлекать из текста
+    },
+    "crave.ru": {
+        "event_selector": None,  # Будем использовать специальную логику
+        "title_selector": None,
+        "date_selector": None,
+        "exclude_navigation": True  # Исключаем навигационные элементы
     }
 }
 

@@ -2,7 +2,7 @@
   "https://vk-stadium.ru/": {
     "url": "https://vk-stadium.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:06:59.537170",
+    "last_check": "2025-10-04T13:11:24.257169",
     "last_hash": "df66dd2b034d4ec2ce1003a4807e86df",
     "events": [
       {
@@ -26,7 +26,7 @@
   "https://livearena.ru/performances": {
     "url": "https://livearena.ru/performances",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:06:59.539342",
+    "last_check": "2025-10-04T13:11:25.012545",
     "last_hash": "d784d5fbb9f597e85854fafbfb58601c",
     "events": [
       {
@@ -162,7 +162,7 @@
   "https://sohorooms.com/anons": {
     "url": "https://sohorooms.com/anons",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:07:00.982170",
+    "last_check": "2025-10-04T13:11:25.016718",
     "last_hash": "d2c112c61ab40e2eff25c61a858e6018",
     "events": [
       {
@@ -210,7 +210,7 @@
   "https://kremlinpalace.org/": {
     "url": "https://kremlinpalace.org/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:07:00.290880",
+    "last_check": "2025-10-04T13:11:25.912067",
     "last_hash": "d102c617a8a29abfba3e9f50b50508ea",
     "events": [
       {
@@ -378,14 +378,14 @@
   "https://assuntamadre.ru/blog/": {
     "url": "https://assuntamadre.ru/blog/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:06:58.807355",
+    "last_check": "2025-10-04T13:11:24.259296",
     "last_hash": "",
     "events": []
   },
   "https://letolifefest.ru/": {
     "url": "https://letolifefest.ru/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:06:58.805279",
+    "last_check": "2025-10-04T13:11:25.014935",
     "last_hash": "688b25115047f37e69c453f18f9a4a86",
     "events": [
       {
@@ -553,11 +553,27 @@
   "https://crave.ru/afisha/": {
     "url": "https://crave.ru/afisha/",
     "user_id": 268477119,
-    "last_check": "2025-10-04T13:06:59.819520",
-    "last_hash": "9c8a26d9ce85fb754df8cc7f15d0449f",
+    "last_check": "2025-10-04T13:11:25.260750",
+    "last_hash": "3891115867c3702921f7dee341e62495",
     "events": [
       {
-        "title": "ТеатрНовостиКомандаКастингПресса о насИстория театра",
+        "title": "ТеатрНовостиКомандаКастингПресса о насИстория театраАфишаПосещениеБарСхема залаПодарочные билетыFAQГ",
+        "date": "Дата не указана",
+        "url": "https://crave.ru/",
+        "image_url": "https://crave.ru/local/templates/bootstrap_v4_v1/components/bitrix/menu/main_v33/images/burger.png",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "ТеатрНовостиКомандаКастингПресса о насИстория театраАфишаПосещениеБарСхема залаПодарочные билетыFAQГ",
+        "date": "Дата не указана",
+        "url": "https://crave.ru/afisha/#main-nav-mobile",
+        "image_url": "https://crave.ru/local/templates/bootstrap_v4_v1/components/bitrix/menu/main_v33/images/burger.png",
+        "venue": null,
+        "price": null
+      },
+      {
+        "title": "ТеатрАфишаПосещениеГалереяКонтактыКастингСхема залаКомандаВакансииFAQ",
         "date": "Дата не указана",
         "url": "https://crave.ru/theatre/",
         "image_url": null,
@@ -565,146 +581,10 @@
         "price": null
       },
       {
-        "title": "Новости",
+        "title": "Пользовательское соглашениеПолитика обработки персональных данныхООО \"Крейв Москоу\",ИНН 9709013091,город Москва, Лубянский пр-д, д. 15 стр. 2, помещ. I,mail@crave.ru,+7(495)215-11-77",
         "date": "Дата не указана",
-        "url": "https://crave.ru/novosti/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Команда",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/theatre/team",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Кастинг",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/theatre/casting",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Пресса о нас",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/theatre/press-about-us/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "История театра",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/theatre/history/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Афиша",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/afisha/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "ПосещениеБарСхема залаПодарочные билетыFAQ",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/visit/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Бар",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/visit/bar/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Схема зала",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/scheme/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Подарочные билеты",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/visit/the-gift-tickets/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "FAQ",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/theatre/faq/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "ГалереяТеатрШоуБарНаши гости",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/photo/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Театр",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/photo/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Шоу",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/photo/show/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Бар",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/photo/bar/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Наши гости",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/photo/guests/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "Контакты",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/kontakty/",
-        "image_url": null,
-        "venue": null,
-        "price": null
-      },
-      {
-        "title": "ТеатрНовостиКомандаКастингПресса о насИстория театраАфишаПосещениеБарСхема залаПодарочные билетыFAQГ",
-        "date": "Дата не указана",
-        "url": "https://crave.ru/",
-        "image_url": "https://crave.ru/local/templates/bootstrap_v4_v1/components/bitrix/menu/main_v33/images/burger.png",
+        "url": "https://crave.ru/user-agreemen/",
+        "image_url": "https://crave.ru/upload/medialibrary/463/Youtube.svg",
         "venue": null,
         "price": null
       }
