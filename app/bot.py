@@ -8,7 +8,7 @@ from typing import List
 from aiogram import Bot, Dispatcher, F
 from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandObject
-from aiogram.types import Message
+from aiogram.types import Message, BotCommand
 from aiogram import Router
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
@@ -152,9 +152,22 @@ async def main():
 
     dp.include_router(router)
 
+    @router.message(F.text)
+    async def _fallback(message: Message):
+        await handle_start(message)
+
     scheduler = AsyncIOScheduler(timezone="UTC")
     scheduler.add_job(lambda: asyncio.create_task(check_updates(bot, db)), "interval", minutes=settings.check_interval_minutes, id="check_updates", replace_existing=True)
     scheduler.start()
+
+    await bot.set_my_commands([
+        BotCommand(command="start", description="Помощь"),
+        BotCommand(command="subscribe", description="Подписаться на страницу"),
+        BotCommand(command="unsubscribe", description="Отписаться"),
+        BotCommand(command="list", description="Мои подписки"),
+        BotCommand(command="health", description="Проверка"),
+        BotCommand(command="check", description="Проверить сейчас"),
+    ])
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
