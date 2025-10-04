@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Monitor - Управление</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #5a6fd8;
+        }
+        
+        .nav-btn.active {
+            background: #28a745;
+        }
+        
+        /* Sections */
+        .section {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        
+        /* Statistics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+        }
+        
+        .stat-card.success { border-top-color: #28a745; }
+        .stat-card.warning { border-top-color: #ffc107; }
+        .stat-card.info { border-top-color: #17a2b8; }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+        }
+        
+        /* Add Site Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-success {
+            background: #28a745;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        /* Site List */
+        .site-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .site-item.inactive {
+            border-left-color: #dc3545;
+            opacity: 0.7;
+        }
+        
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .site-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .site-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .site-info {
+            margin-bottom: 15px;
+        }
+        
+        .site-info strong {
+            color: #333;
+        }
+        
+        .site-info a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .site-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .site-info code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .site-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        /* Events */
+        .event-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #28a745;
+        }
+        
+        .event-item.old {
+            border-left-color: #6c757d;
+        }
+        
+        .event-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .event-badge {
+            background: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-right: 10px;
+        }
+        
+        .event-info {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .event-info strong {
+            color: #333;
+        }
+        
+        .event-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .event-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Settings */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .settings-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .settings-card h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .alert-danger {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .site-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <h1>🎵 Concert Monitor</h1>
+            <p>Управление мониторингом концертных площадок</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="container">
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showSection('dashboard')">📊 Панель управления</button>
+                <button class="nav-btn" onclick="showSection('sites')">🌐 Сайты</button>
+                <button class="nav-btn" onclick="showSection('events')">🎵 События</button>
+                <button class="nav-btn" onclick="showSection('settings')">⚙️ Настройки</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="section active">
+            <h2>📊 Панель управления</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSites">3</div>
+                    <div class="stat-label">Мониторится сайтов</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-number" id="totalEvents">12</div>
+                    <div class="stat-label">Всего событий</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-number" id="newEvents">2</div>
+                    <div class="stat-label">Новых событий</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-number" id="activeSites">3</div>
+                    <div class="stat-label">Активных сайтов</div>
+                </div>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>💡 Подсказка:</strong> Система автоматически проверяет все активные сайты каждые 10 минут. 
+                Уведомления отправляются только при обнаружении новых событий.
+            </div>
+        </div>
+
+        <!-- Sites Section -->
+        <div id="sites" class="section">
+            <h2>🌐 Управление сайтами</h2>
+            
+            <div style="margin-bottom: 30px;">
+                <button class="btn" onclick="showAddSiteForm()">➕ Добавить сайт</button>
+            </div>
+            
+            <!-- Add Site Form -->
+            <div id="addSiteForm" style="display: none; background: #f8f9fa; padding: 25px; border-radius: 10px; margin-bottom: 30px;">
+                <h3>Добавить новый сайт</h3>
+                <form onsubmit="addSite(event)">
+                    <div class="form-group">
+                        <label for="siteName">Название сайта</label>
+                        <input type="text" id="siteName" required placeholder="Например: Крокус Сити Холл">
+                    </div>
+                    <div class="form-group">
+                        <label for="siteUrl">URL страницы с событиями</label>
+                        <input type="url" id="siteUrl" required placeholder="https://example.com/events">
+                    </div>
+                    <div class="form-group">
+                        <label for="siteSelector">CSS селектор для событий</label>
+                        <input type="text" id="siteSelector" required placeholder="Например: .event-card, .concert-item">
+                        <small style="color: #666; margin-top: 5px; display: block;">
+                            💡 Подсказка: Используйте инструменты разработчика браузера для определения правильного селектора
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="siteDescription">Описание (необязательно)</label>
+                        <textarea id="siteDescription" placeholder="Краткое описание сайта..."></textarea>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" class="btn btn-success">✅ Добавить сайт</button>
+                        <button type="button" class="btn" onclick="hideAddSiteForm()">❌ Отмена</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Sites List -->
+            <div id="sitesList">
+                <!-- Sites will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Events Section -->
+        <div id="events" class="section">
+            <h2>🎵 События</h2>
+            
+            <div style="margin-bottom: 30px;">
+                <button class="btn" onclick="checkAllSites()">🔄 Проверить все сайты</button>
+                <button class="btn" onclick="refreshEvents()">🔄 Обновить список</button>
+            </div>
+            
+            <div id="eventsList">
+                <!-- Events will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="section">
+            <h2>⚙️ Настройки</h2>
+            
+            <div class="settings-grid">
+                <div class="settings-card">
+                    <h3>📱 Telegram уведомления</h3>
+                    <div class="form-group">
+                        <label for="telegramToken">Токен бота</label>
+                        <input type="text" id="telegramToken" placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz">
+                    </div>
+                    <div class="form-group">
+                        <label for="telegramChatId">Chat ID</label>
+                        <input type="text" id="telegramChatId" placeholder="123456789">
+                    </div>
+                    <button class="btn" onclick="saveTelegramSettings()">💾 Сохранить</button>
+                </div>
+                
+                <div class="settings-card">
+                    <h3>📧 Email уведомления</h3>
+                    <div class="form-group">
+                        <label for="smtpHost">SMTP хост</label>
+                        <input type="text" id="smtpHost" placeholder="smtp.gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="smtpPort">SMTP порт</label>
+                        <input type="number" id="smtpPort" placeholder="587">
+                    </div>
+                    <div class="form-group">
+                        <label for="smtpUser">Email пользователь</label>
+                        <input type="email" id="smtpUser" placeholder="your-email@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="smtpPass">Email пароль</label>
+                        <input type="password" id="smtpPass" placeholder="your-app-password">
+                    </div>
+                    <button class="btn" onclick="saveEmailSettings()">💾 Сохранить</button>
+                </div>
+                
+                <div class="settings-card">
+                    <h3>⏰ Мониторинг</h3>
+                    <div class="form-group">
+                        <label for="checkInterval">Интервал проверки (минуты)</label>
+                        <input type="number" id="checkInterval" value="10" min="1" max="1440">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="autoMonitoring" checked> 
+                            Автоматический мониторинг
+                        </label>
+                    </div>
+                    <button class="btn" onclick="saveMonitoringSettings()">💾 Сохранить</button>
+                </div>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>📋 Инструкции по настройке:</strong><br>
+                <strong>Telegram:</strong> Создайте бота через @BotFather, получите токен и Chat ID<br>
+                <strong>Email:</strong> Используйте SMTP настройки вашего почтового провайдера<br>
+                <strong>Мониторинг:</strong> Рекомендуется интервал 10-30 минут
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage (in real app this would be API calls)
+        let sites = [
+            {
+                id: 1,
+                name: "Крокус Сити Холл",
+                url: "https://kroсus-city-hall.ru/events",
+                selector: ".event-card",
+                description: "Крупнейшая концертная площадка России",
+                isActive: true,
+                lastCheck: "2024-10-04 12:45"
+            },
+            {
+                id: 2,
+                name: "Олимпийский",
+                url: "https://olympic-stadium.ru/concerts",
+                selector: ".concert-item",
+                description: "Легендарная спортивная арена",
+                isActive: true,
+                lastCheck: "2024-10-04 12:45"
+            },
+            {
+                id: 3,
+                name: "СК Олимпийский",
+                url: "https://olympic.ru/events",
+                selector: ".event-block",
+                description: "Спортивный комплекс Олимпийский",
+                isActive: true,
+                lastCheck: "2024-10-04 12:45"
+            }
+        ];
+
+        let events = [
+            {
+                id: 1,
+                siteId: 1,
+                title: "Концерт группы 'Ария'",
+                url: "https://kroсus-city-hall.ru/event/aria-2024",
+                date: "2024-12-15 20:00",
+                description: "Легендарная группа Ария выступит с новой программой",
+                isNew: true,
+                foundAt: "2024-10-04 12:45"
+            },
+            {
+                id: 2,
+                siteId: 2,
+                title: "Рок-фестиваль 'Нашествие'",
+                url: "https://olympic-stadium.ru/event/nashestvie-2024",
+                date: "2024-12-20 19:00",
+                description: "Крупнейший рок-фестиваль России",
+                isNew: true,
+                foundAt: "2024-10-04 12:45"
+            },
+            {
+                id: 3,
+                siteId: 3,
+                title: "Концерт 'Сплин'",
+                url: "https://olympic.ru/event/splin-2024",
+                date: "2024-12-25 21:00",
+                description: "Акустический концерт группы Сплин",
+                isNew: false,
+                foundAt: "2024-10-03 15:30"
+            }
+        ];
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Load section data
+            if (sectionId === 'sites') {
+                loadSites();
+            } else if (sectionId === 'events') {
+                loadEvents();
+            }
+        }
+
+        // Sites management
+        function showAddSiteForm() {
+            document.getElementById('addSiteForm').style.display = 'block';
+        }
+
+        function hideAddSiteForm() {
+            document.getElementById('addSiteForm').style.display = 'none';
+            document.getElementById('addSiteForm').reset();
+        }
+
+        function addSite(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('siteName').value;
+            const url = document.getElementById('siteUrl').value;
+            const selector = document.getElementById('siteSelector').value;
+            const description = document.getElementById('siteDescription').value;
+            
+            const newSite = {
+                id: sites.length + 1,
+                name: name,
+                url: url,
+                selector: selector,
+                description: description,
+                isActive: true,
+                lastCheck: new Date().toLocaleString('ru-RU')
+            };
+            
+            sites.push(newSite);
+            loadSites();
+            hideAddSiteForm();
+            updateStats();
+            
+            showAlert('Сайт успешно добавлен!', 'success');
+        }
+
+        function loadSites() {
+            const sitesList = document.getElementById('sitesList');
+            sitesList.innerHTML = '';
+            
+            sites.forEach(site => {
+                const siteElement = document.createElement('div');
+                siteElement.className = `site-item ${site.isActive ? '' : 'inactive'}`;
+                siteElement.innerHTML = `
+                    <div class="site-header">
+                        <div class="site-name">${site.name}</div>
+                        <div class="site-status ${site.isActive ? 'status-active' : 'status-inactive'}">
+                            ${site.isActive ? 'Активен' : 'Неактивен'}
+                        </div>
+                    </div>
+                    <div class="site-info">
+                        <strong>URL:</strong> <a href="${site.url}" target="_blank">${site.url}</a><br>
+                        <strong>Селектор:</strong> <code>${site.selector}</code><br>
+                        ${site.description ? `<strong>Описание:</strong> ${site.description}<br>` : ''}
+                        <strong>Последняя проверка:</strong> ${site.lastCheck}
+                    </div>
+                    <div class="site-actions">
+                        <button class="btn btn-sm" onclick="checkSite(${site.id})">🔄 Проверить</button>
+                        <button class="btn btn-sm" onclick="toggleSite(${site.id})">
+                            ${site.isActive ? '⏸️ Остановить' : '▶️ Запустить'}
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteSite(${site.id})">🗑️ Удалить</button>
+                    </div>
+                `;
+                sitesList.appendChild(siteElement);
+            });
+        }
+
+        function checkSite(siteId) {
+            const site = sites.find(s => s.id === siteId);
+            if (site) {
+                site.lastCheck = new Date().toLocaleString('ru-RU');
+                loadSites();
+                showAlert(`Сайт "${site.name}" проверен!`, 'success');
+            }
+        }
+
+        function toggleSite(siteId) {
+            const site = sites.find(s => s.id === siteId);
+            if (site) {
+                site.isActive = !site.isActive;
+                loadSites();
+                updateStats();
+                showAlert(`Сайт "${site.name}" ${site.isActive ? 'активирован' : 'остановлен'}`, 'success');
+            }
+        }
+
+        function deleteSite(siteId) {
+            if (confirm('Вы уверены, что хотите удалить этот сайт?')) {
+                sites = sites.filter(s => s.id !== siteId);
+                events = events.filter(e => e.siteId !== siteId);
+                loadSites();
+                updateStats();
+                showAlert('Сайт удален!', 'success');
+            }
+        }
+
+        // Events management
+        function loadEvents() {
+            const eventsList = document.getElementById('eventsList');
+            eventsList.innerHTML = '';
+            
+            events.forEach(event => {
+                const site = sites.find(s => s.id === event.siteId);
+                const eventElement = document.createElement('div');
+                eventElement.className = `event-item ${event.isNew ? '' : 'old'}`;
+                eventElement.innerHTML = `
+                    <div class="event-title">
+                        ${event.isNew ? '<span class="event-badge">НОВОЕ</span>' : ''}
+                        ${event.title}
+                    </div>
+                    <div class="event-info">
+                        <strong>Сайт:</strong> ${site ? site.name : 'Неизвестно'}<br>
+                        <strong>Дата:</strong> ${event.date}<br>
+                        <strong>Описание:</strong> ${event.description}<br>
+                        <strong>Найдено:</strong> ${event.foundAt}
+                    </div>
+                    <div>
+                        <a href="${event.url}" target="_blank" class="event-link">🔗 Подробнее</a>
+                    </div>
+                `;
+                eventsList.appendChild(eventElement);
+            });
+        }
+
+        function checkAllSites() {
+            sites.forEach(site => {
+                site.lastCheck = new Date().toLocaleString('ru-RU');
+            });
+            loadSites();
+            showAlert('Все сайты проверены!', 'success');
+        }
+
+        function refreshEvents() {
+            loadEvents();
+            showAlert('Список событий обновлен!', 'success');
+        }
+
+        // Settings
+        function saveTelegramSettings() {
+            const token = document.getElementById('telegramToken').value;
+            const chatId = document.getElementById('telegramChatId').value;
+            
+            if (token && chatId) {
+                localStorage.setItem('telegramToken', token);
+                localStorage.setItem('telegramChatId', chatId);
+                showAlert('Настройки Telegram сохранены!', 'success');
+            } else {
+                showAlert('Заполните все поля!', 'danger');
+            }
+        }
+
+        function saveEmailSettings() {
+            const host = document.getElementById('smtpHost').value;
+            const port = document.getElementById('smtpPort').value;
+            const user = document.getElementById('smtpUser').value;
+            const pass = document.getElementById('smtpPass').value;
+            
+            if (host && port && user && pass) {
+                localStorage.setItem('smtpHost', host);
+                localStorage.setItem('smtpPort', port);
+                localStorage.setItem('smtpUser', user);
+                localStorage.setItem('smtpPass', pass);
+                showAlert('Настройки Email сохранены!', 'success');
+            } else {
+                showAlert('Заполните все поля!', 'danger');
+            }
+        }
+
+        function saveMonitoringSettings() {
+            const interval = document.getElementById('checkInterval').value;
+            const autoMonitoring = document.getElementById('autoMonitoring').checked;
+            
+            localStorage.setItem('checkInterval', interval);
+            localStorage.setItem('autoMonitoring', autoMonitoring);
+            showAlert('Настройки мониторинга сохранены!', 'success');
+        }
+
+        // Statistics
+        function updateStats() {
+            document.getElementById('totalSites').textContent = sites.length;
+            document.getElementById('totalEvents').textContent = events.length;
+            document.getElementById('newEvents').textContent = events.filter(e => e.isNew).length;
+            document.getElementById('activeSites').textContent = sites.filter(s => s.isActive).length;
+        }
+
+        // Alerts
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button onclick="this.parentElement.remove()" style="float: right; background: none; border: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
+            `;
+            
+            document.querySelector('.container').insertBefore(alertDiv, document.querySelector('.section'));
+            
+            setTimeout(() => {
+                if (alertDiv.parentElement) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+
+        // Load settings on page load
+        window.onload = function() {
+            updateStats();
+            loadSites();
+            loadEvents();
+            
+            // Load saved settings
+            document.getElementById('telegramToken').value = localStorage.getItem('telegramToken') || '';
+            document.getElementById('telegramChatId').value = localStorage.getItem('telegramChatId') || '';
+            document.getElementById('smtpHost').value = localStorage.getItem('smtpHost') || '';
+            document.getElementById('smtpPort').value = localStorage.getItem('smtpPort') || '';
+            document.getElementById('smtpUser').value = localStorage.getItem('smtpUser') || '';
+            document.getElementById('smtpPass').value = localStorage.getItem('smtpPass') || '';
+            document.getElementById('checkInterval').value = localStorage.getItem('checkInterval') || '10';
+            document.getElementById('autoMonitoring').checked = localStorage.getItem('autoMonitoring') !== 'false';
+        };
+    </script>
+</body>
+</html>
