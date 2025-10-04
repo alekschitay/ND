@@ -331,7 +331,16 @@ class ConcertMonitorBot:
             old_event_hashes = self.events_cache.get(url, set())
             new_events = []
             
+            # Если событий нет, не считаем это новыми событиями
+            if not current_events:
+                logger.info(f"Нет событий на {url}, не отправляем уведомления")
+                return
+            
             for event in current_events:
+                # Проверяем, что событие имеет валидные данные
+                if not event.title or len(event.title.strip()) < 3:
+                    continue
+                    
                 event_hash = hashlib.md5(f"{event.title}|{event.date}".encode('utf-8')).hexdigest()
                 if event_hash not in old_event_hashes:
                     new_events.append(event)
@@ -822,6 +831,11 @@ NOTIFICATION_SETTINGS = {{
                         
                         elements = filtered_elements
                         logger.info(f"После фильтрации навигации для {domain}: {len(elements)} элементов")
+                        
+                        # Если после фильтрации нет элементов, возвращаем пустой список
+                        if not elements:
+                            logger.info(f"Нет реальных событий на {domain}, пропускаем")
+                            return []
                     
                     if not elements:
                         # Если не найдены специфичные селекторы, ищем по общим паттернам
@@ -984,7 +998,16 @@ NOTIFICATION_SETTINGS = {{
                 old_event_hashes = self.events_cache.get(url, set())
                 new_events = []
                 
+                # Если событий нет, не считаем это новыми событиями
+                if not current_events:
+                    logger.info(f"Нет событий на {url}, не отправляем уведомления")
+                    return
+                
                 for event in current_events:
+                    # Проверяем, что событие имеет валидные данные
+                    if not event.title or len(event.title.strip()) < 3:
+                        continue
+                        
                     event_hash = hashlib.md5(f"{event.title}|{event.date}".encode('utf-8')).hexdigest()
                     if event_hash not in old_event_hashes:
                         new_events.append(event)
@@ -993,9 +1016,12 @@ NOTIFICATION_SETTINGS = {{
                 # Обновляем кэш
                 self.events_cache[url] = old_event_hashes
                 
-                # Отправляем уведомления о новых событиях
-                if new_events:
+                # Отправляем уведомления о новых событиях только если есть реальные новые события
+                if new_events and len(new_events) > 0:
+                    logger.info(f"Отправляем уведомление о {len(new_events)} новых событиях для {url}")
                     await self.send_new_events_notification(monitored.user_id, url, new_events, application)
+                else:
+                    logger.info(f"Нет новых событий для {url}, уведомления не отправляем")
                 
                 # Обновляем данные
                 monitored.last_check = datetime.now().isoformat()
