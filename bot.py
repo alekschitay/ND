@@ -179,15 +179,19 @@ class ConcertMonitorBot:
                     await update.message.reply_text(text)
                     
                     try:
+                        logger.info(f"Тестирую отправку изображения: {first_image_event['image_url']}")
                         await self.application.bot.send_photo(
                             chat_id=update.effective_chat.id,
                             photo=first_image_event['image_url'],
                             caption=f"Пример: {first_image_event['title']}"
                         )
+                        logger.info(f"Тестовое изображение успешно отправлено")
                     except Exception as e:
+                        logger.error(f"Ошибка тестовой отправки изображения: {e}")
+                        logger.error(f"Тип ошибки: {type(e).__name__}")
                         await self.application.bot.send_message(
                             chat_id=update.effective_chat.id,
-                            text=f"⚠️ Не удалось отправить изображение: {str(e)}"
+                            text=f"⚠️ Не удалось отправить изображение: {str(e)}\n\n🔗 URL: {first_image_event['image_url']}"
                         )
                 else:
                     await update.message.reply_text(text)
@@ -402,18 +406,26 @@ class ConcertMonitorBot:
                         if not image_url.startswith(('http://', 'https://')):
                             raise ValueError("Некорректный URL изображения")
                         
+                        # Логируем попытку отправки
+                        logger.info(f"Отправляю изображение: {image_url}")
+                        
                         await self.application.bot.send_photo(
                             chat_id=user_id,
                             photo=image_url,
                             caption=text,
                             parse_mode=ParseMode.HTML
                         )
+                        
+                        logger.info(f"Изображение успешно отправлено: {image_url}")
+                        
                     except Exception as e:
-                        logger.warning(f"Не удалось отправить изображение {event['image_url']}: {e}")
+                        logger.error(f"Ошибка отправки изображения {event['image_url']}: {e}")
+                        logger.error(f"Тип ошибки: {type(e).__name__}")
+                        
                         # Если изображение не отправилось, отправляем только текст
                         await self.application.bot.send_message(
                             chat_id=user_id,
-                            text=text + f"\n\n🖼️ Изображение: {event['image_url']}",
+                            text=text + f"\n\n🖼️ Изображение: {event['image_url']}\n❌ Не удалось отправить изображение: {str(e)}",
                             parse_mode=ParseMode.HTML
                         )
                 else:
