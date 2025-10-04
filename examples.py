@@ -12,7 +12,11 @@ EXAMPLES = {
     "add_url": "/add https://example-concert-hall.com/events",
     "list_urls": "/list",
     "remove_url": "/remove 1",
-    "status": "/status"
+    "status": "/status",
+    "scan_all": "/scan",
+    "scan_specific": "/scan 1",
+    "test_url": "/test https://example.com/events",
+    "logs": "/logs"
 }
 
 # Примеры ссылок для мониторинга (замените на реальные):

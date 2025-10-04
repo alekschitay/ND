@@ -114,11 +114,17 @@ class ConcertMonitorBot:
 
 Этот бот поможет вам отслеживать новые события на сайтах концертных площадок.
 
-📋 Доступные команды:
+📋 Основные команды:
 /add <ссылка> - добавить ссылку для мониторинга
 /list - показать все отслеживаемые ссылки
 /remove <номер> - удалить ссылку из мониторинга
-/help - показать справку
+/status - показать статус мониторинга
+
+🔍 Команды сканирования:
+/scan - принудительно сканировать все ссылки
+/scan <номер> - сканировать конкретную ссылку
+/test <ссылка> - протестировать парсинг ссылки
+/logs - показать последние проверки
 
 Просто отправьте ссылку на страницу с событиями, и я начну её отслеживать!
         """
@@ -139,11 +145,17 @@ class ConcertMonitorBot:
 • Ссылка на событие
 • Афиша (если доступна)
 
-⚙️ Команды:
+⚙️ Основные команды:
 /add <ссылка> - добавить ссылку для мониторинга
 /list - показать все отслеживаемые ссылки
 /remove <номер> - удалить ссылку из мониторинга
 /status - показать статус мониторинга
+
+🔍 Команды сканирования:
+/scan - принудительно сканировать все ваши ссылки
+/scan <номер> - сканировать конкретную ссылку
+/test <ссылка> - протестировать парсинг ссылки
+/logs - показать последние проверки ссылок
 
 💡 Совет: Добавляйте ссылки на конкретные разделы сайтов (например, /events, /concerts, /afisha)
         """
@@ -231,20 +243,211 @@ class ConcertMonitorBot:
         """Обработчик команды /status"""
         total_urls = len(self.monitored_urls)
         user_id = update.effective_user.id
-        user_urls = len([url for url, data in self.monitored_urls.items() if data.user_id == user_id])
+        user_urls = [url for url, data in self.monitored_urls.items() if data.user_id == user_id]
         
         status_text = f"""
 📊 Статус мониторинга:
 
 🔗 Всего отслеживаемых ссылок: {total_urls}
-👤 Ваших ссылок: {user_urls}
-⏰ Интервал проверки: 10 минут
-🔄 Последняя проверка: {datetime.now().strftime("%d.%m.%Y %H:%M:%S")}
+👤 Ваших ссылок: {len(user_urls)}
+⏰ Интервал проверки: {MONITORING_INTERVAL // 60} минут
+🔄 Текущее время: {datetime.now().strftime("%d.%m.%Y %H:%M:%S")}
 
 {'✅ Мониторинг активен' if total_urls > 0 else '⏸️ Мониторинг неактивен'}
         """
         
+        if user_urls:
+            status_text += "\n📋 Ваши ссылки:\n"
+            for i, url in enumerate(user_urls, 1):
+                monitored = self.monitored_urls[url]
+                last_check = datetime.fromisoformat(monitored.last_check).strftime("%d.%m.%Y %H:%M")
+                events_count = len(monitored.events)
+                status_text += f"{i}. {url[:50]}...\n"
+                status_text += f"   Последняя проверка: {last_check}\n"
+                status_text += f"   Найдено событий: {events_count}\n\n"
+        
         await update.message.reply_text(status_text)
+    
+    async def scan_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /scan - принудительное сканирование"""
+        user_id = update.effective_user.id
+        user_urls = [url for url, data in self.monitored_urls.items() if data.user_id == user_id]
+        
+        if not user_urls:
+            await update.message.reply_text("❌ У вас нет отслеживаемых ссылок для сканирования.")
+            return
+        
+        # Проверяем, есть ли номер конкретной ссылки
+        if context.args:
+            try:
+                index = int(context.args[0]) - 1
+                if index < 0 or index >= len(user_urls):
+                    await update.message.reply_text("❌ Неверный номер ссылки.")
+                    return
+                
+                url_to_scan = user_urls[index]
+                monitored = self.monitored_urls[url_to_scan]
+                
+                await update.message.reply_text(f"🔍 Сканирование ссылки {index + 1}...")
+                
+                # Принудительное сканирование конкретной ссылки
+                await self.force_scan_url(url_to_scan, monitored, update, context)
+                
+            except ValueError:
+                await update.message.reply_text("❌ Неверный формат номера. Укажите число.")
+        else:
+            # Сканирование всех ссылок пользователя
+            await update.message.reply_text(f"🔍 Начинаю сканирование {len(user_urls)} ссылок...")
+            
+            for i, url in enumerate(user_urls, 1):
+                monitored = self.monitored_urls[url]
+                await update.message.reply_text(f"📡 Сканирование {i}/{len(user_urls)}: {url[:50]}...")
+                
+                await self.force_scan_url(url, monitored, update, context)
+                
+                # Небольшая пауза между сканированиями
+                await asyncio.sleep(1)
+            
+            await update.message.reply_text("✅ Сканирование всех ссылок завершено!")
+    
+    async def force_scan_url(self, url: str, monitored: MonitoredUrl, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Принудительное сканирование конкретного URL"""
+        try:
+            logger.info(f"Принудительное сканирование {url} для пользователя {update.effective_user.id}")
+            
+            # Парсим события
+            current_events = await self.parse_events_from_page(url)
+            current_hash = self.get_page_hash(current_events)
+            
+            # Определяем новые события
+            old_event_hashes = self.events_cache.get(url, set())
+            new_events = []
+            
+            for event in current_events:
+                event_hash = hashlib.md5(f"{event.title}|{event.date}".encode('utf-8')).hexdigest()
+                if event_hash not in old_event_hashes:
+                    new_events.append(event)
+                    old_event_hashes.add(event_hash)
+            
+            # Обновляем кэш
+            self.events_cache[url] = old_event_hashes
+            
+            # Обновляем данные
+            monitored.last_check = datetime.now().isoformat()
+            monitored.last_hash = current_hash
+            monitored.events = current_events
+            
+            self.save_data()
+            
+            # Отправляем результат сканирования
+            result_text = f"""
+📊 Результат сканирования:
+🔗 {url}
+
+📅 Найдено событий: {len(current_events)}
+🆕 Новых событий: {len(new_events)}
+🔄 Последняя проверка: {datetime.now().strftime("%d.%m.%Y %H:%M:%S")}
+            """
+            
+            if current_events:
+                result_text += "\n📋 Последние события:\n"
+                for i, event in enumerate(current_events[:3], 1):
+                    result_text += f"{i}. {event.title}\n"
+                    result_text += f"   📆 {event.date}\n"
+                    if event.venue:
+                        result_text += f"   📍 {event.venue}\n"
+                    result_text += "\n"
+            
+            if new_events:
+                result_text += f"\n🎉 Обнаружены новые события! Отправляю уведомления..."
+                await self.send_new_events_notification(monitored.user_id, url, new_events, context.application)
+            
+            await update.message.reply_text(result_text)
+            
+        except Exception as e:
+            error_text = f"❌ Ошибка сканирования {url}:\n{str(e)}"
+            logger.error(f"Ошибка принудительного сканирования {url}: {e}")
+            await update.message.reply_text(error_text)
+    
+    async def test_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /test - тестирование парсинга ссылки"""
+        if not context.args:
+            await update.message.reply_text("❌ Пожалуйста, укажите ссылку для тестирования.\nПример: /test https://example.com/events")
+            return
+        
+        url = context.args[0]
+        
+        if not self.is_valid_url(url):
+            await update.message.reply_text("❌ Неверный формат ссылки. Пожалуйста, укажите корректный URL.")
+            return
+        
+        await update.message.reply_text(f"🧪 Тестирование парсинга ссылки...\n🔗 {url}")
+        
+        try:
+            # Парсим события
+            events = await self.parse_events_from_page(url)
+            
+            result_text = f"""
+🧪 Результат тестирования:
+🔗 {url}
+
+📅 Найдено событий: {len(events)}
+⏰ Время тестирования: {datetime.now().strftime("%d.%m.%Y %H:%M:%S")}
+            """
+            
+            if events:
+                result_text += "\n📋 Найденные события:\n"
+                for i, event in enumerate(events[:5], 1):
+                    result_text += f"{i}. {event.title}\n"
+                    result_text += f"   📆 {event.date}\n"
+                    if event.venue:
+                        result_text += f"   📍 {event.venue}\n"
+                    if event.price:
+                        result_text += f"   💰 {event.price}\n"
+                    result_text += f"   🔗 {event.url}\n\n"
+                
+                if len(events) > 5:
+                    result_text += f"... и ещё {len(events) - 5} событий"
+            else:
+                result_text += "\n⚠️ События не найдены. Возможно, нужно настроить селекторы для этого сайта."
+            
+            await update.message.reply_text(result_text)
+            
+        except Exception as e:
+            error_text = f"❌ Ошибка тестирования {url}:\n{str(e)}"
+            logger.error(f"Ошибка тестирования {url}: {e}")
+            await update.message.reply_text(error_text)
+    
+    async def logs_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /logs - просмотр последних логов"""
+        user_id = update.effective_user.id
+        user_urls = [url for url, data in self.monitored_urls.items() if data.user_id == user_id]
+        
+        if not user_urls:
+            await update.message.reply_text("❌ У вас нет отслеживаемых ссылок.")
+            return
+        
+        logs_text = "📋 Последние проверки ваших ссылок:\n\n"
+        
+        for i, url in enumerate(user_urls, 1):
+            monitored = self.monitored_urls[url]
+            last_check = datetime.fromisoformat(monitored.last_check)
+            time_diff = datetime.now() - last_check
+            
+            logs_text += f"{i}. {url[:40]}...\n"
+            logs_text += f"   📅 Последняя проверка: {last_check.strftime('%d.%m.%Y %H:%M:%S')}\n"
+            
+            if time_diff.total_seconds() < 60:
+                logs_text += f"   ⏰ {int(time_diff.total_seconds())} секунд назад\n"
+            elif time_diff.total_seconds() < 3600:
+                logs_text += f"   ⏰ {int(time_diff.total_seconds() // 60)} минут назад\n"
+            else:
+                logs_text += f"   ⏰ {int(time_diff.total_seconds() // 3600)} часов назад\n"
+            
+            logs_text += f"   📊 Найдено событий: {len(monitored.events)}\n"
+            logs_text += f"   🔄 Статус: {'✅ Активен' if time_diff.total_seconds() < MONITORING_INTERVAL * 2 else '⚠️ Долго не проверялся'}\n\n"
+        
+        await update.message.reply_text(logs_text)
     
     async def handle_url_message(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик сообщений с URL"""
@@ -514,6 +717,9 @@ class ConcertMonitorBot:
         application.add_handler(CommandHandler("list", self.list_urls_command))
         application.add_handler(CommandHandler("remove", self.remove_url_command))
         application.add_handler(CommandHandler("status", self.status_command))
+        application.add_handler(CommandHandler("scan", self.scan_command))
+        application.add_handler(CommandHandler("test", self.test_command))
+        application.add_handler(CommandHandler("logs", self.logs_command))
         
         # Добавляем обработчик сообщений с URL
         application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_url_message))
