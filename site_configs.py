@@ -81,6 +81,17 @@ SITE_CONFIGS = {
         'link_selector': 'a',
         'image_selector': 'img',
         'description': 'Социальная сеть Instagram'
+    },
+    
+    # Специальные конфигурации для сайтов с графическими афишами
+    'poster_site': {
+        'name': 'Сайт с графическими афишами',
+        'event_selector': 'img, .poster, .afisha, .event-image',
+        'title_selector': 'img[alt], img[title]',
+        'date_selector': '',  # Дата обычно в изображении
+        'link_selector': 'a',
+        'image_selector': 'img',
+        'description': 'Сайт с графическими афишами (без текстовых описаний)'
     }
 }
 
@@ -96,6 +107,11 @@ def get_config_for_domain(domain: str) -> dict:
     for site_domain, config in SITE_CONFIGS.items():
         if site_domain in domain_lower:
             return config
+    
+    # Проверяем, является ли это сайтом с графическими афишами
+    poster_keywords = ['poster', 'afisha', 'афиша', 'posters', 'events', 'concerts']
+    if any(keyword in domain_lower for keyword in poster_keywords):
+        return SITE_CONFIGS['poster_site']
     
     # Возвращаем общую конфигурацию
     return {

@@ -42,10 +42,13 @@ class ConcertMonitorBot:
 /list - Показать отслеживаемые страницы
 /remove - Удалить страницу из мониторинга
 /test - Тестировать парсинг страницы
+/images - Тестировать извлечение изображений-афиш
 /sites - Показать поддерживаемые сайты
 /help - Помощь
 
 🔗 Чтобы добавить страницу для мониторинга, используйте команду /add или просто отправьте ссылку на страницу.
+
+🖼️ Для страниц с графическими афишами используйте команду /images для тестирования.
         """
         
         await update.message.reply_text(welcome_text)
@@ -61,6 +64,7 @@ class ConcertMonitorBot:
 /list - Показать все отслеживаемые страницы
 /remove - Удалить страницу из мониторинга
 /test - Тестировать парсинг страницы
+/images - Тестировать извлечение изображений-афиш
 /sites - Показать поддерживаемые сайты
 /help - Показать эту справку
 
@@ -77,6 +81,7 @@ class ConcertMonitorBot:
 ⚡ Уведомления приходят только при появлении новых событий на отслеживаемых страницах.
 
 🔍 Команда /test позволяет проверить, как бот парсит конкретную страницу.
+🖼️ Команда /images специально для страниц с графическими афишами.
 🌐 Команда /sites показывает список оптимизированных сайтов.
         """
         await update.message.reply_text(help_text)
@@ -182,6 +187,86 @@ class ConcertMonitorBot:
             
         except Exception as e:
             await update.message.reply_text(f"❌ Ошибка получения списка сайтов: {str(e)}")
+
+    async def images_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /images для тестирования извлечения изображений"""
+        if not context.args:
+            await update.message.reply_text(
+                "🖼️ Использование: /images <URL>\n\n"
+                "Пример: /images https://example.com/posters\n\n"
+                "Эта команда специально для страниц с графическими афишами."
+            )
+            return
+        
+        url = context.args[0]
+        if not self._is_valid_url(url):
+            await update.message.reply_text("❌ Пожалуйста, укажите корректную ссылку.")
+            return
+        
+        await update.message.reply_text("🖼️ Тестирую извлечение изображений...")
+        
+        try:
+            # Загружаем страницу
+            content = await self.monitor.fetch_page(url)
+            if not content:
+                await update.message.reply_text("❌ Не удалось загрузить страницу")
+                return
+            
+            # Извлекаем только изображения
+            from bs4 import BeautifulSoup
+            from urllib.parse import urljoin
+            soup = BeautifulSoup(content, 'html.parser')
+            
+            images = soup.find_all('img')
+            found_images = []
+            
+            for img in images:
+                if self.monitor._is_event_image(img):
+                    src = img.get('src', '')
+                    if src:
+                        image_url = urljoin(url, src)
+                        alt = img.get('alt', '') or img.get('title', '') or 'Без описания'
+                        found_images.append({
+                            'url': image_url,
+                            'alt': alt,
+                            'width': img.get('width', ''),
+                            'height': img.get('height', '')
+                        })
+            
+            if found_images:
+                text = f"🖼️ Найдено {len(found_images)} изображений-афиш:\n\n"
+                
+                for i, img in enumerate(found_images[:5], 1):  # Показываем первые 5
+                    text += f"{i}. {img['alt']}\n"
+                    text += f"   📏 {img['width']}x{img['height']}\n"
+                    text += f"   🔗 {img['url'][:50]}...\n\n"
+                
+                if len(found_images) > 5:
+                    text += f"... и еще {len(found_images) - 5} изображений"
+                
+                await update.message.reply_text(text)
+                
+                # Отправляем первое изображение как пример
+                if found_images[0]['url']:
+                    try:
+                        await self.application.bot.send_photo(
+                            chat_id=update.effective_chat.id,
+                            photo=found_images[0]['url'],
+                            caption=f"Пример афиши: {found_images[0]['alt']}"
+                        )
+                    except Exception as e:
+                        await update.message.reply_text(f"⚠️ Не удалось отправить изображение: {str(e)}")
+            else:
+                await update.message.reply_text(
+                    "❌ Изображения-афиши не найдены.\n\n"
+                    "Возможные причины:\n"
+                    "• Изображения слишком маленькие\n"
+                    "• Изображения помечены как служебные\n"
+                    "• Нужны специальные селекторы для этого сайта"
+                )
+            
+        except Exception as e:
+            await update.message.reply_text(f"❌ Ошибка тестирования: {str(e)}")
 
     async def handle_url_message(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Обработчик сообщений с URL"""
@@ -360,6 +445,7 @@ class ConcertMonitorBot:
         self.application.add_handler(CommandHandler("remove", self.remove_command))
         self.application.add_handler(CommandHandler("test", self.test_command))
         self.application.add_handler(CommandHandler("sites", self.sites_command))
+        self.application.add_handler(CommandHandler("images", self.images_command))
         self.application.add_handler(CallbackQueryHandler(self.handle_callback_query))
         self.application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_url_message))
         

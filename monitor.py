@@ -67,12 +67,16 @@ class PageMonitor:
             
             for element in event_elements:
                 event_data = self._extract_event_data(element, url, patterns)
-                if event_data and event_data['title']:
+                if event_data and (event_data['title'] or event_data.get('image_url')):
                     events.append(event_data)
             
             # Если не нашли события по селекторам, ищем по ключевым словам
             if not events:
                 events = self._search_by_keywords(soup, url)
+            
+            # Если все еще нет событий, ищем только изображения
+            if not events:
+                events = self._extract_image_only_events(soup, url, patterns)
             
             return events
             
@@ -216,6 +220,167 @@ class PageMonitor:
                 return match.group()
         
         return ""
+
+    def _extract_image_only_events(self, soup: BeautifulSoup, base_url: str, patterns: Dict) -> List[Dict]:
+        """Извлечение событий только по изображениям (для страниц с графическими афишами)"""
+        events = []
+        
+        try:
+            # Ищем все изображения на странице
+            images = soup.find_all('img')
+            
+            for img in images:
+                # Проверяем, что это не служебное изображение
+                if self._is_event_image(img):
+                    event_data = self._extract_event_from_image(img, base_url)
+                    if event_data:
+                        events.append(event_data)
+            
+            # Если не нашли по img, ищем по контейнерам с изображениями
+            if not events:
+                events = self._extract_events_from_image_containers(soup, base_url, patterns)
+            
+            return events
+            
+        except Exception as e:
+            logger.error(f"Ошибка извлечения событий по изображениям: {e}")
+            return []
+
+    def _is_event_image(self, img_element) -> bool:
+        """Проверка, является ли изображение афишей события"""
+        try:
+            # Проверяем атрибуты изображения
+            src = img_element.get('src', '').lower()
+            alt = img_element.get('alt', '').lower()
+            title = img_element.get('title', '').lower()
+            class_name = ' '.join(img_element.get('class', [])).lower()
+            
+            # Исключаем служебные изображения
+            exclude_keywords = [
+                'logo', 'icon', 'avatar', 'profile', 'banner', 'header', 'footer',
+                'social', 'facebook', 'twitter', 'instagram', 'vk', 'youtube',
+                'loading', 'spinner', 'placeholder', 'default', 'no-image'
+            ]
+            
+            # Проверяем размеры изображения (примерно)
+            width = img_element.get('width', '')
+            height = img_element.get('height', '')
+            
+            # Если есть размеры, проверяем что это не маленькая иконка
+            if width and height:
+                try:
+                    w = int(width.replace('px', ''))
+                    h = int(height.replace('px', ''))
+                    if w < 100 or h < 100:  # Слишком маленькое изображение
+                        return False
+                except:
+                    pass
+            
+            # Проверяем, что это не служебное изображение
+            for keyword in exclude_keywords:
+                if keyword in src or keyword in alt or keyword in title or keyword in class_name:
+                    return False
+            
+            # Проверяем, что изображение достаточно большое по URL или атрибутам
+            if any(keyword in src for keyword in ['poster', 'event', 'concert', 'show', 'afisha']):
+                return True
+            
+            if any(keyword in alt for keyword in ['концерт', 'concert', 'событие', 'event', 'афиша']):
+                return True
+            
+            # Если изображение имеет разумные размеры и не исключено, считаем его событием
+            return True
+            
+        except Exception as e:
+            logger.error(f"Ошибка проверки изображения: {e}")
+            return False
+
+    def _extract_event_from_image(self, img_element, base_url: str) -> Optional[Dict]:
+        """Извлечение данных события из изображения"""
+        try:
+            src = img_element.get('src', '')
+            if not src:
+                return None
+            
+            # Получаем полный URL изображения
+            image_url = urljoin(base_url, src)
+            
+            # Извлекаем заголовок из alt или title
+            title = img_element.get('alt', '') or img_element.get('title', '')
+            if not title:
+                # Пытаемся извлечь из родительского элемента
+                parent = img_element.parent
+                if parent:
+                    title = parent.get_text(strip=True)[:100]  # Первые 100 символов
+            
+            # Если заголовка нет, создаем общий
+            if not title:
+                title = "🎵 Новое событие"
+            
+            # Ищем ссылку на событие (в родительском элементе)
+            link = ""
+            parent = img_element.parent
+            while parent and parent.name != 'body':
+                if parent.name == 'a' and parent.get('href'):
+                    link = urljoin(base_url, parent['href'])
+                    break
+                parent = parent.parent
+            
+            # Создаем хеш для уникальности
+            content_hash = hashlib.md5(f"{image_url}{title}".encode()).hexdigest()
+            
+            return {
+                'title': title,
+                'date': "",  # Для графических афиш дата обычно в изображении
+                'link': link,
+                'image_url': image_url,
+                'content_hash': content_hash
+            }
+            
+        except Exception as e:
+            logger.error(f"Ошибка извлечения события из изображения: {e}")
+            return None
+
+    def _extract_events_from_image_containers(self, soup: BeautifulSoup, base_url: str, patterns: Dict) -> List[Dict]:
+        """Извлечение событий из контейнеров с изображениями"""
+        events = []
+        
+        try:
+            # Ищем контейнеры, которые могут содержать афиши
+            container_selectors = [
+                '.poster', '.event', '.concert', '.show', '.afisha',
+                '[class*="poster"]', '[class*="event"]', '[class*="concert"]',
+                '.card', '.item', '.tile', '.block'
+            ]
+            
+            for selector in container_selectors:
+                containers = soup.select(selector)
+                
+                for container in containers:
+                    # Ищем изображение в контейнере
+                    img = container.find('img')
+                    if img and self._is_event_image(img):
+                        event_data = self._extract_event_from_image(img, base_url)
+                        
+                        # Пытаемся извлечь дополнительную информацию из контейнера
+                        if event_data:
+                            # Ищем ссылку в контейнере
+                            link_elem = container.find('a')
+                            if link_elem and link_elem.get('href'):
+                                event_data['link'] = urljoin(base_url, link_elem['href'])
+                            
+                            # Ищем текст в контейнере для заголовка
+                            container_text = container.get_text(strip=True)
+                            if container_text and len(container_text) > len(event_data['title']):
+                                event_data['title'] = container_text[:100]
+                            
+                            events.append(event_data)
+            
+            return events
+            
+        except Exception as e:
+            logger.error(f"Ошибка извлечения событий из контейнеров: {e}")
+            return []
 
     async def check_page_for_updates(self, page_info: Dict) -> List[Dict]:
         """Проверка страницы на обновления"""
