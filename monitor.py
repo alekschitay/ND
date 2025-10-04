@@ -38,10 +38,32 @@ class PageMonitor:
         """Загрузка страницы"""
         try:
             session = await self._get_session()
-            async with session.get(url) as response:
+            
+            # Улучшенные заголовки для обхода защиты
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+            }
+            
+            async with session.get(url, headers=headers) as response:
                 if response.status == 200:
                     content = await response.text()
                     return content
+                elif response.status == 202:
+                    # Для статуса 202 ждем и повторяем запрос
+                    logger.info(f"HTTP 202 для {url}, жду и повторяю...")
+                    await asyncio.sleep(2)
+                    async with session.get(url, headers=headers) as retry_response:
+                        if retry_response.status == 200:
+                            content = await retry_response.text()
+                            return content
+                        else:
+                            logger.warning(f"Повторный HTTP {retry_response.status} для {url}")
+                            return None
                 else:
                     logger.warning(f"HTTP {response.status} для {url}")
                     return None
@@ -467,19 +489,20 @@ class PageMonitor:
             # Вычисляем хеш содержимого
             current_hash = self.calculate_content_hash(content)
             
+            # Извлекаем события
+            events = self.extract_events_from_html(content, url)
+            
+            # Обновляем время последней проверки ВСЕГДА
+            from database import Database
+            db = Database()
+            await db.update_page_hash(page_info['id'], current_hash)
+            
             # Если хеш не изменился, обновлений нет
             if last_hash and last_hash == current_hash:
                 return []
             
-            # Извлекаем события
-            events = self.extract_events_from_html(content, url)
-            
             # Если это первая проверка, не отправляем все события
             if not last_hash:
-                # Обновляем хеш, но не отправляем события
-                from database import Database
-                db = Database()
-                await db.update_page_hash(page_info['id'], current_hash)
                 return []
             
             # Фильтруем новые события
@@ -490,11 +513,6 @@ class PageMonitor:
             for event in events:
                 if event['content_hash'] not in existing_hashes:
                     new_events.append(event)
-            
-            # Обновляем хеш страницы
-            from database import Database
-            db = Database()
-            await db.update_page_hash(page_info['id'], current_hash)
             
             return new_events[:config.MAX_EVENTS_PER_CHECK]
             
