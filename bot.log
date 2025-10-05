@@ -1,10 +1,20 @@
-2025-10-04 19:09:28,356 - ERROR - Ошибка загрузки: ConcertEvent.__init__() got an unexpected keyword argument 'image_url'
-2025-10-04 19:09:28,418 - INFO - 🎵 Запуск надежного бота...
-2025-10-04 19:09:28,419 - ERROR - Критическая ошибка: Cannot close a running event loop
-/workspace/reliable_bot.py:314: RuntimeWarning: coroutine 'Application.shutdown' was never awaited
-  self.is_running = False
-RuntimeWarning: Enable tracemalloc to get the object allocation traceback
-/workspace/reliable_bot.py:314: RuntimeWarning: coroutine 'Application._bootstrap_initialize' was never awaited
-  self.is_running = False
-RuntimeWarning: Enable tracemalloc to get the object allocation traceback
-2025-10-04 19:09:28,420 - INFO - 🚀 Запуск мониторинга
+2025-10-05 12:43:27,469 - INFO - Загружено 17 ссылок
+2025-10-05 12:43:27,540 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 12:43:27,540 - INFO - 🎵 Запуск финального бота...
+2025-10-05 12:43:27,822 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getMe "HTTP/1.1 200 OK"
+2025-10-05 12:43:27,909 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 12:43:27,911 - INFO - Added job "monitoring_job" to job store "default"
+2025-10-05 12:43:27,911 - INFO - Scheduler started
+2025-10-05 12:43:27,912 - INFO - Application started
+2025-10-05 12:43:37,552 - INFO - Running job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 12:48:37 UTC)" (scheduled at 2025-10-05 12:43:37.539853+00:00)
+2025-10-05 12:43:37,552 - INFO - Начало цикла мониторинга
+2025-10-05 12:43:37,552 - INFO - Проверка https://vk-stadium.ru/
+2025-10-05 12:43:38,173 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:43:38,420 - INFO - Изменения на https://vk-stadium.ru/
+2025-10-05 12:43:38,795 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:38,797 - INFO - Уведомление отправлено для https://vk-stadium.ru/
+2025-10-05 12:43:38,799 - INFO - Проверка https://livearena.ru/performances
+2025-10-05 12:43:40,079 - INFO - Изменения на https://livearena.ru/performances
+2025-10-05 12:43:40,190 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:40,191 - INFO - Уведомление отправлено для https://livearena.ru/performances
+2025-10-05 12:43:40,192 - INFO - Проверка https://sohorooms.com/anons
