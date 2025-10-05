@@ -18,3 +18,135 @@
 2025-10-05 12:43:40,190 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
 2025-10-05 12:43:40,191 - INFO - Уведомление отправлено для https://livearena.ru/performances
 2025-10-05 12:43:40,192 - INFO - Проверка https://sohorooms.com/anons
+2025-10-05 12:43:42,659 - INFO - Изменения на https://sohorooms.com/anons
+2025-10-05 12:43:42,790 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:42,791 - INFO - Уведомление отправлено для https://sohorooms.com/anons
+2025-10-05 12:43:42,792 - INFO - Проверка https://kremlinpalace.org/
+2025-10-05 12:43:43,899 - INFO - Изменения на https://kremlinpalace.org/
+2025-10-05 12:43:44,064 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:44,065 - INFO - Уведомление отправлено для https://kremlinpalace.org/
+2025-10-05 12:43:44,066 - INFO - Проверка https://assuntamadre.ru/blog/
+2025-10-05 12:43:44,746 - ERROR - Ошибка https://assuntamadre.ru/blog/: 503
+2025-10-05 12:43:44,747 - INFO - Проверка https://letolifefest.ru/
+2025-10-05 12:43:45,349 - INFO - Изменения на https://letolifefest.ru/
+2025-10-05 12:43:45,551 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:45,552 - INFO - Уведомление отправлено для https://letolifefest.ru/
+2025-10-05 12:43:45,554 - INFO - Проверка https://crave.ru/afisha/
+2025-10-05 12:43:46,176 - INFO - Изменения на https://crave.ru/afisha/
+2025-10-05 12:43:46,350 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:46,351 - INFO - Уведомление отправлено для https://crave.ru/afisha/
+2025-10-05 12:43:46,352 - INFO - Проверка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop
+2025-10-05 12:43:46,376 - ERROR - Ошибка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop: 202
+2025-10-05 12:43:46,377 - INFO - Проверка https://peachrest.ru/events/
+2025-10-05 12:43:47,270 - INFO - Изменения на https://peachrest.ru/events/
+2025-10-05 12:43:47,517 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:47,518 - INFO - Уведомление отправлено для https://peachrest.ru/events/
+2025-10-05 12:43:47,520 - INFO - Проверка https://bolshoi.ru/timetable/all
+2025-10-05 12:43:47,959 - ERROR - Ошибка https://bolshoi.ru/timetable/all: 401
+2025-10-05 12:43:47,959 - INFO - Проверка https://mxat.ru/afisha/
+2025-10-05 12:43:48,259 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:43:50,425 - INFO - Изменения на https://mxat.ru/afisha/
+2025-10-05 12:43:50,582 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:50,583 - INFO - Уведомление отправлено для https://mxat.ru/afisha/
+2025-10-05 12:43:50,594 - INFO - Проверка https://msk-live-hall.mts.ru/
+2025-10-05 12:43:51,412 - INFO - Изменения на https://msk-live-hall.mts.ru/
+2025-10-05 12:43:51,615 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:51,616 - INFO - Уведомление отправлено для https://msk-live-hall.mts.ru/
+2025-10-05 12:43:51,618 - INFO - Проверка https://vtb-arena.com/poster/
+2025-10-05 12:43:53,316 - INFO - Изменения на https://vtb-arena.com/poster/
+2025-10-05 12:43:53,458 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:53,459 - INFO - Уведомление отправлено для https://vtb-arena.com/poster/
+2025-10-05 12:43:53,460 - INFO - Проверка https://icearenamsk.ru/
+2025-10-05 12:43:54,710 - INFO - Изменения на https://icearenamsk.ru/
+2025-10-05 12:43:54,860 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:54,861 - INFO - Уведомление отправлено для https://icearenamsk.ru/
+2025-10-05 12:43:54,863 - INFO - Проверка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f
+2025-10-05 12:43:55,137 - ERROR - Ошибка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f: 403
+2025-10-05 12:43:55,138 - INFO - Проверка https://spartak.com/
+2025-10-05 12:43:55,415 - ERROR - Ошибка https://spartak.com/: 403
+2025-10-05 12:43:55,416 - INFO - Проверка https://pfc-cska.com/matches/spisok-matchej/
+2025-10-05 12:43:56,278 - INFO - Изменения на https://pfc-cska.com/matches/spisok-matchej/
+2025-10-05 12:43:56,447 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:43:56,448 - INFO - Уведомление отправлено для https://pfc-cska.com/matches/spisok-matchej/
+2025-10-05 12:43:56,449 - INFO - Цикл мониторинга завершен
+2025-10-05 12:43:56,450 - INFO - Job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 12:48:37 UTC)" executed successfully
+2025-10-05 12:43:58,346 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:44:08,433 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:44:18,519 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:44:28,605 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:44:38,691 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:44:48,778 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:44:58,865 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:45:08,952 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:45:19,038 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:45:29,126 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:45:39,219 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:45:49,306 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:45:59,392 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:46:09,478 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:46:19,565 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:46:29,652 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:46:39,741 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:46:49,828 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:46:59,915 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:47:10,003 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:47:20,090 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:47:30,176 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:47:40,263 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:47:50,349 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:48:00,436 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:48:10,523 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:48:20,608 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:48:30,695 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:48:37,548 - INFO - Running job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 12:53:37 UTC)" (scheduled at 2025-10-05 12:48:37.539853+00:00)
+2025-10-05 12:48:37,548 - INFO - Начало цикла мониторинга
+2025-10-05 12:48:37,548 - INFO - Проверка https://vk-stadium.ru/
+2025-10-05 12:48:38,390 - INFO - Изменений на https://vk-stadium.ru/ нет
+2025-10-05 12:48:38,391 - INFO - Проверка https://livearena.ru/performances
+2025-10-05 12:48:39,618 - INFO - Изменений на https://livearena.ru/performances нет
+2025-10-05 12:48:39,619 - INFO - Проверка https://sohorooms.com/anons
+2025-10-05 12:48:40,782 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:48:41,055 - INFO - Изменений на https://sohorooms.com/anons нет
+2025-10-05 12:48:41,056 - INFO - Проверка https://kremlinpalace.org/
+2025-10-05 12:48:42,179 - INFO - Изменения на https://kremlinpalace.org/
+2025-10-05 12:48:42,519 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:48:42,520 - INFO - Уведомление отправлено для https://kremlinpalace.org/
+2025-10-05 12:48:42,522 - INFO - Проверка https://assuntamadre.ru/blog/
+2025-10-05 12:48:43,102 - ERROR - Ошибка https://assuntamadre.ru/blog/: 503
+2025-10-05 12:48:43,103 - INFO - Проверка https://letolifefest.ru/
+2025-10-05 12:48:43,992 - INFO - Изменений на https://letolifefest.ru/ нет
+2025-10-05 12:48:43,993 - INFO - Проверка https://crave.ru/afisha/
+2025-10-05 12:48:44,533 - INFO - Изменения на https://crave.ru/afisha/
+2025-10-05 12:48:44,644 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:48:44,646 - INFO - Уведомление отправлено для https://crave.ru/afisha/
+2025-10-05 12:48:44,648 - INFO - Проверка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop
+2025-10-05 12:48:44,674 - ERROR - Ошибка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop: 202
+2025-10-05 12:48:44,675 - INFO - Проверка https://peachrest.ru/events/
+2025-10-05 12:48:45,558 - INFO - Изменений на https://peachrest.ru/events/ нет
+2025-10-05 12:48:45,559 - INFO - Проверка https://bolshoi.ru/timetable/all
+2025-10-05 12:48:46,135 - ERROR - Ошибка https://bolshoi.ru/timetable/all: 401
+2025-10-05 12:48:46,136 - INFO - Проверка https://mxat.ru/afisha/
+2025-10-05 12:48:47,921 - INFO - Изменения на https://mxat.ru/afisha/
+2025-10-05 12:48:48,092 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:48:48,093 - INFO - Уведомление отправлено для https://mxat.ru/afisha/
+2025-10-05 12:48:48,095 - INFO - Проверка https://msk-live-hall.mts.ru/
+2025-10-05 12:48:49,243 - INFO - Изменений на https://msk-live-hall.mts.ru/ нет
+2025-10-05 12:48:49,244 - INFO - Проверка https://vtb-arena.com/poster/
+2025-10-05 12:48:50,310 - INFO - Изменения на https://vtb-arena.com/poster/
+2025-10-05 12:48:50,427 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:48:50,429 - INFO - Уведомление отправлено для https://vtb-arena.com/poster/
+2025-10-05 12:48:50,430 - INFO - Проверка https://icearenamsk.ru/
+2025-10-05 12:48:50,868 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:48:51,540 - INFO - Изменения на https://icearenamsk.ru/
+2025-10-05 12:48:51,672 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:48:51,673 - INFO - Уведомление отправлено для https://icearenamsk.ru/
+2025-10-05 12:48:51,675 - INFO - Проверка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f
+2025-10-05 12:48:51,985 - ERROR - Ошибка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f: 403
+2025-10-05 12:48:51,986 - INFO - Проверка https://spartak.com/
+2025-10-05 12:48:52,292 - ERROR - Ошибка https://spartak.com/: 403
+2025-10-05 12:48:52,292 - INFO - Проверка https://pfc-cska.com/matches/spisok-matchej/
+2025-10-05 12:48:53,130 - INFO - Изменений на https://pfc-cska.com/matches/spisok-matchej/ нет
+2025-10-05 12:48:53,131 - INFO - Цикл мониторинга завершен
+2025-10-05 12:48:53,131 - INFO - Job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 12:53:37 UTC)" executed successfully
+2025-10-05 12:49:00,956 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:49:11,045 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
