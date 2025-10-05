@@ -24,7 +24,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 BOT_TOKEN = "7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU"
-MONITORING_INTERVAL = 600  # 10 минут
+MONITORING_INTERVAL = 180  # 3 минуты
 HTTP_TIMEOUT = 30
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 
@@ -151,7 +151,7 @@ class CorrectBot:
 
 🔗 Всего отслеживаемых ссылок: {total_urls}
 👤 Ваших ссылок: {len(user_urls)}
-⏰ Интервал проверки: {MONITORING_INTERVAL // 60} минут
+⏰ Интервал проверки: {MONITORING_INTERVAL // 60} минуты
 🔄 Текущее время: {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}
 
 {'✅ Мониторинг активен' if total_urls > 0 else '⏸️ Мониторинг неактивен'}
