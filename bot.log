@@ -1,67 +1,61 @@
-2025-10-05 12:49:34,620 - INFO - Загружено 17 ссылок
-2025-10-05 12:49:34,697 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2025-10-05 12:49:34,697 - INFO - 🎵 Запуск финального бота...
-2025-10-05 12:49:34,961 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getMe "HTTP/1.1 200 OK"
-2025-10-05 12:49:35,045 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/deleteWebhook "HTTP/1.1 200 OK"
-2025-10-05 12:49:35,047 - INFO - Added job "monitoring_job" to job store "default"
-2025-10-05 12:49:35,047 - INFO - Scheduler started
-2025-10-05 12:49:35,047 - INFO - Application started
-2025-10-05 12:49:44,708 - INFO - Running job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 12:54:44 UTC)" (scheduled at 2025-10-05 12:49:44.696743+00:00)
-2025-10-05 12:49:44,708 - INFO - Начало цикла мониторинга
-2025-10-05 12:49:44,709 - INFO - Проверка https://vk-stadium.ru/
-2025-10-05 12:49:45,315 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
-2025-10-05 12:49:45,638 - INFO - Изменений на https://vk-stadium.ru/ нет
-2025-10-05 12:49:45,640 - INFO - Проверка https://livearena.ru/performances
-2025-10-05 12:49:46,730 - INFO - Изменений на https://livearena.ru/performances нет
-2025-10-05 12:49:46,731 - INFO - Проверка https://sohorooms.com/anons
-2025-10-05 12:49:48,758 - INFO - Изменений на https://sohorooms.com/anons нет
-2025-10-05 12:49:48,759 - INFO - Проверка https://kremlinpalace.org/
-2025-10-05 12:49:49,793 - INFO - Изменения на https://kremlinpalace.org/
-2025-10-05 12:49:50,135 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:49:50,136 - INFO - Уведомление отправлено для https://kremlinpalace.org/
-2025-10-05 12:49:50,137 - INFO - Проверка https://assuntamadre.ru/blog/
-2025-10-05 12:49:50,839 - ERROR - Ошибка https://assuntamadre.ru/blog/: 503
-2025-10-05 12:49:50,840 - INFO - Проверка https://letolifefest.ru/
-2025-10-05 12:49:51,690 - INFO - Изменений на https://letolifefest.ru/ нет
-2025-10-05 12:49:51,691 - INFO - Проверка https://crave.ru/afisha/
-2025-10-05 12:49:52,347 - INFO - Изменения на https://crave.ru/afisha/
-2025-10-05 12:49:52,486 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:49:52,488 - INFO - Уведомление отправлено для https://crave.ru/afisha/
-2025-10-05 12:49:52,490 - INFO - Проверка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop
-2025-10-05 12:49:52,521 - ERROR - Ошибка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop: 202
-2025-10-05 12:49:52,521 - INFO - Проверка https://peachrest.ru/events/
-2025-10-05 12:49:53,390 - INFO - Изменений на https://peachrest.ru/events/ нет
-2025-10-05 12:49:53,390 - INFO - Проверка https://bolshoi.ru/timetable/all
-2025-10-05 12:49:53,954 - ERROR - Ошибка https://bolshoi.ru/timetable/all: 401
-2025-10-05 12:49:53,955 - INFO - Проверка https://mxat.ru/afisha/
-2025-10-05 12:49:55,402 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
-2025-10-05 12:49:55,681 - INFO - Изменения на https://mxat.ru/afisha/
-2025-10-05 12:49:55,893 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:49:55,894 - INFO - Уведомление отправлено для https://mxat.ru/afisha/
-2025-10-05 12:49:55,897 - INFO - Проверка https://msk-live-hall.mts.ru/
-2025-10-05 12:49:56,936 - INFO - Изменений на https://msk-live-hall.mts.ru/ нет
-2025-10-05 12:49:56,937 - INFO - Проверка https://vtb-arena.com/poster/
-2025-10-05 12:49:58,011 - INFO - Изменения на https://vtb-arena.com/poster/
-2025-10-05 12:49:58,136 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:49:58,137 - INFO - Уведомление отправлено для https://vtb-arena.com/poster/
-2025-10-05 12:49:58,139 - INFO - Проверка https://icearenamsk.ru/
-2025-10-05 12:49:59,488 - INFO - Изменения на https://icearenamsk.ru/
-2025-10-05 12:49:59,612 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:49:59,613 - INFO - Уведомление отправлено для https://icearenamsk.ru/
-2025-10-05 12:49:59,615 - INFO - Проверка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f
-2025-10-05 12:49:59,910 - ERROR - Ошибка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f: 403
-2025-10-05 12:49:59,911 - INFO - Проверка https://spartak.com/
-2025-10-05 12:50:00,224 - ERROR - Ошибка https://spartak.com/: 403
-2025-10-05 12:50:00,225 - INFO - Проверка https://pfc-cska.com/matches/spisok-matchej/
-2025-10-05 12:50:01,672 - INFO - Изменений на https://pfc-cska.com/matches/spisok-matchej/ нет
-2025-10-05 12:50:01,673 - INFO - Цикл мониторинга завершен
-2025-10-05 12:50:01,673 - INFO - Job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 12:54:44 UTC)" executed successfully
-2025-10-05 12:50:05,491 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
-2025-10-05 12:50:15,578 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
-2025-10-05 12:50:25,667 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
-2025-10-05 12:50:35,755 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
-2025-10-05 12:50:43,100 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:50:43,101 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:57:41,846 - INFO - Загружено 17 ссылок
+2025-10-05 12:57:41,923 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-10-05 12:57:41,923 - INFO - 🎵 Запуск финального бота...
+2025-10-05 12:57:42,196 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getMe "HTTP/1.1 200 OK"
+2025-10-05 12:57:42,282 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/deleteWebhook "HTTP/1.1 200 OK"
+2025-10-05 12:57:42,284 - INFO - Added job "monitoring_job" to job store "default"
+2025-10-05 12:57:42,284 - INFO - Scheduler started
+2025-10-05 12:57:42,284 - INFO - Application started
+2025-10-05 12:57:51,933 - INFO - Running job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 13:02:51 UTC)" (scheduled at 2025-10-05 12:57:51.922939+00:00)
+2025-10-05 12:57:51,933 - INFO - Начало цикла мониторинга
+2025-10-05 12:57:51,933 - INFO - Проверка https://vk-stadium.ru/
+2025-10-05 12:57:52,402 - INFO - Изменений на https://vk-stadium.ru/ нет
+2025-10-05 12:57:52,404 - INFO - Проверка https://livearena.ru/performances
+2025-10-05 12:57:52,547 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:57:53,475 - INFO - Изменений на https://livearena.ru/performances нет
+2025-10-05 12:57:53,476 - INFO - Проверка https://sohorooms.com/anons
+2025-10-05 12:57:54,926 - INFO - Изменений на https://sohorooms.com/anons нет
+2025-10-05 12:57:54,927 - INFO - Проверка https://kremlinpalace.org/
+2025-10-05 12:57:56,056 - INFO - Изменения на https://kremlinpalace.org/
+2025-10-05 12:57:56,466 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:57:56,468 - INFO - Уведомление отправлено для https://kremlinpalace.org/
+2025-10-05 12:57:56,469 - INFO - Проверка https://assuntamadre.ru/blog/
+2025-10-05 12:57:57,182 - ERROR - Ошибка https://assuntamadre.ru/blog/: 503
+2025-10-05 12:57:57,182 - INFO - Проверка https://letolifefest.ru/
+2025-10-05 12:57:57,778 - INFO - Изменений на https://letolifefest.ru/ нет
+2025-10-05 12:57:57,779 - INFO - Проверка https://crave.ru/afisha/
+2025-10-05 12:57:58,462 - INFO - Изменения на https://crave.ru/afisha/
+2025-10-05 12:57:58,694 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:57:58,695 - INFO - Уведомление отправлено для https://crave.ru/afisha/
+2025-10-05 12:57:58,697 - INFO - Проверка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop
+2025-10-05 12:57:58,720 - ERROR - Ошибка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop: 202
+2025-10-05 12:57:58,721 - INFO - Проверка https://peachrest.ru/events/
+2025-10-05 12:57:59,601 - INFO - Изменений на https://peachrest.ru/events/ нет
+2025-10-05 12:57:59,602 - INFO - Проверка https://bolshoi.ru/timetable/all
+2025-10-05 12:58:00,017 - ERROR - Ошибка https://bolshoi.ru/timetable/all: 401
+2025-10-05 12:58:00,018 - INFO - Проверка https://mxat.ru/afisha/
+2025-10-05 12:58:01,750 - INFO - Изменений на https://mxat.ru/afisha/ нет
+2025-10-05 12:58:01,753 - INFO - Проверка https://msk-live-hall.mts.ru/
+2025-10-05 12:58:02,634 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 200 OK"
+2025-10-05 12:58:02,998 - INFO - Изменений на https://msk-live-hall.mts.ru/ нет
+2025-10-05 12:58:02,999 - INFO - Проверка https://vtb-arena.com/poster/
+2025-10-05 12:58:04,758 - INFO - Изменения на https://vtb-arena.com/poster/
+2025-10-05 12:58:05,066 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:58:05,067 - INFO - Уведомление отправлено для https://vtb-arena.com/poster/
+2025-10-05 12:58:05,069 - INFO - Проверка https://icearenamsk.ru/
+2025-10-05 12:58:06,342 - INFO - Изменения на https://icearenamsk.ru/
+2025-10-05 12:58:06,467 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 12:58:06,469 - INFO - Уведомление отправлено для https://icearenamsk.ru/
+2025-10-05 12:58:06,470 - INFO - Проверка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f
+2025-10-05 12:58:06,758 - ERROR - Ошибка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f: 403
+2025-10-05 12:58:06,759 - INFO - Проверка https://spartak.com/
+2025-10-05 12:58:07,062 - ERROR - Ошибка https://spartak.com/: 403
+2025-10-05 12:58:07,063 - INFO - Проверка https://pfc-cska.com/matches/spisok-matchej/
+2025-10-05 12:58:08,050 - INFO - Изменений на https://pfc-cska.com/matches/spisok-matchej/ нет
+2025-10-05 12:58:08,051 - INFO - Цикл мониторинга завершен
+2025-10-05 12:58:08,051 - INFO - Job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 13:02:51 UTC)" executed successfully
+2025-10-05 12:58:10,363 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:58:10,365 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -113,8 +107,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:50:48,278 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:50:48,279 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:58:15,541 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:58:15,542 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -166,8 +160,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:50:54,456 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:50:54,457 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:58:21,715 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:58:21,716 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -219,8 +213,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:51:02,136 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:51:02,138 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:58:29,392 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:58:29,393 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -272,8 +266,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:51:09,083 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:51:09,086 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:58:36,320 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:58:36,321 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -325,8 +319,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:51:19,763 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:51:19,764 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:58:46,995 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:58:46,996 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -378,8 +372,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:51:35,522 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:51:35,523 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:59:02,740 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:59:02,741 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -431,8 +425,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:51:51,292 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:51:51,293 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:59:18,495 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:59:18,496 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -484,8 +478,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:52:12,762 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:52:12,763 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 12:59:39,968 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 12:59:39,969 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -537,8 +531,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:52:42,788 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:52:42,789 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 13:00:09,984 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 13:00:09,986 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -590,8 +584,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:53:17,183 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:53:17,184 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 13:00:44,383 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 13:00:44,384 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -643,8 +637,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:53:51,587 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:53:51,588 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 13:01:18,770 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 13:01:18,771 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -696,8 +690,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:54:25,980 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:54:25,981 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 13:01:53,157 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 13:01:53,158 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -749,49 +743,8 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:54:44,718 - INFO - Running job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 12:59:44 UTC)" (scheduled at 2025-10-05 12:54:44.696743+00:00)
-2025-10-05 12:54:44,719 - INFO - Начало цикла мониторинга
-2025-10-05 12:54:44,720 - INFO - Проверка https://vk-stadium.ru/
-2025-10-05 12:54:45,739 - INFO - Изменений на https://vk-stadium.ru/ нет
-2025-10-05 12:54:45,740 - INFO - Проверка https://livearena.ru/performances
-2025-10-05 12:54:46,847 - INFO - Изменений на https://livearena.ru/performances нет
-2025-10-05 12:54:46,848 - INFO - Проверка https://sohorooms.com/anons
-2025-10-05 12:54:50,046 - INFO - Изменений на https://sohorooms.com/anons нет
-2025-10-05 12:54:50,047 - INFO - Проверка https://kremlinpalace.org/
-2025-10-05 12:54:51,290 - INFO - Изменения на https://kremlinpalace.org/
-2025-10-05 12:54:51,637 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:54:51,641 - INFO - Уведомление отправлено для https://kremlinpalace.org/
-2025-10-05 12:54:51,643 - INFO - Проверка https://assuntamadre.ru/blog/
-2025-10-05 12:54:52,205 - ERROR - Ошибка https://assuntamadre.ru/blog/: 503
-2025-10-05 12:54:52,206 - INFO - Проверка https://letolifefest.ru/
-2025-10-05 12:54:52,800 - INFO - Изменений на https://letolifefest.ru/ нет
-2025-10-05 12:54:52,800 - INFO - Проверка https://crave.ru/afisha/
-2025-10-05 12:54:53,337 - INFO - Изменения на https://crave.ru/afisha/
-2025-10-05 12:54:53,460 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:54:53,461 - INFO - Уведомление отправлено для https://crave.ru/afisha/
-2025-10-05 12:54:53,462 - INFO - Проверка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop
-2025-10-05 12:54:53,489 - ERROR - Ошибка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop: 202
-2025-10-05 12:54:53,490 - INFO - Проверка https://peachrest.ru/events/
-2025-10-05 12:54:54,084 - INFO - Изменений на https://peachrest.ru/events/ нет
-2025-10-05 12:54:54,085 - INFO - Проверка https://bolshoi.ru/timetable/all
-2025-10-05 12:54:54,524 - ERROR - Ошибка https://bolshoi.ru/timetable/all: 401
-2025-10-05 12:54:54,525 - INFO - Проверка https://mxat.ru/afisha/
-2025-10-05 12:54:56,293 - INFO - Изменения на https://mxat.ru/afisha/
-2025-10-05 12:54:56,421 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:54:56,423 - INFO - Уведомление отправлено для https://mxat.ru/afisha/
-2025-10-05 12:54:56,425 - INFO - Проверка https://msk-live-hall.mts.ru/
-2025-10-05 12:54:57,711 - INFO - Изменений на https://msk-live-hall.mts.ru/ нет
-2025-10-05 12:54:57,712 - INFO - Проверка https://vtb-arena.com/poster/
-2025-10-05 12:54:58,772 - INFO - Изменения на https://vtb-arena.com/poster/
-2025-10-05 12:54:58,981 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:54:58,982 - INFO - Уведомление отправлено для https://vtb-arena.com/poster/
-2025-10-05 12:54:58,984 - INFO - Проверка https://icearenamsk.ru/
-2025-10-05 12:55:00,211 - INFO - Изменения на https://icearenamsk.ru/
-2025-10-05 12:55:00,334 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
-2025-10-05 12:55:00,335 - INFO - Уведомление отправлено для https://icearenamsk.ru/
-2025-10-05 12:55:00,337 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:55:00,338 - INFO - Проверка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f
-2025-10-05 12:55:00,338 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 13:02:27,548 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 13:02:27,549 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -843,15 +796,35 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:55:00,629 - ERROR - Ошибка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f: 403
-2025-10-05 12:55:00,629 - INFO - Проверка https://spartak.com/
-2025-10-05 12:55:00,928 - ERROR - Ошибка https://spartak.com/: 403
-2025-10-05 12:55:00,929 - INFO - Проверка https://pfc-cska.com/matches/spisok-matchej/
-2025-10-05 12:55:01,904 - INFO - Изменений на https://pfc-cska.com/matches/spisok-matchej/ нет
-2025-10-05 12:55:01,905 - INFO - Цикл мониторинга завершен
-2025-10-05 12:55:01,906 - INFO - Job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 12:59:44 UTC)" executed successfully
-2025-10-05 12:55:34,729 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:55:34,730 - ERROR - No error handlers are registered, logging exception.
+2025-10-05 13:02:51,949 - INFO - Running job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 13:07:51 UTC)" (scheduled at 2025-10-05 13:02:51.922939+00:00)
+2025-10-05 13:02:51,949 - INFO - Начало цикла мониторинга
+2025-10-05 13:02:51,950 - INFO - Проверка https://vk-stadium.ru/
+2025-10-05 13:02:52,920 - INFO - Изменений на https://vk-stadium.ru/ нет
+2025-10-05 13:02:52,921 - INFO - Проверка https://livearena.ru/performances
+2025-10-05 13:02:53,876 - INFO - Изменений на https://livearena.ru/performances нет
+2025-10-05 13:02:53,877 - INFO - Проверка https://sohorooms.com/anons
+2025-10-05 13:02:55,858 - INFO - Изменений на https://sohorooms.com/anons нет
+2025-10-05 13:02:55,859 - INFO - Проверка https://kremlinpalace.org/
+2025-10-05 13:02:57,103 - INFO - Изменения на https://kremlinpalace.org/
+2025-10-05 13:02:57,425 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 13:02:57,427 - INFO - Уведомление отправлено для https://kremlinpalace.org/
+2025-10-05 13:02:57,429 - INFO - Проверка https://assuntamadre.ru/blog/
+2025-10-05 13:02:57,995 - ERROR - Ошибка https://assuntamadre.ru/blog/: 503
+2025-10-05 13:02:57,995 - INFO - Проверка https://letolifefest.ru/
+2025-10-05 13:02:58,598 - INFO - Изменений на https://letolifefest.ru/ нет
+2025-10-05 13:02:58,599 - INFO - Проверка https://crave.ru/afisha/
+2025-10-05 13:02:59,268 - INFO - Изменения на https://crave.ru/afisha/
+2025-10-05 13:02:59,386 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 13:02:59,387 - INFO - Уведомление отправлено для https://crave.ru/afisha/
+2025-10-05 13:02:59,388 - INFO - Проверка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop
+2025-10-05 13:02:59,426 - ERROR - Ошибка https://www.viagogo.com/Concert-Tickets/Pop-Rock/Pop: 202
+2025-10-05 13:02:59,427 - INFO - Проверка https://peachrest.ru/events/
+2025-10-05 13:03:00,313 - INFO - Изменений на https://peachrest.ru/events/ нет
+2025-10-05 13:03:00,314 - INFO - Проверка https://bolshoi.ru/timetable/all
+2025-10-05 13:03:00,613 - ERROR - Ошибка https://bolshoi.ru/timetable/all: 401
+2025-10-05 13:03:00,613 - INFO - Проверка https://mxat.ru/afisha/
+2025-10-05 13:03:01,904 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
+2025-10-05 13:03:01,905 - ERROR - No error handlers are registered, logging exception.
 Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
     await do_action()
@@ -903,162 +876,24 @@ Traceback (most recent call last):
   File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:56:10,973 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:56:10,980 - ERROR - No error handlers are registered, logging exception.
-Traceback (most recent call last):
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
-    await do_action()
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 127, in do_action
-    action_cb_task.result()
-    ~~~~~~~~~~~~~~~~~~~~~^^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_updater.py", line 340, in polling_action_cb
-    updates = await self.bot.get_updates(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<3 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 676, in get_updates
-    updates = await super().get_updates(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<9 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 4780, in get_updates
-    await self._post(
-    ^^^^^^^^^^^^^^^^^
-    ...<7 lines>...
-    ),
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 703, in _post
-    return await self._do_post(
-           ^^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 372, in _do_post
-    return await super()._do_post(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 732, in _do_post
-    result = await request.post(
-             ^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 198, in post
-    result = await self._request_wrapper(
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<7 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
-    raise exception
-telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:56:45,376 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:56:45,377 - ERROR - No error handlers are registered, logging exception.
-Traceback (most recent call last):
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
-    await do_action()
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 127, in do_action
-    action_cb_task.result()
-    ~~~~~~~~~~~~~~~~~~~~~^^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_updater.py", line 340, in polling_action_cb
-    updates = await self.bot.get_updates(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<3 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 676, in get_updates
-    updates = await super().get_updates(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<9 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 4780, in get_updates
-    await self._post(
-    ^^^^^^^^^^^^^^^^^
-    ...<7 lines>...
-    ),
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 703, in _post
-    return await self._do_post(
-           ^^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 372, in _do_post
-    return await super()._do_post(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 732, in _do_post
-    result = await request.post(
-             ^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 198, in post
-    result = await self._request_wrapper(
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<7 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
-    raise exception
-telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-10-05 12:57:19,778 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/getUpdates "HTTP/1.1 409 Conflict"
-2025-10-05 12:57:19,779 - ERROR - No error handlers are registered, logging exception.
-Traceback (most recent call last):
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 134, in network_retry_loop
-    await do_action()
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_utils/networkloop.py", line 127, in do_action
-    action_cb_task.result()
-    ~~~~~~~~~~~~~~~~~~~~~^^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_updater.py", line 340, in polling_action_cb
-    updates = await self.bot.get_updates(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<3 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 676, in get_updates
-    updates = await super().get_updates(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<9 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 4780, in get_updates
-    await self._post(
-    ^^^^^^^^^^^^^^^^^
-    ...<7 lines>...
-    ),
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 703, in _post
-    return await self._do_post(
-           ^^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/ext/_extbot.py", line 372, in _do_post
-    return await super()._do_post(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/_bot.py", line 732, in _do_post
-    result = await request.post(
-             ^^^^^^^^^^^^^^^^^^^
-    ...<6 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 198, in post
-    result = await self._request_wrapper(
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<7 lines>...
-    )
-    ^
-  File "/home/ubuntu/.local/lib/python3.13/site-packages/telegram/request/_baserequest.py", line 375, in _request_wrapper
-    raise exception
-telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2025-10-05 13:03:02,393 - INFO - Изменения на https://mxat.ru/afisha/
+2025-10-05 13:03:02,566 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 13:03:02,567 - INFO - Уведомление отправлено для https://mxat.ru/afisha/
+2025-10-05 13:03:02,569 - INFO - Проверка https://msk-live-hall.mts.ru/
+2025-10-05 13:03:03,510 - INFO - Изменений на https://msk-live-hall.mts.ru/ нет
+2025-10-05 13:03:03,511 - INFO - Проверка https://vtb-arena.com/poster/
+2025-10-05 13:03:04,509 - INFO - Изменения на https://vtb-arena.com/poster/
+2025-10-05 13:03:04,717 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 13:03:04,718 - INFO - Уведомление отправлено для https://vtb-arena.com/poster/
+2025-10-05 13:03:04,720 - INFO - Проверка https://icearenamsk.ru/
+2025-10-05 13:03:05,956 - INFO - Изменения на https://icearenamsk.ru/
+2025-10-05 13:03:06,138 - INFO - HTTP Request: POST https://api.telegram.org/bot7711964415:AAF0tp9uhybhTZ7gPEGLNnpE6TxgvAElYzU/sendMessage "HTTP/1.1 200 OK"
+2025-10-05 13:03:06,139 - INFO - Уведомление отправлено для https://icearenamsk.ru/
+2025-10-05 13:03:06,140 - INFO - Проверка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f
+2025-10-05 13:03:06,447 - ERROR - Ошибка https://spartak.com/?utm_referrer=https%3a%2f%2fyandex.ru%2f: 403
+2025-10-05 13:03:06,447 - INFO - Проверка https://spartak.com/
+2025-10-05 13:03:06,758 - ERROR - Ошибка https://spartak.com/: 403
+2025-10-05 13:03:06,758 - INFO - Проверка https://pfc-cska.com/matches/spisok-matchej/
+2025-10-05 13:03:08,280 - INFO - Изменений на https://pfc-cska.com/matches/spisok-matchej/ нет
+2025-10-05 13:03:08,280 - INFO - Цикл мониторинга завершен
+2025-10-05 13:03:08,281 - INFO - Job "monitoring_job (trigger: interval[0:05:00], next run at: 2025-10-05 13:07:51 UTC)" executed successfully
