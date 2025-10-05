@@ -54,6 +54,7 @@ class WorkingBot:
                             last_hash=url_data['last_hash'],
                             group_chat_id=url_data.get('group_chat_id')
                         )
+                logger.info(f"Загружено {len(self.monitored_urls)} ссылок для мониторинга")
         except Exception as e:
             logger.error(f"Ошибка загрузки: {e}")
     
