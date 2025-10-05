@@ -186,6 +186,84 @@ class WorkingBot:
         except Exception as e:
             logger.error(f"Ошибка в handle_url_message: {e}")
     
+    async def parse_events(self, url: str, content: str) -> list:
+        """Парсинг событий с сайта"""
+        try:
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(content, 'html.parser')
+            events = []
+            
+            # Универсальные селекторы для поиска событий
+            selectors = [
+                '[class*="event"]',
+                '[class*="item"]',
+                '[class*="card"]',
+                '[class*="show"]',
+                '.event',
+                '.item',
+                '.card',
+                '.show'
+            ]
+            
+            for selector in selectors:
+                elements = soup.select(selector)
+                if elements:
+                    logger.info(f"Найдены элементы с селектором {selector}: {len(elements)}")
+                    
+                    for element in elements[:10]:  # Ограничиваем количество
+                        try:
+                            # Извлекаем заголовок
+                            title = ""
+                            title_selectors = ['h1', 'h2', 'h3', 'h4', '.title', '.name', 'a']
+                            for title_sel in title_selectors:
+                                title_elem = element.select_one(title_sel)
+                                if title_elem:
+                                    title = title_elem.get_text(strip=True)
+                                    break
+                            
+                            if not title:
+                                title = element.get_text(strip=True)[:100]
+                            
+                            # Извлекаем дату
+                            date = ""
+                            date_selectors = ['.date', '.time', '[class*="date"]', '[class*="time"]']
+                            for date_sel in date_selectors:
+                                date_elem = element.select_one(date_sel)
+                                if date_elem:
+                                    date = date_elem.get_text(strip=True)
+                                    break
+                            
+                            # Извлекаем ссылку
+                            event_url = url
+                            link_elem = element.select_one('a')
+                            if link_elem and link_elem.get('href'):
+                                href = link_elem.get('href')
+                                if href.startswith('http'):
+                                    event_url = href
+                                elif href.startswith('/'):
+                                    from urllib.parse import urljoin
+                                    event_url = urljoin(url, href)
+                            
+                            # Фильтруем пустые события
+                            if title and len(title) > 3:
+                                events.append({
+                                    'title': title,
+                                    'date': date or "Дата не указана",
+                                    'url': event_url
+                                })
+                        
+                        except Exception as e:
+                            logger.error(f"Ошибка парсинга элемента: {e}")
+                            continue
+                    
+                    break  # Используем первый найденный селектор
+            
+            return events
+            
+        except Exception as e:
+            logger.error(f"Ошибка парсинга событий: {e}")
+            return []
+    
     async def check_url(self, url: str, monitored: MonitoredUrl, application):
         try:
             logger.info(f"Проверка {url}")
@@ -203,10 +281,30 @@ class WorkingBot:
                     if current_hash != monitored.last_hash:
                         logger.info(f"Изменения на {url}")
                         
+                        # Парсим события
+                        events = await self.parse_events(url, content)
+                        
+                        if events:
+                            # Формируем сообщение с событиями
+                            message = f"🎵 Новые события на сайте!\n🔗 {url}\n\n"
+                            
+                            for i, event in enumerate(events[:5], 1):  # Показываем до 5 событий
+                                message += f"{i}. {event['title']}\n"
+                                if event['date'] != "Дата не указана":
+                                    message += f"   📅 {event['date']}\n"
+                                if event['url'] != url:
+                                    message += f"   🔗 {event['url']}\n"
+                                message += "\n"
+                            
+                            if len(events) > 5:
+                                message += f"... и ещё {len(events) - 5} событий"
+                        else:
+                            message = f"🔄 Обновления на сайте!\n🔗 {url}\n\n(События не найдены)"
+                        
                         chat_id = monitored.group_chat_id if monitored.group_chat_id else monitored.user_id
                         await application.bot.send_message(
                             chat_id=chat_id,
-                            text=f"🔄 Обновления на сайте!\n🔗 {url}"
+                            text=message
                         )
                         
                         monitored.last_hash = current_hash
