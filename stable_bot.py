@@ -188,42 +188,101 @@ class StableBot:
             logger.error(f"Ошибка в handle_url_message: {e}")
     
     async def parse_events(self, url: str, content: str) -> list:
-        """Быстрый парсинг событий"""
+        """Улучшенный парсинг событий с датами"""
         try:
             from bs4 import BeautifulSoup
             soup = BeautifulSoup(content, 'html.parser')
             events = []
             
-            # Быстрые селекторы
-            selectors = ['[class*="event"]', '[class*="item"]', '.event', '.item']
+            # Расширенные селекторы для поиска событий
+            selectors = [
+                '[class*="event"]',
+                '[class*="item"]', 
+                '[class*="card"]',
+                '[class*="show"]',
+                '.event',
+                '.item',
+                '.card',
+                '.show'
+            ]
             
             for selector in selectors:
                 elements = soup.select(selector)
                 if elements:
-                    for element in elements[:5]:  # Только первые 5
+                    logger.info(f"Найдены элементы с селектором {selector}: {len(elements)}")
+                    
+                    for element in elements[:15]:  # Увеличиваем до 15 событий
                         try:
+                            # Извлекаем заголовок
                             title = ""
-                            for title_sel in ['h1', 'h2', 'h3', 'h4', '.title', 'a']:
+                            title_selectors = ['h1', 'h2', 'h3', 'h4', '.title', '.name', 'a', '.event-title', '.item-title']
+                            for title_sel in title_selectors:
                                 title_elem = element.select_one(title_sel)
                                 if title_elem:
                                     title = title_elem.get_text(strip=True)
                                     break
                             
                             if not title:
-                                title = element.get_text(strip=True)[:50]
+                                title = element.get_text(strip=True)[:100]
                             
-                            if title and len(title) > 3:
+                            # Извлекаем дату
+                            date = ""
+                            date_selectors = [
+                                '.date', '.time', '.datetime', 
+                                '[class*="date"]', '[class*="time"]', '[class*="datetime"]',
+                                '.event-date', '.item-date', '.show-date'
+                            ]
+                            for date_sel in date_selectors:
+                                date_elem = element.select_one(date_sel)
+                                if date_elem:
+                                    date = date_elem.get_text(strip=True)
+                                    break
+                            
+                            # Если дата не найдена, ищем в тексте элемента
+                            if not date:
+                                text = element.get_text(strip=True)
+                                # Ищем даты в формате ДД.ММ или ДД.ММ.ГГГГ
+                                import re
+                                date_patterns = [
+                                    r'\d{1,2}\.\d{1,2}\.\d{4}',  # ДД.ММ.ГГГГ
+                                    r'\d{1,2}\.\d{1,2}',         # ДД.ММ
+                                    r'\d{1,2}\s+(января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря)',
+                                    r'(понедельник|вторник|среда|четверг|пятница|суббота|воскресенье)'
+                                ]
+                                for pattern in date_patterns:
+                                    match = re.search(pattern, text, re.IGNORECASE)
+                                    if match:
+                                        date = match.group()
+                                        break
+                            
+                            # Извлекаем ссылку
+                            event_url = url
+                            link_elem = element.select_one('a')
+                            if link_elem and link_elem.get('href'):
+                                href = link_elem.get('href')
+                                if href.startswith('http'):
+                                    event_url = href
+                                elif href.startswith('/'):
+                                    from urllib.parse import urljoin
+                                    event_url = urljoin(url, href)
+                            
+                            # Фильтруем пустые события
+                            if title and len(title) > 3 and title not in ['Дата не указана', 'События не найдены']:
                                 events.append({
                                     'title': title,
-                                    'date': "Дата не указана",
-                                    'url': url
+                                    'date': date or "Дата не указана",
+                                    'url': event_url
                                 })
-                        except:
+                        
+                        except Exception as e:
+                            logger.error(f"Ошибка парсинга элемента: {e}")
                             continue
-                    break
+                    
+                    break  # Используем первый найденный селектор
             
             return events
-        except:
+        except Exception as e:
+            logger.error(f"Ошибка парсинга событий: {e}")
             return []
     
     async def check_url_fast(self, url: str, monitored: MonitoredUrl, application):
@@ -241,17 +300,25 @@ class StableBot:
                     if current_hash != monitored.last_hash:
                         logger.info(f"Изменения на {url}")
                         
-                        # Быстрый парсинг
+                        # Парсинг событий
                         events = await self.parse_events(url, content)
                         
                         if events:
-                            message = f"🎵 Новые события!\n🔗 {url}\n\n"
-                            for i, event in enumerate(events[:3], 1):
-                                message += f"{i}. {event['title']}\n"
-                            if len(events) > 3:
-                                message += f"... и ещё {len(events) - 3} событий"
+                            message = f"🎵 Новые события на сайте!\n🔗 {url}\n\n"
+                            
+                            # Показываем все события (до 10)
+                            for i, event in enumerate(events[:10], 1):
+                                message += f"📅 {event['title']}\n"
+                                if event['date'] != "Дата не указана":
+                                    message += f"   🕐 {event['date']}\n"
+                                if event['url'] != url:
+                                    message += f"   🔗 {event['url']}\n"
+                                message += "\n"
+                            
+                            if len(events) > 10:
+                                message += f"... и ещё {len(events) - 10} событий"
                         else:
-                            message = f"🔄 Обновления на сайте!\n🔗 {url}"
+                            message = f"🔄 Обновления на сайте!\n🔗 {url}\n\n(События не найдены)"
                         
                         chat_id = monitored.group_chat_id if monitored.group_chat_id else monitored.user_id
                         await application.bot.send_message(chat_id=chat_id, text=message)
